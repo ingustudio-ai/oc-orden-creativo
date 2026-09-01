@@ -1,0 +1,26 @@
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# Existing project files (from other project)
+src/
+public/
+scripts/
+vite.config.*
+tsconfig.*
+tailwind.config.*
+postcss.config.*
+package*.json
+oxlintrc.json
+.eslintrc*
+.prettierrc*
+.env*
+coverage/
+*.md
+!README.md
+!.nojekyll
