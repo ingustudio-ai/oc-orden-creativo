@@ -1,108 +1,1342 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ÁUREA — Oráculo del Linaje · Orden Creativo</title>
-<meta name="description" content="Áurea — Oráculo del Linaje. 22 arcanos para comprender, honrar y transformar tu historia.">
-<style>
-:root{--ink:#120f0d;--cream:#f4eee3;--paper:#eee5d5;--gold:#c7a05a;--gold2:#8d682d;--muted:#766e63;--white:#fffaf0;--line:rgba(111,78,31,.22);--darkline:rgba(217,183,111,.24);--serif:Georgia,'Times New Roman',serif;--sans:Inter,Arial,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.5}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}.serif{font-family:var(--serif)}
-/* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;color:#f6ead5;background:linear-gradient(180deg,rgba(8,7,6,.86),rgba(8,7,6,.18));backdrop-filter:blur(10px);border-bottom:1px solid rgba(210,170,91,.14)}.nav-in{height:76px;display:flex;align-items:center;justify-content:space-between;gap:25px}.brand{display:flex;align-items:center;gap:10px}.brand-symbol{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:17px;color:var(--gold)}.brand-text{font-family:var(--serif);letter-spacing:.18em;font-size:17px}.brand-text small{display:block;font-family:var(--sans);font-size:7px;letter-spacing:.28em;margin-top:1px}.links{display:flex;gap:25px;align-items:center}.links a{font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:#e6d9c4}.nav-cta{border:1px solid var(--gold);padding:11px 18px;border-radius:999px}.menu{display:none;background:none;border:0;color:#fff;font-size:24px}
-/* HERO */
-.hero{min-height:100vh;position:relative;background:#0d0c0a;overflow:hidden;color:#f5ead7}.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,5,4,.66),rgba(6,5,4,.08) 48%,rgba(6,5,4,.35)),linear-gradient(0deg,rgba(6,5,4,.82),transparent 45%)}.hero-content{position:relative;z-index:2;min-height:100vh;display:flex;align-items:flex-end;padding:0 0 80px}.hero-copy{max-width:610px}.hero h1{font:400 clamp(65px,11vw,145px)/.85 var(--serif);letter-spacing:.04em;margin:12px 0 12px}.hero-sub{font:400 clamp(21px,3vw,34px)/1.1 var(--serif);letter-spacing:.2em;text-transform:uppercase;margin:0 0 20px}.hero-desc{max-width:520px;color:#d8cbb7;font-size:15px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{border-radius:999px;padding:14px 21px;border:1px solid transparent;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;justify-content:center;transition:.25s}.btn:hover{transform:translateY(-2px)}.btn-gold{background:var(--gold);color:#16120e}.btn-outline{border-color:rgba(239,220,184,.6);color:#f7ead6;background:rgba(0,0,0,.12);backdrop-filter:blur(8px)}
-/* INTRO */
-.intro{background:var(--paper);padding:95px 0 80px;text-align:center;position:relative}.intro h2,.section-title{font:400 clamp(40px,6vw,70px)/.98 var(--serif);margin:12px auto 15px}.intro p{max-width:700px;margin:auto;color:#665f55;font-size:16px}.ornament{margin:25px auto;width:110px;height:1px;background:var(--gold);position:relative}.ornament:after{content:'✦';position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);background:var(--paper);padding:0 9px;color:var(--gold);font-size:15px}
-/* EXPLORER */
-.explorer{background:linear-gradient(180deg,#171411,#0e0d0b);color:#f3e8d4;padding:105px 0 95px;position:relative;overflow:hidden}.explorer:before{content:"";position:absolute;width:700px;height:700px;left:50%;top:0;transform:translateX(-50%);background:radial-gradient(circle,rgba(199,160,90,.14),transparent 65%);pointer-events:none}.head{text-align:center;max-width:760px;margin:0 auto 45px;position:relative}.head .section-title{color:#f4ead8}.head p{color:#bdb09d}.browser{border:1px solid var(--darkline);border-radius:28px;background:rgba(3,3,2,.42);overflow:hidden;position:relative;box-shadow:0 30px 90px rgba(0,0,0,.3)}.browser-top{padding:20px 24px;border-bottom:1px solid var(--darkline);display:flex;align-items:center;justify-content:space-between;gap:18px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--darkline);background:none;color:#c8b9a3;padding:8px 13px;border-radius:999px;font-size:9px;letter-spacing:.13em;text-transform:uppercase}.filter.active,.filter:hover{background:var(--gold);border-color:var(--gold);color:#17120c}.count{font:13px var(--serif);letter-spacing:.12em;color:var(--gold);white-space:nowrap}.feature{display:grid;grid-template-columns:54px minmax(240px,360px) minmax(320px,500px) 54px;gap:28px;justify-content:center;align-items:center;padding:50px 30px 34px}.arrow{width:48px;height:48px;border:1px solid var(--darkline);border-radius:50%;background:none;color:#dbc59d;font-size:28px}.arrow:hover{background:var(--gold);color:#15110d}.main-card{aspect-ratio:2/3.05;border:1px solid var(--gold);border-radius:20px;overflow:hidden;position:relative;background:#191613;box-shadow:0 25px 65px rgba(0,0,0,.5);transform:rotate(-1deg)}.main-card img{width:100%;height:100%;object-fit:cover;display:block}.main-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(0,0,0,.82));pointer-events:none}.card-num{position:absolute;z-index:2;top:16px;left:18px;font:13px var(--serif);letter-spacing:.18em}.card-fallback{height:100%;display:grid;place-items:center;background:radial-gradient(circle,rgba(199,160,90,.18),transparent 42%),#151311;color:var(--gold);font:80px var(--serif)}.detail .eyebrow{margin-bottom:8px}.detail h3{font:400 clamp(38px,5vw,62px)/1 var(--serif);margin:0 0 7px}.detail .keyword{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#d1af72}.detail p{color:#bcae9a;line-height:1.8}.question-box{border-left:1px solid var(--gold);padding-left:16px;margin:25px 0}.question-box span{display:block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}.question-box strong{font:400 18px/1.35 var(--serif);color:#eee2ce}.thumbs{display:flex;gap:12px;overflow-x:auto;padding:8px 24px 27px;scrollbar-width:thin;scrollbar-color:#86632e transparent}.thumb{flex:0 0 72px;height:108px;padding:0;border:1px solid var(--darkline);border-radius:9px;overflow:hidden;background:#151311;opacity:.52;position:relative}.thumb.active,.thumb:hover{opacity:1;border-color:var(--gold);transform:translateY(-4px)}.thumb img{width:100%;height:100%;object-fit:cover}.thumb b{position:absolute;top:4px;left:6px;font:8px var(--serif);text-shadow:0 1px 4px #000;color:#fff}.thumb span{height:100%;display:grid;place-items:center;color:var(--gold);font:30px var(--serif)}
-/* STORY */
-.story{padding:100px 0;background:var(--cream)}.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.story-card{padding:34px;border:1px solid var(--line);background:rgba(255,252,246,.6);min-height:240px}.story-card h3{font:400 31px var(--serif);margin:15px 0 10px}.story-card p{color:#6c6459}.story-card:first-child{background:#171411;color:#eee2cf;border-color:#171411}.story-card:first-child p{color:#c4b5a0}.story-card:first-child .eyebrow{color:var(--gold)}
-/* DAILY */
-.daily{padding:100px 0;background:#e9dfce}.daily-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;align-items:start}.panel{background:rgba(255,252,246,.72);border:1px solid var(--line);padding:32px;border-radius:24px}.panel h3{font:400 34px var(--serif);margin:9px 0 12px}.panel p{color:#696157}.textarea{width:100%;min-height:125px;border:1px solid var(--line);background:#fbf7ef;border-radius:15px;padding:15px;resize:vertical;outline:none}.textarea:focus{border-color:var(--gold2);box-shadow:0 0 0 3px rgba(199,160,90,.13)}.reading{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}.reading strong{font:400 23px var(--serif)}.result-card{display:grid;grid-template-columns:180px 1fr;gap:28px}.result-card .main-card{transform:none;width:180px}.result-card .main-card:after{display:none}.legal{font-size:10px;color:#81786c;margin-top:17px}
-/* CTA + FOOTER */
-.cta{padding:95px 0;background:linear-gradient(135deg,#171411,#29231b);color:#f3e7d3;text-align:center}.cta h2{font:400 clamp(43px,6vw,72px) var(--serif);margin:12px auto 18px}.cta p{max-width:650px;margin:auto;color:#c6b8a4}.footer{background:#0e0d0b;color:#d6c8b1;padding:42px 0}.footer-in{display:flex;justify-content:space-between;gap:30px;align-items:center}.footer-brand{font:400 27px var(--serif);letter-spacing:.12em}.footer small{display:block;color:#887e70;margin-top:5px}.footer-links{display:flex;gap:20px;font-size:9px;letter-spacing:.14em;text-transform:uppercase}.copy{border-top:1px solid rgba(220,190,130,.13);margin-top:28px;padding-top:20px;font-size:10px;color:#746b60;display:flex;justify-content:space-between}
-/* MODAL */
-.modal{position:fixed;inset:0;z-index:100;background:rgba(4,3,2,.75);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}.modal.open{display:flex}.modal-box{width:min(760px,100%);max-height:90vh;overflow:auto;background:var(--cream);border:1px solid var(--gold);border-radius:24px;padding:34px;position:relative}.close{position:absolute;right:15px;top:12px;border:0;background:none;font-size:27px}.modal-box h2{font:400 45px var(--serif);margin:8px 0}.modal-box p{color:#645d54}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
-@media(max-width:950px){.links a:not(.nav-cta){display:none}.menu{display:block}.feature{grid-template-columns:45px minmax(210px,300px) 45px}.detail{grid-column:1/-1;text-align:center;max-width:650px;margin:auto}.question-box{text-align:left}.daily-grid{grid-template-columns:1fr}.result-card{grid-template-columns:160px 1fr}.result-card .main-card{width:160px}}
-@media(max-width:650px){.wrap{width:calc(100% - 24px)}.nav-in{height:64px}.brand-text{font-size:15px}.nav-cta{padding:9px 12px;font-size:8px}.hero-content{padding-bottom:48px}.hero-copy{max-width:100%}.hero-desc{font-size:14px}.actions{flex-direction:column}.actions .btn{width:100%}.intro,.story,.daily,.explorer,.cta{padding:70px 0}.browser-top{align-items:flex-start;flex-direction:column}.count{align-self:flex-end}.feature{grid-template-columns:36px minmax(0,1fr) 36px;gap:8px;padding:32px 10px 22px}.arrow{width:36px;height:36px;font-size:23px}.main-card{width:min(270px,70vw);margin:auto}.detail h3{font-size:39px}.thumb{flex-basis:61px;height:92px}.story-grid{grid-template-columns:1fr}.panel{padding:22px}.result-card{grid-template-columns:1fr}.result-card .main-card{margin:auto}.footer-in,.copy{flex-direction:column;align-items:flex-start}.footer-links{flex-wrap:wrap}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style id="orden-creativo-visual-system">
-:root{--ink:#171717;--cream:#f7f3eb;--paper:#fbf9f4;--paper2:#eee7da;--gold:#b98a3c;--gold2:#8e672b;--muted:#6e675e;--line:rgba(142,103,43,.22);--darkline:rgba(201,164,96,.3);--white:#fffdf8;--serif:Georgia,"Times New Roman",serif;--sans:Inter,Arial,sans-serif}
-body{background:var(--cream);color:var(--ink)}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.08;background-image:radial-gradient(rgba(30,24,17,.3) .45px,transparent .45px);background-size:7px 7px}
-.nav{background:rgba(247,243,235,.92);color:var(--ink);border-bottom:1px solid rgba(142,103,43,.18)}
-.brand{gap:12px}.brand .oc-logo{width:44px;height:44px;object-fit:cover;object-position:center;border-radius:50%;mix-blend-mode:multiply}.brand-text{color:var(--ink);font-weight:400}.brand-text small{color:var(--gold2)}.links a{color:#4f4a43}.nav-cta{border-color:var(--gold2);color:var(--ink)}
-.hero{min-height:92vh;background:var(--cream);color:var(--ink);display:grid;align-items:center}.hero:after{display:none}.hero-img{width:48%;height:78%;left:auto;right:7%;top:12%;object-fit:contain;object-position:center;filter:drop-shadow(0 28px 55px rgba(45,33,19,.2));border-radius:18px}.hero-content{min-height:92vh;align-items:center;padding:80px 0}.hero-copy{max-width:570px}.hero .eyebrow{color:var(--gold2)}.hero h1{font-size:clamp(70px,11vw,145px);color:var(--ink);letter-spacing:.06em}.hero-sub{color:var(--gold2);font-size:clamp(18px,2.5vw,30px);letter-spacing:.3em}.hero-desc{color:#625b52;max-width:510px}.btn-gold{background:var(--gold);color:#17120d}.btn-outline{border-color:rgba(55,45,32,.38);color:var(--ink);background:transparent}.intro{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.intro h2,.section-title{color:var(--ink)}
-.explorer{background:var(--paper);color:var(--ink);padding-top:95px}.explorer:before{background:radial-gradient(circle,rgba(185,138,60,.09),transparent 65%)}.head .section-title{color:var(--ink)}.head p{color:#6a6258}.browser{background:rgba(255,253,248,.9);border:1px solid var(--line);box-shadow:0 28px 80px rgba(48,35,19,.09)}.browser-top{border-bottom:1px solid var(--line)}.filter{border-color:var(--line);color:#625a4f}.filter.active,.filter:hover{background:var(--ink);border-color:var(--ink);color:var(--white)}.count{color:var(--gold2)}.arrow{border-color:var(--line);color:var(--gold2)}.arrow:hover{background:var(--gold);color:var(--ink)}.main-card{box-shadow:0 24px 60px rgba(40,28,15,.18);border-color:var(--gold2)}.detail .keyword{color:var(--gold2)}.detail p{color:#665e54}.question-box{border-left-color:var(--gold2)}.question-box strong{color:var(--ink)}.thumb{border-color:var(--line);background:#f2ede4}.thumb.active,.thumb:hover{border-color:var(--gold2)}
-.daily{background:#eee7da}.panel{background:rgba(255,253,248,.8);border-color:var(--line);box-shadow:0 18px 50px rgba(49,36,20,.05)}.textarea{background:#fffdf8;border-color:var(--line)}.story{background:var(--paper)}.story-card{background:rgba(255,253,248,.75);border-color:var(--line)}.story-card:first-child{background:var(--ink);border-color:var(--ink)}.cta{background:var(--ink);color:var(--white)}.footer{background:#f0eadf;color:var(--ink);border-top:1px solid var(--line)}.footer-brand{color:var(--ink)}.footer small,.copy{color:#756d62}.footer-links a{color:#514b43}.copy{border-top-color:var(--line)}
-#autor{background:var(--paper)!important;color:var(--ink)!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}#autor p{color:#5f584f!important}#autor .eyebrow{color:var(--gold2)!important}
-.oc-author-logo{width:min(260px,60vw);height:auto;margin:0 auto 28px;display:block;mix-blend-mode:multiply}
-@media(max-width:950px){.hero-img{position:relative;width:min(380px,72vw);height:auto;right:auto;top:auto;margin:20px auto 0;order:-1}.hero{display:block}.hero-content{min-height:auto;padding:95px 0 70px}.hero-copy{text-align:center;margin:auto}.hero-desc{margin-left:auto;margin-right:auto}.actions{justify-content:center}}
-@media(max-width:650px){.brand .oc-logo{width:38px;height:38px}.brand-text{font-size:13px}.hero h1{font-size:70px}.hero-sub{letter-spacing:.18em}.hero-img{width:76vw}.intro,.story,.daily,.explorer,.cta{padding:72px 0}.browser{border-radius:20px}.feature{grid-template-columns:34px minmax(0,1fr) 34px}.main-card{width:min(250px,66vw)}.oc-author-logo{width:220px}}
-</style>
+  <title>El Campo Sagrado — Fernando Matías Acri</title>
+
+  <meta
+    name="description"
+    content="El Campo Sagrado. Un proceso individual para mirar lo que se repite, reconocer lo que necesita ser visto y crear una nueva posibilidad."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f6f2e9;
+      --cream-light: #fbf9f4;
+      --black: #171714;
+      --gray: #66645e;
+      --gold: #b59a62;
+      --gold-light: #d6c397;
+      --line: rgba(23, 23, 20, 0.12);
+      --white: #fffdf8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream-light);
+      color: var(--black);
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* -----------------------------
+       HEADER
+    ----------------------------- */
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      padding: 28px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+    }
+
+    .brand span {
+      color: var(--gold);
+    }
+
+    .nav-link {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    /* -----------------------------
+       HERO
+    ----------------------------- */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 75% 45%,
+          rgba(181, 154, 98, 0.13),
+          transparent 30%
+        ),
+        var(--cream);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border: 1px solid rgba(181, 154, 98, 0.25);
+      border-radius: 50%;
+      right: -140px;
+      bottom: -150px;
+    }
+
+    .hero-content {
+      max-width: 850px;
+      position: relative;
+      z-index: 2;
+      padding-top: 70px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-size: clamp(64px, 9vw, 118px);
+      letter-spacing: -0.035em;
+      max-width: 900px;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero-description {
+      max-width: 600px;
+      margin-top: 34px;
+      font-size: 17px;
+      color: var(--gray);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 28px;
+      margin-top: 42px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .hero-meta span::before {
+      content: "✦";
+      color: var(--gold);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 42px;
+      padding: 17px 26px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .cta:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .cta-arrow {
+      font-size: 17px;
+    }
+
+    /* -----------------------------
+       INTRO
+    ----------------------------- */
+
+    section {
+      padding: 130px 0;
+    }
+
+    .intro {
+      background: var(--cream-light);
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 26px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+    }
+
+    .intro h2 {
+      font-size: clamp(42px, 5vw, 68px);
+    }
+
+    .intro-copy {
+      font-size: 19px;
+      color: var(--gray);
+      max-width: 650px;
+    }
+
+    .intro-copy p + p {
+      margin-top: 25px;
+    }
+
+    /* -----------------------------
+       REFLECTION
+    ----------------------------- */
+
+    .reflection {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .reflection .section-label {
+      color: var(--gold-light);
+    }
+
+    .reflection h2 {
+      font-size: clamp(46px, 6vw, 82px);
+      max-width: 800px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 70px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .card {
+      padding: 42px 35px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .card:last-child {
+      border-right: none;
+    }
+
+    .card-number {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--gold-light);
+      font-size: 26px;
+    }
+
+    .card p {
+      margin-top: 22px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* -----------------------------
+       TRANSFORMATION
+    ----------------------------- */
+
+    .transformation {
+      background: var(--cream);
+    }
+
+    .transformation-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .transformation h2 {
+      font-size: clamp(48px, 6vw, 78px);
+    }
+
+    .quote {
+      border-left: 1px solid var(--gold);
+      padding-left: 30px;
+      color: var(--gray);
+      font-size: 18px;
+    }
+
+    /* -----------------------------
+       CAMPO
+    ----------------------------- */
+
+    .campo {
+      background: var(--cream-light);
+    }
+
+    .campo-inner {
+      max-width: 820px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .campo h2 {
+      font-size: clamp(52px, 7vw, 92px);
+    }
+
+    .campo-text {
+      margin: 35px auto 0;
+      max-width: 680px;
+      font-size: 18px;
+      color: var(--gray);
+    }
+
+    /* -----------------------------
+       PROCESS
+    ----------------------------- */
+
+    .process {
+      background: #eee9de;
+    }
+
+    .process h2 {
+      font-size: clamp(48px, 6vw, 76px);
+    }
+
+    .process-list {
+      margin-top: 70px;
+    }
+
+    .process-item {
+      display: grid;
+      grid-template-columns: 100px 250px 1fr;
+      gap: 30px;
+      padding: 35px 0;
+      border-top: 1px solid var(--line);
+      align-items: center;
+    }
+
+    .process-item:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-number {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--gold);
+      font-size: 34px;
+    }
+
+    .process-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 31px;
+    }
+
+    .process-description {
+      color: var(--gray);
+    }
+
+    /* -----------------------------
+       ABOUT
+    ----------------------------- */
+
+    .about {
+      background: var(--cream-light);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 90px;
+      align-items: center;
+    }
+
+    .portrait {
+      aspect-ratio: 4 / 5;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(181,154,98,0.25),
+          rgba(23,23,20,0.08)
+        );
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portrait::after {
+      content: "FMA";
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 60px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .about h2 {
+      font-size: clamp(48px, 6vw, 78px);
+    }
+
+    .about-copy {
+      margin-top: 30px;
+      color: var(--gray);
+      font-size: 17px;
+    }
+
+    /* -----------------------------
+       OFFER
+    ----------------------------- */
+
+    .offer {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .offer-inner {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .offer .section-label {
+      color: var(--gold-light);
+    }
+
+    .offer h2 {
+      font-size: clamp(55px, 7vw, 95px);
+    }
+
+    .offer-description {
+      margin: 35px auto 0;
+      max-width: 650px;
+      color: rgba(255,255,255,0.65);
+      font-size: 17px;
+    }
+
+    .offer-box {
+      margin-top: 55px;
+      border: 1px solid rgba(181,154,98,0.35);
+      padding: 40px;
+      text-align: left;
+    }
+
+    .offer-box ul {
+      list-style: none;
+    }
+
+    .offer-box li {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.75);
+    }
+
+    .offer-box li::before {
+      content: "✦";
+      color: var(--gold);
+      margin-right: 15px;
+    }
+
+    .offer .cta {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .offer .cta:hover {
+      background: var(--white);
+    }
+
+    /* -----------------------------
+       FAQ
+    ----------------------------- */
+
+    .faq {
+      background: var(--cream);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 100px;
+    }
+
+    .faq h2 {
+      font-size: clamp(50px, 6vw, 78px);
+    }
+
+    details {
+      border-top: 1px solid var(--line);
+      padding: 25px 0;
+    }
+
+    details:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      font-family: "Inter", sans-serif;
+      font-size: 18px;
+      color: var(--gold);
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    details p {
+      margin-top: 15px;
+      color: var(--gray);
+      max-width: 650px;
+    }
+
+    /* -----------------------------
+       FINAL CTA
+    ----------------------------- */
+
+    .final {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(181,154,98,0.16),
+          transparent 42%
+        ),
+        var(--cream-light);
+    }
+
+    .final-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .final h2 {
+      font-size: clamp(58px, 8vw, 105px);
+    }
+
+    .final p {
+      max-width: 600px;
+      margin: 30px auto 0;
+      color: var(--gray);
+      font-size: 18px;
+    }
+
+    /* -----------------------------
+       FOOTER
+    ----------------------------- */
+
+    footer {
+      padding: 30px 0;
+      background: var(--black);
+      color: rgba(255,255,255,0.55);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* -----------------------------
+       WHATSAPP FLOAT
+    ----------------------------- */
+
+    .whatsapp {
+      position: fixed;
+      z-index: 50;
+      right: 25px;
+      bottom: 25px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+      transition: transform .3s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp:hover {
+      transform: scale(1.08);
+    }
+
+    .whatsapp svg {
+      width: 27px;
+      height: 27px;
+      fill: currentColor;
+    }
+
+    /* -----------------------------
+       ANIMATION
+    ----------------------------- */
+
+    .fade {
+      opacity: 0;
+      transform: translateY(25px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* -----------------------------
+       MOBILE
+    ----------------------------- */
+
+    @media (max-width: 800px) {
+
+      .container {
+        width: min(100% - 32px, 1120px);
+      }
+
+      header {
+        padding: 20px 0;
+      }
+
+      .nav-link {
+        display: none;
+      }
+
+      section {
+        padding: 90px 0;
+      }
+
+      .hero {
+        min-height: 90vh;
+      }
+
+      .hero h1 {
+        font-size: clamp(58px, 17vw, 90px);
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .intro-grid,
+      .transformation-grid,
+      .about-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+      }
+
+      .card:last-child {
+        border-bottom: none;
+      }
+
+      .process-item {
+        grid-template-columns: 55px 1fr;
+        gap: 10px;
+      }
+
+      .process-description {
+        grid-column: 2;
+      }
+
+      .portrait {
+        max-width: 400px;
+      }
+
+      .offer-box {
+        padding: 25px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav class="nav"><div class="wrap nav-in"><a class="brand" href="#inicio" aria-label="Áurea — Orden Creativo"><img class="oc-logo" src="assets/orden-creativo-logo.png" alt="Orden Creativo · Arte · Alma · Sistema"><span class="brand-text">ÁUREA<small>ORÁCULO DEL LINAJE</small></span></a><div class="links"><a href="#arcanos">Las cartas</a><a href="#filosofia">Filosofía</a><a href="#carta">Carta del día</a><a href="#viaje">Tu viaje</a><a href="#autor">Creación</a><a class="nav-cta" href="#sesion">Quiero mi oráculo</a></div><button class="menu" onclick="document.querySelector('.links').classList.toggle('show')">☰</button></div></nav>
-<main>
-<section id="inicio" class="hero"><img class="hero-img" src="assets/aurea-heredero.png" alt="Áurea — Oráculo del Linaje · Orden Creativo"><div class="hero-content wrap"><div class="hero-copy"><div class="eyebrow">Arte · Alma · Sistema</div><h1>Áurea</h1><div class="hero-sub">Oráculo del Linaje</div><p class="hero-desc">Creé 22 arcanos para acompañarte a comprender, honrar y transformar tu historia. Te propongo un viaje simbólico hacia tus raíces, tus vínculos y el futuro que elegís construir.</p><div class="actions"><a class="btn btn-gold" href="#arcanos">Explorar los 22 arcanos →</a><a class="btn btn-outline" href="#carta">Revelar mi carta del día</a></div></div></div></section>
-<section id="filosofia" class="intro"><div class="wrap"><div class="eyebrow">Un viaje hacia tu raíz interior</div><h2>Tu historia también vive en vos.</h2><div class="ornament"></div><p>Creé Áurea como una herramienta simbólica de reflexión inspirada en la mirada sistémica. En cada arcano busqué abrir una pregunta sobre pertenencia, memoria, vínculos, repeticiones, recursos y posibilidades.</p></div></section>
-<section id="arcanos" class="explorer"><div class="wrap"><div class="head"><div class="eyebrow">El mapa de Áurea</div><h2 class="section-title">Las 22 cartas</h2><p>Para mí, cada arcano es una puerta. Te invito a elegir una carta y recorrer su símbolo, su palabra y el movimiento que propone.</p></div><div class="browser"><div class="browser-top"><div class="filters" id="filters"><button class="filter active" data-filter="all">Todas</button><button class="filter" data-filter="raices">Raíces</button><button class="filter" data-filter="vinculos">Vínculos</button><button class="filter" data-filter="conciencia">Conciencia</button><button class="filter" data-filter="transformacion">Transformación</button></div><div class="count" id="count">22 arcanos</div></div><div class="feature"><button class="arrow" id="prev">‹</button><div class="main-card" id="mainCard"></div><div class="detail"><div class="eyebrow" id="detailKicker"></div><h3 id="detailName"></h3><div class="keyword" id="detailKeyword"></div><p id="detailMessage"></p><div class="question-box"><span>Pregunta para mirar</span><strong id="detailQuestion"></strong></div><button class="btn btn-gold" id="openDetail">Ver mensaje completo →</button></div><button class="arrow" id="next">›</button></div><div class="thumbs" id="thumbs"></div></div></div></section>
-<section id="carta" class="daily"><div class="wrap"><div class="head" style="color:var(--ink)"><div class="eyebrow" style="color:var(--gold2)">01 · Carta del día</div><h2 class="section-title">¿Qué necesita mostrarte hoy tu sistema?</h2><p style="color:#6c6459">Te propongo una carta al día: una mirada distinta sobre aquello que estás viviendo.</p></div><div class="daily-grid"><div class="panel"><div class="eyebrow" style="color:var(--gold2)">Tu pregunta</div><h3>Entrá conmigo al oráculo.</h3><p>Respirá. Pensá en aquello que hoy pide ser mirado y revelá una carta. Yo creé este espacio para que puedas detenerte y escucharte.</p><button class="btn btn-gold" id="dailyBtn">Revelar carta</button><p class="legal">Áurea es una herramienta simbólica de reflexión y no reemplaza atención médica, psicológica ni terapéutica profesional.</p></div><div class="panel" id="dailyResult"><div class="eyebrow" style="color:var(--gold2)">Resultado</div><h3>Tu carta aparecerá aquí.</h3><p>Podés volver a revelar otra carta cuando quieras.</p></div></div></div></section>
-<section id="viaje" class="story"><div class="wrap"><div class="head"><div class="eyebrow" style="color:var(--gold2)">02 · Tu viaje</div><h2 class="section-title">Del patrón a una nueva posición.</h2><p>Cuando creé Áurea, partí de una idea simple: mirar no es quedar atrapado en el pasado. Es reconocerlo para poder elegir desde el presente.</p></div><div class="story-grid"><article class="story-card"><div class="eyebrow">Raíz</div><h3>Comprender de dónde venís.</h3><p>Te invito a observar pertenencias, vínculos, memorias y aquello que forma parte de tu historia sin convertirlo en una sentencia sobre tu futuro.</p></article><article class="story-card"><div class="eyebrow" style="color:var(--gold2)">Movimiento</div><h3>Elegir qué continúa.</h3><p>Creo que honrar lo recibido también puede significar dejar de repetir. Por eso, en Áurea propongo preguntas para encontrar una posición más consciente.</p></article></div></div></section>
-<section id="sesion" class="cta"><div class="wrap"><div class="eyebrow">Una experiencia más profunda</div><h2>Tu historia merece ser mirada.</h2><p>Si querés profundizar en una pregunta personal, podés llevar la lectura a una sesión individual y trabajar el símbolo desde tu propia historia.</p><div class="actions" style="justify-content:center"><a class="btn btn-gold" href="https://wa.me/541131404044" target="_blank" rel="noopener">Quiero una sesión →</a></div></div></section>
 
-<section id="autor" class="story" style="background:var(--ink);color:var(--white);text-align:center;position:relative;overflow:hidden">
-  <div class="wrap" style="max-width:900px">
-    <img class="oc-author-logo" src="assets/orden-creativo-logo.png" alt="Orden Creativo · Arte · Alma · Sistema">
-    <div class="eyebrow">Una creación de autor</div>
-    <h2 class="serif" style="font-size:clamp(38px,5vw,64px);margin:12px 0 18px">Yo creé Áurea desde una visión integral.</h2>
-    <p style="font-size:18px;max-width:760px;margin:0 auto 24px;color:#ded3c2">
-      Yo soy <strong style="color:#e2c17d">Fernando Matías Acri</strong>, creador de <strong style="color:#e2c17d">Orden Creativo</strong>, y esta idea integral nació de mi propia visión creativa. Yo desarrollé su concepto, su universo simbólico y su dirección creativa para convertir el linaje, la memoria y la conciencia en una experiencia visual y simbólica.
-    </p>
-    <p style="max-width:700px;margin:0 auto;color:#bdb3a5">
-      En Áurea integré diseño, arte, simbolismo ancestral y una mirada contemporánea sobre el linaje. Mi intención fue convertir cada arcano en una puerta de reflexión y transformación, y crear un universo que puedas recorrer desde tu propia historia.
-    </p>
-    <div style="margin-top:30px;letter-spacing:.18em;text-transform:uppercase;font-size:11px;color:var(--gold)">Fernando Matías Acri · Yo creé Áurea · Orden Creativo</div>
-  </div>
-</section>
+  <!-- HEADER -->
 
-</main>
-<footer class="footer"><div class="wrap"><div class="footer-in"><div><div class="footer-brand">ÁUREA</div><small>ORÁCULO DEL LINAJE · Arte · Alma · Sistema</small></div><div class="footer-links"><a href="#inicio">Inicio</a><a href="#arcanos">Las cartas</a><a href="#filosofia">Filosofía</a><a href="#sesion">Sesión</a></div></div><div class="copy"><span>© 2026 Áurea. Todos los derechos reservados.</span><span>Una guía simbólica para tu presente y futuro.</span><span>Creado por Fernando Matías Acri · Orden Creativo</span></div></div></footer>
-<div class="modal" id="modal"><div class="modal-box"><button class="close" id="close">×</button><div class="eyebrow" id="modalKicker"></div><h2 id="modalTitle"></h2><div class="keyword" id="modalKeyword"></div><p id="modalMessage"></p><div class="reading"><div class="eyebrow" style="color:var(--gold2)">Pregunta</div><p class="serif" id="modalQuestion"></p></div><div class="reading"><div class="eyebrow" style="color:var(--gold2)">Movimiento sugerido</div><p id="modalMove"></p></div><div class="modal-actions"><button class="btn btn-gold" id="close2">Cerrar</button></div></div></div>
-<script>
-const cards=[
-{id:0,r:'0',name:'El Errante',key:'la exclusión',cat:'raices',img:'assets/1000129956.png',msg:'El viaje comienza cuando reconocés aquello que quedó fuera del relato. Mirar la exclusión permite devolver pertenencia sin repetir el destino.',q:'¿Qué parte de tu historia sentís que todavía no tiene lugar?',move:'Nombrá aquello que fue excluido y reconocé que también forma parte de tu historia.'},
-{id:1,r:'I',name:'El Origen',key:'la raíz',cat:'raices',img:'assets/1000129942.png',msg:'Toda historia comienza antes de vos. El Origen invita a mirar la raíz, el contexto y los vínculos que hicieron posible tu llegada.',q:'¿Qué recibiste de tu origen que hoy sí querés conservar?',move:'Agradecé internamente la vida recibida y elegí qué legado querés continuar.'},
-{id:2,r:'II',name:'La Guardiana',key:'el secreto',cat:'raices',img:'assets/1000129941.png',msg:'Hay historias que permanecen en silencio. La Guardiana señala aquello que fue protegido, ocultado o callado y que todavía pide una mirada respetuosa.',q:'¿Qué tema familiar evitás mirar?',move:'Abrí una pregunta sin forzar una respuesta inmediata.'},
-{id:3,r:'III',name:'La Matriarca',key:'la vida',cat:'raices',img:'assets/1000129940.png',msg:'La vida llega a través de una cadena de mujeres y vínculos. La Matriarca habla de recibir, gestar y permitir que la vida siga hacia adelante.',q:'¿Qué te cuesta recibir de tu línea materna?',move:'Reconocé lo recibido sin exigir que haya sido perfecto.'},
-{id:4,r:'IV',name:'El Patriarca',key:'la autoridad',cat:'raices',img:'assets/1000129939.png',msg:'La autoridad puede ser sostén o carga. Este arcano invita a reconocer las responsabilidades que corresponden a cada generación.',q:'¿Qué responsabilidad estás llevando que no corresponde a tu lugar?',move:'Dejá simbólicamente a los mayores con sus destinos y volvé a tu presente.'},
-{id:5,r:'V',name:'El Ancestro',key:'el legado',cat:'raices',img:'assets/1000129938.png',msg:'Pertenecés antes de elegir. El Ancestro recuerda que mirar de dónde venís no significa quedar atrapado, sino integrar la historia.',q:'¿Qué aspecto de tu origen todavía rechazás?',move:'Decite: "Esto también forma parte de mi historia, y puedo elegir qué hago con ella".'},
-{id:6,r:'VI',name:'Los Amantes',key:'el vínculo',cat:'vinculos',img:'assets/1000129937.png',msg:'Todo vínculo crea una trama. Los Amantes muestran intercambio, elección y la posibilidad de relacionarte desde una posición adulta.',q:'¿En qué vínculo das de más para sentir que pertenecés?',move:'Observá dónde podés pasar de la compensación al intercambio.'},
-{id:7,r:'VII',name:'El Heredero',key:'la continuidad',cat:'vinculos',img:'assets/1000129955.png',msg:'El Heredero habla del camino que continúa. Avanzar no tiene por qué ser una traición a quienes vinieron antes.',q:'¿Qué camino querés tomar aunque nadie en tu sistema lo haya tomado antes?',move:'Permitite avanzar sin dejar de honrar de dónde venís.'},
-{id:8,r:'VIII',name:'La Justicia',key:'el orden',cat:'conciencia',img:'assets/1000129957.png',msg:'Cada sistema tiene consecuencias. La Justicia invita a mirar con honestidad qué causa y efecto estás sosteniendo hoy.',q:'¿Qué patrón repetís y después llamás destino?',move:'Reconocé una elección concreta que sí está bajo tu responsabilidad.'},
-{id:9,r:'IX',name:'El Solitario',key:'la ausencia',cat:'conciencia',img:'assets/1000129909.png',msg:'La ausencia también forma parte del árbol. Este arcano invita a reconocer el vacío sin convertirlo en identidad.',q:'¿Qué ausencia sigue ocupando un lugar central en tu presente?',move:'Dale un lugar a esa ausencia y permitite seguir viviendo.'},
-{id:10,r:'X',name:'La Rueda',key:'la repetición',cat:'conciencia',img:'assets/1000129958.png',msg:'Los sistemas repiten hasta que algo se vuelve consciente. La Rueda muestra ciclos que pueden dejar de girar del mismo modo.',q:'¿Qué se repite en tu vida con distintos nombres?',move:'Cambiá hoy una conducta automática, aunque sea pequeña.'},
-{id:11,r:'XI',name:'La Fuerza',key:'la presencia',cat:'conciencia',img:'assets/1000129912.png',msg:'La fuerza no es controlar. Es permanecer presente frente a lo difícil sin abandonar tu lugar.',q:'¿Qué emoción intentás dominar cuando necesita ser reconocida?',move:'Sentí el cuerpo antes de actuar.'},
-{id:12,r:'XII',name:'El Colgado',key:'la lealtad invisible',cat:'vinculos',img:'assets/1000129959.png',msg:'Hay cargas que se sostienen por amor. El Colgado distingue entre honrar un destino y cargarlo.',q:'¿Qué dolor ajeno estás llevando como prueba de amor?',move:'Devolvé simbólicamente a cada persona aquello que le pertenece.'},
-{id:13,r:'XIII',name:'La Transformación',key:'el duelo',cat:'transformacion',img:'assets/1000129911.png',msg:'Transformar implica dejar morir una identidad. Algo termina para que otra forma de estar en la vida pueda aparecer.',q:'¿Qué versión de vos ya cumplió su función?',move:'Nombrá lo que terminó y agradecé la función que tuvo.'},
-{id:14,r:'XIV',name:'La Integración',key:'el equilibrio',cat:'transformacion',img:'assets/arcano-14.png',msg:'Integrar es poder incluir partes antes separadas. No se trata de elegir una historia contra otra.',q:'¿Qué dos partes de vos sentís que están peleando?',move:'Dale un lugar simbólico a ambas antes de decidir.'},
-{id:15,r:'XV',name:'La Atadura',key:'la lealtad',cat:'vinculos',img:'assets/arcano-15.png',msg:'La Atadura muestra el punto donde amor y libertad parecen incompatibles. La lealtad puede transformarse cuando deja de necesitar sacrificio.',q:'¿A quién sentirías que traicionás si te fuera realmente bien?',move:'Imaginá éxito y pertenencia al mismo tiempo.'},
-{id:16,r:'XVI',name:'La Torre',key:'la ruptura',cat:'transformacion',img:'assets/1000129907.png',msg:'No todo quiebre es fracaso. Algunas estructuras caen porque ya no sostienen vida.',q:'¿Qué estructura estás intentando conservar aunque ya no te represente?',move:'Identificá una regla antigua que hoy podés cuestionar.'},
-{id:17,r:'XVII',name:'La Esperanza',key:'el futuro',cat:'transformacion',img:'assets/arcano-17.png',msg:'La Esperanza aparece cuando el futuro deja de ser una repetición del pasado y se convierte en posibilidad.',q:'¿Qué querés que sea diferente en quienes vienen después de vos?',move:'Hacé hoy algo que te gustaría que tu sistema aprendiera de vos.'},
-{id:18,r:'XVIII',name:'La Luna',key:'la memoria inconsciente',cat:'conciencia',img:'assets/1000129943.png',msg:'Algunas experiencias aparecen como sensaciones, miedos o repeticiones. La Luna invita a observar sin convertir cada sensación en certeza.',q:'¿Qué repetición te cuesta explicar desde tu historia consciente?',move:'Registrá la repetición y abrí una pregunta.'},
-{id:19,r:'XIX',name:'El Sol',key:'la vida',cat:'transformacion',img:'assets/1000129960.png',msg:'La claridad puede reorganizar mucho. El Sol ilumina lo que ya estaba frente a vos.',q:'¿Qué ya sabés y todavía no querés reconocer?',move:'Escribí: "En realidad, yo ya sé que…".'},
-{id:20,r:'XX',name:'El Llamado',key:'la conciencia',cat:'conciencia',img:'assets/1000129944.png',msg:'El Llamado es el momento en que un automatismo se vuelve consciente y, por eso mismo, deja de parecer inevitable.',q:'¿Qué patrón podés observar hoy sin confundirte con él?',move:'Pasá de "yo soy esto" a "esto aparece en mí y puedo elegir".'},
-{id:21,r:'XXI',name:'La Integridad',key:'la plenitud',cat:'transformacion',img:'assets/1000129993.png',msg:'La Integridad no exige una historia perfecta. Es ocupar tu lugar completo, incluyendo lo recibido, lo vivido y lo que elegís transformar.',q:'¿Qué parte de tu historia necesitás dejar de excluir para sentirte entero?',move:'Reuní en una frase de dónde venís, dónde estás y hacia dónde elegís ir.'}
-];
-let current=0, filtered=[...cards];
-const $=s=>document.querySelector(s);
-function render(){const c=filtered[current];if(!c)return;$('#count').textContent=`${filtered.length} ${filtered.length===1?'arcano':'arcanos'}`;const main=$('#mainCard');main.innerHTML=`<img src="${c.img}" alt="${c.r} — ${c.name}" onerror="this.remove();this.parentElement.insertAdjacentHTML('beforeend','<div class=card-fallback>${c.r}</div>')"><span class="card-num">${c.r}</span>`;$('#detailKicker').textContent=`Arcano ${c.r}`;$('#detailName').textContent=c.name;$('#detailKeyword').textContent=c.key;$('#detailMessage').textContent=c.msg;$('#detailQuestion').textContent=c.q;$('#thumbs').innerHTML=filtered.map((x,i)=>`<button class="thumb ${i===current?'active':''}" data-i="${i}" aria-label="${x.name}">${x.img?`<img src="${x.img}" alt="" onerror="this.style.display='none'">`:`<span>${x.r}</span>`}<b>${x.r}</b></button>`).join('');document.querySelectorAll('.thumb').forEach(t=>t.onclick=()=>{current=+t.dataset.i;render()})}
-function move(n){current=(current+n+filtered.length)%filtered.length;render()}
-$('#prev').onclick=()=>move(-1);$('#next').onclick=()=>move(1);document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;filtered=f==='all'?[...cards]:cards.filter(c=>c.cat===f);current=0;render()});
-const modal=$('#modal');function openModal(){const c=filtered[current];$('#modalKicker').textContent=`Arcano ${c.r}`;$('#modalTitle').textContent=c.name;$('#modalKeyword').textContent=c.key;$('#modalMessage').textContent=c.msg;$('#modalQuestion').textContent=c.q;$('#modalMove').textContent=c.move;modal.classList.add('open')}function closeModal(){modal.classList.remove('open')}$('#openDetail').onclick=openModal;$('#close').onclick=closeModal;$('#close2').onclick=closeModal;modal.onclick=e=>{if(e.target===modal)closeModal()};
-$('#dailyBtn').onclick=()=>{const c=cards[Math.floor(Math.random()*cards.length)];$('#dailyResult').innerHTML=`<div class="result-card"><div class="main-card"><img src="${c.img}" alt="${c.name}" onerror="this.remove();this.parentElement.insertAdjacentHTML('beforeend','<div class=card-fallback>${c.r}</div>')"><span class="card-num">${c.r}</span></div><div><div class="eyebrow" style="color:var(--gold2)">Tu carta de hoy · ${c.key}</div><h3>${c.name}</h3><p>${c.msg}</p><div class="reading"><div class="eyebrow" style="color:var(--gold2)">Pregunta para hoy</div><strong>${c.q}</strong></div><div class="reading"><div class="eyebrow" style="color:var(--gold2)">Movimiento</div><p>${c.move}</p></div></div></div>`};
-render();
-</script>
-</body></html>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        Fernando <span>✦</span> Acri
+      </div>
+
+      <a href="#proceso" class="nav-link">
+        El Campo Sagrado
+      </a>
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content fade">
+
+          <div class="eyebrow">
+            Proceso individual 1:1
+          </div>
+
+          <h1>
+            Hay momentos en los que
+            <em>entender</em>
+            ya no alcanza.
+          </h1>
+
+          <p class="hero-description">
+            El Campo Sagrado es un espacio individual para mirar aquello
+            que se repite, reconocer su origen y abrir una nueva posibilidad.
+          </p>
+
+          <div class="hero-meta">
+            <span>Espacio íntimo</span>
+            <span>Acompañamiento 1:1</span>
+            <span>Online</span>
+          </div>
+
+          <a
+            class="cta"
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20vengo%20de%20la%20masterclass%20y%20quiero%20conocer%20el%20proceso%20individual%20de%20El%20Campo%20Sagrado."
+            target="_blank"
+          >
+            Quiero conocer el proceso
+            <span class="cta-arrow">→</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+      <div class="container">
+
+        <div class="intro-grid">
+
+          <div>
+            <div class="section-label">
+              Una mirada diferente
+            </div>
+
+            <h2>
+              Quizás no necesitás otra respuesta.
+            </h2>
+          </div>
+
+          <div class="intro-copy">
+
+            <p>
+              Quizás necesitás mirar aquello que está detrás de la pregunta.
+            </p>
+
+            <p>
+              Muchas veces sabemos qué queremos cambiar, pero seguimos
+              encontrándonos con los mismos patrones, las mismas dificultades
+              o las mismas sensaciones.
+            </p>
+
+            <p>
+              En El Campo Sagrado creo un espacio para detenernos,
+              observar y reconocer qué está pidiendo ser visto.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- REFLECTION -->
+
+    <section class="reflection">
+
+      <div class="container">
+
+        <div class="section-label">
+          Tal vez te está pasando
+        </div>
+
+        <h2>
+          Lo sabés racionalmente,
+          pero algo sigue repitiéndose.
+        </h2>
+
+        <div class="cards">
+
+          <div class="card">
+            <div class="card-number">01</div>
+            <p>
+              Sentís que repetís una historia aunque racionalmente sabés
+              que querés otra cosa.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">02</div>
+            <p>
+              Hay algo en tu vida que parece no encontrar orden:
+              dinero, vínculos, trabajo, propósito o merecimiento.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">03</div>
+            <p>
+              Estás cansado de buscar respuestas afuera y sentís que
+              llegó el momento de mirar más profundo.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRANSFORMATION -->
+
+    <section class="transformation">
+
+      <div class="container">
+
+        <div class="transformation-grid">
+
+          <div>
+            <div class="section-label">
+              Mi manera de acompañarte
+            </div>
+
+            <h2>
+              No trabajo para que te conviertas en otra persona.
+            </h2>
+          </div>
+
+          <div class="quote">
+            <p>
+              Trabajo para que puedas reconocer quién sos,
+              mirar tu historia con mayor conciencia y
+              ocupar tu lugar desde un lugar diferente.
+            </p>
+
+            <br />
+
+            <p>
+              Integro una mirada sistémica, simbólica y creativa
+              para acompañarte a observar patrones, vínculos,
+              lealtades y aquello que necesita ser reconocido.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CAMPO SAGRADO -->
+
+    <section class="campo" id="proceso">
+
+      <div class="container">
+
+        <div class="campo-inner">
+
+          <div class="section-label">
+            El espacio
+          </div>
+
+          <h2>
+            ¿Qué es<br>
+            El Campo Sagrado?
+          </h2>
+
+          <p class="campo-text">
+            Es un espacio de observación, reconocimiento y movimiento
+            interior. Un lugar donde podemos mirar aquello que muchas
+            veces permanece oculto en nuestra historia y encontrar una
+            nueva manera de relacionarnos con ello.
+          </p>
+
+          <a
+            class="cta"
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20El%20Campo%20Sagrado."
+            target="_blank"
+          >
+            Quiero conversar con vos
+            <span class="cta-arrow">→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROCESS -->
+
+    <section class="process">
+
+      <div class="container">
+
+        <div class="section-label">
+          El proceso
+        </div>
+
+        <h2>
+          Tres movimientos.
+        </h2>
+
+        <div class="process-list">
+
+          <div class="process-item">
+
+            <div class="process-number">01</div>
+
+            <div class="process-title">
+              Mirar
+            </div>
+
+            <div class="process-description">
+              Reconocer qué está sucediendo y qué patrón,
+              situación o pregunta querés traer al espacio.
+            </div>
+
+          </div>
+
+          <div class="process-item">
+
+            <div class="process-number">02</div>
+
+            <div class="process-title">
+              Ordenar
+            </div>
+
+            <div class="process-description">
+              Dar lugar a aquello que necesita ser visto,
+              reconocido y ubicado en su lugar.
+            </div>
+
+          </div>
+
+          <div class="process-item">
+
+            <div class="process-number">03</div>
+
+            <div class="process-title">
+              Crear
+            </div>
+
+            <div class="process-description">
+              Abrir una nueva posibilidad y llevar esa mirada
+              a decisiones concretas de tu vida cotidiana.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="about">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="portrait"></div>
+
+          <div>
+
+            <div class="section-label">
+              Sobre mí
+            </div>
+
+            <h2>
+              Soy Fernando Matías Acri.
+            </h2>
+
+            <div class="about-copy">
+
+              <p>
+                Soy diseñador gráfico y creador de Orden Creativo.
+              </p>
+
+              <br>
+
+              <p>
+                Desde hace años integro creatividad, símbolos,
+                trabajo sistémico y procesos de transformación
+                para crear espacios donde las personas puedan
+                reconocerse y abrir nuevas posibilidades.
+              </p>
+
+              <br>
+
+              <p>
+                El Campo Sagrado nace de esa integración:
+                un espacio donde mirar la historia no significa
+                quedarse en ella, sino encontrar una nueva forma
+                de relacionarte con tu presente.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- OFFER -->
+
+    <section class="offer">
+
+      <div class="container">
+
+        <div class="offer-inner">
+
+          <div class="section-label">
+            Acompañamiento individual
+          </div>
+
+          <h2>
+            El Campo Sagrado
+          </h2>
+
+          <p class="offer-description">
+            Un espacio personalizado para trabajar aquello que hoy
+            está pidiendo tu atención.
+          </p>
+
+          <div class="offer-box">
+
+            <ul>
+
+              <li>
+                Encuentro individual 1:1
+              </li>
+
+              <li>
+                Espacio personalizado según tu situación
+              </li>
+
+              <li>
+                Mirada sistémica y simbólica
+              </li>
+
+              <li>
+                Material de integración posterior
+              </li>
+
+              <li>
+                Acompañamiento cercano
+              </li>
+
+            </ul>
+
+          </div>
+
+          <a
+            class="cta"
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20particip%C3%A9%20de%20la%20masterclass%20y%20quiero%20conocer%20el%20acompa%C3%B1amiento%20individual%20El%20Campo%20Sagrado."
+            target="_blank"
+          >
+            Quiero conocer el proceso
+            <span class="cta-arrow">→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+
+    <section class="faq">
+
+      <div class="container">
+
+        <div class="faq-grid">
+
+          <div>
+
+            <div class="section-label">
+              Preguntas
+            </div>
+
+            <h2>
+              Antes de dar el próximo paso.
+            </h2>
+
+          </div>
+
+          <div>
+
+            <details>
+              <summary>
+                ¿Para quién es este espacio?
+              </summary>
+
+              <p>
+                Para personas que sienten que hay algo que se repite
+                en su vida y quieren mirarlo desde una perspectiva
+                diferente, con disposición a participar activamente
+                de su propio proceso.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                ¿Es terapia?
+              </summary>
+
+              <p>
+                No. El Campo Sagrado no reemplaza psicoterapia,
+                tratamiento médico ni atención profesional de salud.
+                Es un espacio de acompañamiento y exploración personal.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                ¿Cómo se realiza?
+              </summary>
+
+              <p>
+                El proceso se realiza de manera online.
+                Una vez que me escriba podemos conversar sobre
+                tu situación y definir si este espacio es adecuado
+                para vos.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                ¿Cuánto dura?
+              </summary>
+
+              <p>
+                La duración y modalidad se definen según el proceso
+                que necesites. Te voy a explicar todos los detalles
+                cuando conversemos por WhatsApp.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                ¿Qué sucede después de escribirte?
+              </summary>
+
+              <p>
+                Primero vamos a conversar. Quiero conocer qué estás
+                atravesando y qué querés trabajar antes de proponerte
+                cualquier proceso.
+              </p>
+            </details>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL CTA -->
+
+    <section class="final">
+
+      <div class="container">
+
+        <div class="final-inner">
+
+          <div class="section-label">
+            Tu próximo paso
+          </div>
+
+          <h2>
+            Si sentís que es momento de mirar de otra manera...
+          </h2>
+
+          <p>
+            No necesitás tener todo claro antes de escribirme.
+            Podemos empezar por una conversación.
+          </p>
+
+          <a
+            class="cta"
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20vengo%20de%20la%20masterclass%20y%20quiero%20conocer%20El%20Campo%20Sagrado."
+            target="_blank"
+          >
+            Quiero conversar con vos
+            <span class="cta-arrow">→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+        Fernando Matías Acri · Orden Creativo
+      </div>
+
+      <div>
+        El Campo Sagrado
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- WHATSAPP -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20vengo%20de%20la%20masterclass%20y%20quiero%20conocer%20El%20Campo%20Sagrado."
+    target="_blank"
+    aria-label="Contactar por WhatsApp"
+  >
+
+    <svg viewBox="0 0 24 24">
+      <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.5-8.3ZM12.2 21.6c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 1 1 8.1 4.6Zm5.3-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.8-1.8-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.9.7.8.3 1.5.3 2.1.2.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4Z"/>
+    </svg>
+
+  </a>
+
+</body>
+</html>
