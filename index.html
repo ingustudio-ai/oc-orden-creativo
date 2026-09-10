@@ -876,6 +876,97 @@
       }
     }
 
+    /* SURVEY */
+    .survey {
+      padding: 0 0 80px;
+      text-align: center;
+    }
+
+    .survey-card {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(181, 154, 98, 0.18);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .survey-card .eyebrow {
+      justify-content: center;
+    }
+
+    .survey-card h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      margin-bottom: 12px;
+    }
+
+    .survey-card > p {
+      color: var(--gray);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .survey-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .survey-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 16px 22px;
+      background: var(--cream-light);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-family: "Inter", sans-serif;
+      font-size: 15px;
+      color: var(--black);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: left;
+    }
+
+    .survey-btn:hover {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .survey-btn .survey-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      font-size: 16px;
+      transition: all var(--transition);
+    }
+
+    .survey-btn:hover .survey-icon {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    @media (max-width: 800px) {
+      .survey {
+        padding: 0 0 60px;
+      }
+      .survey-card {
+        padding: 32px 24px;
+      }
+    }
+
     /* MOBILE */
     @media (max-width: 800px) {
 
@@ -1015,6 +1106,49 @@
             Quiero conocer el proceso
             <span class="cta-arrow">→</span>
           </a>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SURVEY -->
+
+    <section class="survey">
+      <div class="container">
+        <div class="survey-card">
+
+          <div class="eyebrow">
+            Tu opinión importa
+          </div>
+
+          <h2>¿Cómo sentiste la masterclass?</h2>
+
+          <p>Elegí la opción que mejor represente lo que viviste</p>
+
+          <div class="survey-options">
+
+            <button class="survey-btn" onclick="sendSurvey('Me encantó, quiero seguir profundizando')">
+              <span class="survey-icon">✦</span>
+              <span>Me encantó, quiero seguir profundizando</span>
+            </button>
+
+            <button class="survey-btn" onclick="sendSurvey('Me gustó pero tengo dudas')">
+              <span class="survey-icon">✦</span>
+              <span>Me gustó pero tengo dudas</span>
+            </button>
+
+            <button class="survey-btn" onclick="sendSurvey('No fue lo que esperaba')">
+              <span class="survey-icon">✦</span>
+              <span>No fue lo que esperaba</span>
+            </button>
+
+            <button class="survey-btn" onclick="sendSurvey('Quiero hablar con vos antes de decidir')">
+              <span class="survey-icon">✦</span>
+              <span>Quiero hablar con vos antes de decidir</span>
+            </button>
+
+          </div>
 
         </div>
       </div>
@@ -1517,6 +1651,13 @@
       <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.5-8.3ZM12.2 21.6c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 1 1 8.1 4.6Zm5.3-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.8-1.8-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.9.7.8.3 1.5.3 2.1.2.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4Z"/>
     </svg>
   </a>
+
+  <script>
+    function sendSurvey(answer) {
+      var text = encodeURIComponent('Mi respuesta sobre la masterclass: ' + answer);
+      window.open('https://wa.me/541131404044?text=' + text, '_blank');
+    }
+  </script>
 
 </body>
 </html>
