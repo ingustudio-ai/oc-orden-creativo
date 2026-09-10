@@ -4,18 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>El Campo Sagrado — Fernando Matías Acri</title>
+  <title>Constelaciones del Dinero — Fernando Matías Acri</title>
 
   <meta
     name="description"
-    content="El Campo Sagrado. Un proceso individual para mirar lo que se repite, reconocer lo que necesita ser visto y crear una nueva posibilidad."
+    content="Constelaciones del Dinero. Un proceso de 6 sesiones para destrabar tu relación con el dinero desde una mirada sistémica, simbólica y creativa."
   />
 
+  <link rel="icon" href="assets/orden-creativo-logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   />
 
@@ -23,12 +24,21 @@
     :root {
       --cream: #f6f2e9;
       --cream-light: #fbf9f4;
+      --cream-warm: #f0e8d8;
       --black: #171714;
       --gray: #66645e;
       --gold: #b59a62;
+      --gold-dark: #8a7340;
       --gold-light: #d6c397;
-      --line: rgba(23, 23, 20, 0.12);
+      --line: rgba(23, 23, 20, 0.10);
       --white: #fffdf8;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 40px;
+      --shadow-soft: 0 8px 40px rgba(23, 23, 20, 0.06);
+      --shadow-card: 0 4px 24px rgba(23, 23, 20, 0.05);
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     * {
@@ -47,14 +57,13 @@
       font-family: "Inter", sans-serif;
       font-weight: 300;
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1,
-    h2,
-    h3 {
+    h1, h2, h3 {
       font-family: "Cormorant Garamond", serif;
       font-weight: 400;
-      line-height: 1.05;
+      line-height: 1.08;
     }
 
     a {
@@ -62,15 +71,47 @@
       text-decoration: none;
     }
 
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
     .container {
       width: min(1120px, calc(100% - 48px));
       margin: 0 auto;
     }
 
-    /* -----------------------------
-       HEADER
-    ----------------------------- */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      z-index: 100;
+      padding: 12px 24px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 14px;
+      border-radius: var(--radius-sm);
+      transition: top var(--transition);
+    }
 
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .footer-logo {
+      height: 24px;
+      width: auto;
+      opacity: 0.85;
+    }
+
+    em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* HEADER */
     header {
       position: absolute;
       top: 0;
@@ -87,38 +128,69 @@
     }
 
     .brand {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 22px;
-      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
     }
 
-    .brand span {
-      color: var(--gold);
+    .brand img {
+      height: 32px;
+      width: auto;
+      transition: opacity var(--transition);
+    }
+
+    .brand img:hover {
+      opacity: 0.7;
     }
 
     .nav-link {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.18em;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      transition: all var(--transition);
     }
 
-    /* -----------------------------
-       HERO
-    ----------------------------- */
+    .nav-link:hover {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
 
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
       position: relative;
       overflow: hidden;
       background:
         radial-gradient(
-          circle at 75% 45%,
-          rgba(181, 154, 98, 0.13),
-          transparent 30%
+          ellipse at 50% 40%,
+          rgba(181, 154, 98, 0.10),
+          transparent 55%
+        ),
+        radial-gradient(
+          ellipse at 80% 80%,
+          rgba(181, 154, 98, 0.06),
+          transparent 40%
         ),
         var(--cream);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(181, 154, 98, 0.15);
+      border-radius: 50%;
+      left: -200px;
+      top: -200px;
+      animation: float 20s ease-in-out infinite;
     }
 
     .hero::after {
@@ -126,10 +198,16 @@
       position: absolute;
       width: 480px;
       height: 480px;
-      border: 1px solid rgba(181, 154, 98, 0.25);
+      border: 1px solid rgba(181, 154, 98, 0.18);
       border-radius: 50%;
       right: -140px;
       bottom: -150px;
+      animation: float 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
     }
 
     .hero-content {
@@ -140,43 +218,46 @@
     }
 
     .eyebrow {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 14px;
       margin-bottom: 30px;
       font-size: 10px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-dark);
+      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 999px;
+      border: 1px solid rgba(181, 154, 98, 0.15);
+      backdrop-filter: blur(8px);
     }
 
     .eyebrow::before {
       content: "";
-      width: 38px;
-      height: 1px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
       background: var(--gold);
     }
 
     .hero h1 {
-      font-size: clamp(64px, 9vw, 118px);
-      letter-spacing: -0.035em;
+      font-size: clamp(58px, 9vw, 110px);
+      letter-spacing: -0.03em;
       max-width: 900px;
-    }
-
-    .hero h1 em {
-      color: var(--gold);
-      font-style: normal;
+      margin: 0 auto;
     }
 
     .hero-description {
       max-width: 600px;
-      margin-top: 34px;
+      margin: 34px auto 0;
       font-size: 17px;
       color: var(--gray);
     }
 
     .hero-meta {
       display: flex;
+      justify-content: center;
       gap: 28px;
       margin-top: 42px;
       font-size: 10px;
@@ -193,56 +274,74 @@
     .hero-meta span::before {
       content: "✦";
       color: var(--gold);
+      font-size: 8px;
     }
 
     .cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 18px;
+      gap: 12px;
       margin-top: 42px;
-      padding: 17px 26px;
+      padding: 16px 32px;
       background: var(--black);
       color: var(--white);
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      transition: all 0.3s ease;
+      border-radius: 999px;
+      transition: all var(--transition);
     }
 
     .cta:hover {
       background: var(--gold);
+      color: var(--black);
       transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(181, 154, 98, 0.25);
     }
 
     .cta-arrow {
-      font-size: 17px;
+      font-size: 16px;
+      transition: transform var(--transition);
     }
 
-    /* -----------------------------
-       INTRO
-    ----------------------------- */
+    .cta:hover .cta-arrow {
+      transform: translateX(4px);
+    }
 
+    /* SECTIONS */
     section {
-      padding: 130px 0;
-    }
-
-    .intro {
-      background: var(--cream-light);
+      padding: 120px 0;
     }
 
     .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-size: 10px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-dark);
       margin-bottom: 26px;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* INTRO */
+    .intro {
+      background: var(--cream-light);
     }
 
     .intro-grid {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
       gap: 80px;
+      align-items: start;
     }
 
     .intro h2 {
@@ -259,17 +358,56 @@
       margin-top: 25px;
     }
 
-    /* -----------------------------
-       REFLECTION
-    ----------------------------- */
+    .intro-img {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-top: 40px;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+      box-shadow: var(--shadow-soft);
+    }
 
+    .img-section {
+      width: 100%;
+      margin-top: 0;
+      padding: 0;
+    }
+
+    .img-section img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: var(--radius-xl);
+      margin: 0 auto;
+      max-width: 1200px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* REFLECTION */
     .reflection {
       background: var(--black);
       color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reflection::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border: 1px solid rgba(181, 154, 98, 0.12);
+      border-radius: 50%;
+      right: -200px;
+      top: -200px;
     }
 
     .reflection .section-label {
       color: var(--gold-light);
+    }
+
+    .reflection .section-label::before {
+      background: var(--gold-light);
     }
 
     .reflection h2 {
@@ -281,36 +419,40 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       margin-top: 70px;
-      border-top: 1px solid rgba(255,255,255,0.15);
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
     }
 
     .card {
       padding: 42px 35px;
-      border-right: 1px solid rgba(255,255,255,0.15);
+      background: var(--black);
+      transition: background var(--transition);
     }
 
-    .card:last-child {
-      border-right: none;
+    .card:hover {
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .card-number {
       font-family: "Cormorant Garamond", serif;
       color: var(--gold-light);
       font-size: 26px;
+      opacity: 0.6;
     }
 
     .card p {
       margin-top: 22px;
       font-size: 16px;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
     }
 
-    /* -----------------------------
-       TRANSFORMATION
-    ----------------------------- */
-
+    /* TRANSFORMATION */
     .transformation {
       background: var(--cream);
+      position: relative;
     }
 
     .transformation-grid {
@@ -325,47 +467,62 @@
     }
 
     .quote {
-      border-left: 1px solid var(--gold);
-      padding-left: 30px;
+      border-left: 2px solid var(--gold);
+      padding-left: 35px;
       color: var(--gray);
       font-size: 18px;
+      line-height: 1.8;
     }
 
-    /* -----------------------------
-       CAMPO
-    ----------------------------- */
+    .quote p + p {
+      margin-top: 20px;
+    }
 
-    .campo {
+    /* ORIGIN */
+    .origin {
       background: var(--cream-light);
+      position: relative;
+      overflow: hidden;
     }
 
-    .campo-inner {
+    .origin::before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border: 1px solid rgba(181, 154, 98, 0.12);
+      border-radius: 50%;
+      left: -150px;
+      bottom: -150px;
+    }
+
+    .origin-inner {
       max-width: 820px;
       margin: auto;
       text-align: center;
     }
 
-    .campo h2 {
+    .origin h2 {
       font-size: clamp(52px, 7vw, 92px);
     }
 
-    .campo-text {
+    .origin-text {
       margin: 35px auto 0;
       max-width: 680px;
       font-size: 18px;
       color: var(--gray);
+      line-height: 1.8;
     }
 
-    /* -----------------------------
-       PROCESS
-    ----------------------------- */
-
+    /* PROCESS */
     .process {
-      background: #eee9de;
+      background: var(--cream-warm);
+      position: relative;
     }
 
     .process h2 {
       font-size: clamp(48px, 6vw, 76px);
+      max-width: 700px;
     }
 
     .process-list {
@@ -376,19 +533,30 @@
       display: grid;
       grid-template-columns: 100px 250px 1fr;
       gap: 30px;
-      padding: 35px 0;
+      padding: 40px 0;
       border-top: 1px solid var(--line);
       align-items: center;
+      transition: all var(--transition);
     }
 
     .process-item:last-child {
       border-bottom: 1px solid var(--line);
     }
 
+    .process-item:hover {
+      padding-left: 12px;
+    }
+
     .process-number {
       font-family: "Cormorant Garamond", serif;
       color: var(--gold);
-      font-size: 34px;
+      font-size: 38px;
+      opacity: 0.5;
+      transition: opacity var(--transition);
+    }
+
+    .process-item:hover .process-number {
+      opacity: 1;
     }
 
     .process-title {
@@ -398,12 +566,10 @@
 
     .process-description {
       color: var(--gray);
+      line-height: 1.7;
     }
 
-    /* -----------------------------
-       ABOUT
-    ----------------------------- */
-
+    /* ABOUT */
     .about {
       background: var(--cream-light);
     }
@@ -417,24 +583,10 @@
 
     .portrait {
       aspect-ratio: 4 / 5;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(181,154,98,0.25),
-          rgba(23,23,20,0.08)
-        );
-      position: relative;
-      overflow: hidden;
-    }
-
-    .portrait::after {
-      content: "FMA";
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 60px;
-      color: rgba(255,255,255,0.65);
+      width: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
     }
 
     .about h2 {
@@ -445,25 +597,46 @@
       margin-top: 30px;
       color: var(--gray);
       font-size: 17px;
+      line-height: 1.8;
     }
 
-    /* -----------------------------
-       OFFER
-    ----------------------------- */
+    .about-copy p + p {
+      margin-top: 18px;
+    }
 
+    /* OFFER */
     .offer {
       background: var(--black);
       color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(181, 154, 98, 0.10);
+      border-radius: 50%;
+      left: -250px;
+      top: -250px;
     }
 
     .offer-inner {
       max-width: 850px;
       margin: auto;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     .offer .section-label {
       color: var(--gold-light);
+    }
+
+    .offer .section-label::before {
+      background: var(--gold-light);
     }
 
     .offer h2 {
@@ -473,15 +646,17 @@
     .offer-description {
       margin: 35px auto 0;
       max-width: 650px;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255, 255, 255, 0.65);
       font-size: 17px;
     }
 
     .offer-box {
       margin-top: 55px;
-      border: 1px solid rgba(181,154,98,0.35);
+      border: 1px solid rgba(181, 154, 98, 0.25);
       padding: 40px;
       text-align: left;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .offer-box ul {
@@ -489,15 +664,23 @@
     }
 
     .offer-box li {
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.75);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .offer-box li:last-child {
+      border-bottom: none;
     }
 
     .offer-box li::before {
       content: "✦";
       color: var(--gold);
-      margin-right: 15px;
+      font-size: 10px;
+      flex-shrink: 0;
     }
 
     .offer .cta {
@@ -507,12 +690,10 @@
 
     .offer .cta:hover {
       background: var(--white);
+      box-shadow: 0 12px 32px rgba(181, 154, 98, 0.3);
     }
 
-    /* -----------------------------
-       FAQ
-    ----------------------------- */
-
+    /* FAQ */
     .faq {
       background: var(--cream);
     }
@@ -529,7 +710,8 @@
 
     details {
       border-top: 1px solid var(--line);
-      padding: 25px 0;
+      padding: 28px 0;
+      transition: all var(--transition);
     }
 
     details:last-child {
@@ -543,6 +725,13 @@
       font-size: 25px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      transition: color var(--transition);
+    }
+
+    summary:hover {
+      color: var(--gold-dark);
     }
 
     summary::-webkit-details-marker {
@@ -552,24 +741,33 @@
     summary::after {
       content: "+";
       font-family: "Inter", sans-serif;
-      font-size: 18px;
-      color: var(--gold);
+      font-size: 20px;
+      color: var(--gold-dark);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      transition: all var(--transition);
+      flex-shrink: 0;
     }
 
     details[open] summary::after {
       content: "−";
+      background: var(--gold-dark);
+      color: var(--white);
+      border-color: var(--gold-dark);
     }
 
     details p {
-      margin-top: 15px;
+      margin-top: 18px;
       color: var(--gray);
       max-width: 650px;
+      line-height: 1.8;
     }
 
-    /* -----------------------------
-       FINAL CTA
-    ----------------------------- */
-
+    /* FINAL CTA */
     .final {
       min-height: 75vh;
       display: flex;
@@ -577,9 +775,9 @@
       text-align: center;
       background:
         radial-gradient(
-          circle at center,
-          rgba(181,154,98,0.16),
-          transparent 42%
+          ellipse at center,
+          rgba(181, 154, 98, 0.12),
+          transparent 50%
         ),
         var(--cream-light);
     }
@@ -590,7 +788,7 @@
     }
 
     .final h2 {
-      font-size: clamp(58px, 8vw, 105px);
+      font-size: clamp(52px, 8vw, 100px);
     }
 
     .final p {
@@ -598,16 +796,14 @@
       margin: 30px auto 0;
       color: var(--gray);
       font-size: 18px;
+      line-height: 1.8;
     }
 
-    /* -----------------------------
-       FOOTER
-    ----------------------------- */
-
+    /* FOOTER */
     footer {
-      padding: 30px 0;
+      padding: 40px 0;
       background: var(--black);
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.5);
       font-size: 11px;
       letter-spacing: 0.08em;
     }
@@ -615,12 +811,10 @@
     .footer-inner {
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
-    /* -----------------------------
-       WHATSAPP FLOAT
-    ----------------------------- */
-
+    /* WHATSAPP */
     .whatsapp {
       position: fixed;
       z-index: 50;
@@ -634,13 +828,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
-      transition: transform .3s ease;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
+      transition: all var(--transition);
       text-decoration: none;
     }
 
     .whatsapp:hover {
       transform: scale(1.08);
+      box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
     }
 
     .whatsapp svg {
@@ -649,10 +844,7 @@
       fill: currentColor;
     }
 
-    /* -----------------------------
-       ANIMATION
-    ----------------------------- */
-
+    /* ANIMATION */
     .fade {
       opacity: 0;
       transform: translateY(25px);
@@ -666,10 +858,25 @@
       }
     }
 
-    /* -----------------------------
-       MOBILE
-    ----------------------------- */
+    @media (prefers-reduced-motion: reduce) {
+      .fade {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      .hero::before,
+      .hero::after {
+        animation: none;
+      }
+      .process-item:hover {
+        padding-left: 0;
+      }
+    }
 
+    /* MOBILE */
     @media (max-width: 800px) {
 
       .container {
@@ -685,7 +892,7 @@
       }
 
       section {
-        padding: 90px 0;
+        padding: 80px 0;
       }
 
       .hero {
@@ -693,7 +900,7 @@
       }
 
       .hero h1 {
-        font-size: clamp(58px, 17vw, 90px);
+        font-size: clamp(52px, 15vw, 85px);
       }
 
       .hero-description {
@@ -717,15 +924,6 @@
         grid-template-columns: 1fr;
       }
 
-      .card {
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.15);
-      }
-
-      .card:last-child {
-        border-bottom: none;
-      }
-
       .process-item {
         grid-template-columns: 55px 1fr;
         gap: 10px;
@@ -745,7 +943,16 @@
 
       .footer-inner {
         flex-direction: column;
-        gap: 10px;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .eyebrow {
+        font-size: 9px;
+      }
+
+      .img-section img {
+        border-radius: var(--radius-lg);
       }
     }
   </style>
@@ -753,54 +960,57 @@
 
 <body>
 
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
   <!-- HEADER -->
 
   <header>
-    <div class="container nav">
+    <nav class="container nav" aria-label="Navegación principal">
       <div class="brand">
-        Fernando <span>✦</span> Acri
+        <img src="assets/orden-creativo-logo.png" alt="Fernando Matías Acri · Orden Creativo" width="120" height="32" />
       </div>
 
       <a href="#proceso" class="nav-link">
-        El Campo Sagrado
+        Constelaciones del Dinero
       </a>
-    </div>
+    </nav>
   </header>
 
 
-  <!-- HERO -->
+  <main id="main-content">
 
-  <main>
+    <!-- HERO -->
 
     <section class="hero">
       <div class="container">
         <div class="hero-content fade">
 
           <div class="eyebrow">
-            Proceso individual 1:1
+            Proceso de acompañamiento · 6 sesiones
           </div>
 
           <h1>
-            Hay momentos en los que
-            <em>entender</em>
-            ya no alcanza.
+            El dinero
+            <em>también tiene historia.</em>
           </h1>
 
           <p class="hero-description">
-            El Campo Sagrado es un espacio individual para mirar aquello
-            que se repite, reconocer su origen y abrir una nueva posibilidad.
+            Un proceso de 6 sesiones para recorrer paso a paso aquello que
+            obstaculiza tu relación con el dinero —desde la raíz sistémica
+            hasta una nueva forma de recibir, elegir y avanzar.
           </p>
 
           <div class="hero-meta">
-            <span>Espacio íntimo</span>
             <span>Acompañamiento 1:1</span>
             <span>Online</span>
+            <span>6 sesiones</span>
           </div>
 
           <a
             class="cta"
-            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20vengo%20de%20la%20masterclass%20y%20quiero%20conocer%20el%20proceso%20individual%20de%20El%20Campo%20Sagrado."
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20el%20proceso%20de%20Constelaciones%20del%20Dinero."
             target="_blank"
+            rel="noopener noreferrer"
           >
             Quiero conocer el proceso
             <span class="cta-arrow">→</span>
@@ -814,51 +1024,42 @@
     <!-- INTRO -->
 
     <section class="intro">
-
       <div class="container">
-
         <div class="intro-grid">
 
           <div>
             <div class="section-label">
               Una mirada diferente
             </div>
-
             <h2>
-              Quizás no necesitás otra respuesta.
+              No se trata de hacer más.<br>Se trata de <em>recibir</em> distinto.
             </h2>
           </div>
 
           <div class="intro-copy">
 
             <p>
-              Quizás necesitás mirar aquello que está detrás de la pregunta.
+              Antes de aprender a ganar, ya habíamos aprendido —o no— a recibir.
+              Y lo aprendimos en el vínculo más temprano: con nuestra madre.
             </p>
-
             <p>
-              Muchas veces sabemos qué queremos cambiar, pero seguimos
-              encontrándonos con los mismos patrones, las mismas dificultades
-              o las mismas sensaciones.
+              Desde ahí se construye todo lo demás: cómo llega el dinero,
+              cómo lo guardamos, cómo lo gastamos, cómo lo merecemos.
             </p>
-
             <p>
-              En El Campo Sagrado creo un espacio para detenernos,
-              observar y reconocer qué está pidiendo ser visto.
+              Constelaciones del Dinero es un recorrido de 6 sesiones
+              para mirar esa raíz y abrir una nueva posibilidad.
             </p>
 
           </div>
-
         </div>
-
       </div>
-
     </section>
 
 
     <!-- REFLECTION -->
 
     <section class="reflection">
-
       <div class="container">
 
         <div class="section-label">
@@ -866,8 +1067,7 @@
         </div>
 
         <h2>
-          Lo sabés racionalmente,
-          pero algo sigue repitiéndose.
+          Sabés querer abundancia,<br>pero algo la frena.
         </h2>
 
         <div class="cards">
@@ -875,47 +1075,43 @@
           <div class="card">
             <div class="card-number">01</div>
             <p>
-              Sentís que repetís una historia aunque racionalmente sabés
-              que querés otra cosa.
+              Sentís que merecer lo bueno te cuesta más de lo que debería.
+              Aunque racionalmente sabés que lo merecés, algo adentro frena.
             </p>
           </div>
 
           <div class="card">
             <div class="card-number">02</div>
             <p>
-              Hay algo en tu vida que parece no encontrar orden:
-              dinero, vínculos, trabajo, propósito o merecimiento.
+              El dinero parece no llegar, o cuando llega se va igual.
+              Hay un patrón que se repite y no encontrás la salida.
             </p>
           </div>
 
           <div class="card">
             <div class="card-number">03</div>
             <p>
-              Estás cansado de buscar respuestas afuera y sentís que
-              llegó el momento de mirar más profundo.
+              Notás que la culpa aparece cuando te va bien,
+              o que sentís que tomar demasiado es una forma de traicionar a alguien.
             </p>
           </div>
 
         </div>
 
       </div>
-
     </section>
 
 
     <!-- TRANSFORMATION -->
 
     <section class="transformation">
-
       <div class="container">
-
         <div class="transformation-grid">
 
           <div>
             <div class="section-label">
               Mi manera de acompañarte
             </div>
-
             <h2>
               No trabajo para que te conviertas en otra persona.
             </h2>
@@ -923,144 +1119,159 @@
 
           <div class="quote">
             <p>
-              Trabajo para que puedas reconocer quién sos,
-              mirar tu historia con mayor conciencia y
-              ocupar tu lugar desde un lugar diferente.
+              Trabajo para que puedas reconocer qué historia llevás
+              puesta en el dinero, mirar su origen y encontrar
+              una nueva forma de recibir, elegir y avanzar.
             </p>
-
-            <br />
-
             <p>
               Integro una mirada sistémica, simbólica y creativa
-              para acompañarte a observar patrones, vínculos,
-              lealtades y aquello que necesita ser reconocido.
+              para que cada sesión te acerque a tu propia verdad,
+              sin apuro, sin culpa, sin exigencia.
             </p>
           </div>
 
         </div>
-
       </div>
-
     </section>
 
 
-    <!-- CAMPO SAGRADO -->
+    <!-- ORIGIN -->
 
-    <section class="campo" id="proceso">
-
+    <section class="origin" id="proceso">
       <div class="container">
-
-        <div class="campo-inner">
+        <div class="origin-inner">
 
           <div class="section-label">
             El espacio
           </div>
 
           <h2>
-            ¿Qué es<br>
-            El Campo Sagrado?
+            ¿Qué son<br>
+            las Constelaciones del Dinero?
           </h2>
 
-          <p class="campo-text">
-            Es un espacio de observación, reconocimiento y movimiento
-            interior. Un lugar donde podemos mirar aquello que muchas
-            veces permanece oculto en nuestra historia y encontrar una
-            nueva manera de relacionarnos con ello.
+          <p class="origin-text">
+            Es un proceso de 6 sesiones individuales donde recorrés,
+            paso a paso, tu historia con el dinero. Desde la raíz
+            —el vínculo temprano con recibir— hasta la posibilidad
+            de ocupar un nuevo lugar frente a la abundancia.
           </p>
 
           <a
             class="cta"
-            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20El%20Campo%20Sagrado."
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20el%20proceso%20de%20Constelaciones%20del%20Dinero."
             target="_blank"
+            rel="noopener noreferrer"
           >
             Quiero conversar con vos
             <span class="cta-arrow">→</span>
           </a>
 
         </div>
-
       </div>
-
     </section>
 
 
-    <!-- PROCESS -->
+    <!-- PROCESS — 6 SESSIONS -->
 
     <section class="process">
-
       <div class="container">
 
         <div class="section-label">
-          El proceso
+          Las 6 sesiones
         </div>
 
         <h2>
-          Tres movimientos.
+          Seis pasos para destrabar tu relación con el dinero.
         </h2>
 
         <div class="process-list">
 
           <div class="process-item">
-
             <div class="process-number">01</div>
-
             <div class="process-title">
-              Mirar
+              El vínculo con lo recibido
             </div>
-
             <div class="process-description">
-              Reconocer qué está sucediendo y qué patrón,
-              situación o pregunta querés traer al espacio.
+              Miramos cómo fue tu relación con recibir de tu madre.
+              El primer acto de recibir es la raíz de todo lo que
+              después llega —incluido el dinero.
             </div>
-
           </div>
 
           <div class="process-item">
-
             <div class="process-number">02</div>
-
             <div class="process-title">
-              Ordenar
+              El merecimiento y la culpa
             </div>
-
             <div class="process-description">
-              Dar lugar a aquello que necesita ser visto,
-              reconocido y ubicado en su lugar.
+              Exploramos aquello que te impide sentirte merecedor.
+              Las lealtades invisibles, las frases heredadas y
+              los mandatos que todavía te sostienen.
             </div>
-
           </div>
 
           <div class="process-item">
-
             <div class="process-number">03</div>
-
             <div class="process-title">
-              Crear
+              El dinero como espejo
             </div>
-
             <div class="process-description">
-              Abrir una nueva posibilidad y llevar esa mirada
-              a decisiones concretas de tu vida cotidiana.
+              El dinero no es solo dinero: refleja vínculos,
+              pertenencias y órdenes familiares. Reconocemos
+              qué historia está puesta en tu relación con él.
             </div>
+          </div>
 
+          <div class="process-item">
+            <div class="process-number">04</div>
+            <div class="process-title">
+              Soltar lo que no es tuyo
+            </div>
+            <div class="process-description">
+              Deudas, culpas, deudas simbólicas y lealtades
+              familiares. Devolvemos a cada quien lo que le
+              pertenece y liberamos lo que estás cargando.
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">05</div>
+            <div class="process-title">
+              Recibir desde tu lugar
+            </div>
+            <div class="process-description">
+              Ocupás el lugar del que recibe sin culpa,
+              sin pedir permiso, sin compensar. Recibir
+              se convierte en un acto de vida, no de deuda.
+            </div>
+          </div>
+
+          <div class="process-item">
+            <div class="process-number">06</div>
+            <div class="process-title">
+              Crear desde la nueva posición
+            </div>
+            <div class="process-description">
+              Integrás lo mirado y elegís una nueva forma
+              de relacionarte con el dinero. Decisiones
+              concretas, movimiento real en tu vida cotidiana.
+            </div>
           </div>
 
         </div>
 
       </div>
-
     </section>
 
 
     <!-- ABOUT -->
 
     <section class="about">
-
       <div class="container">
-
         <div class="about-grid">
 
-          <div class="portrait"></div>
+          <img src="assets/1782509959179.jpg" alt="Fernando Matías Acri" class="portrait" width="400" height="500" loading="lazy" />
 
           <div>
 
@@ -1073,46 +1284,34 @@
             </h2>
 
             <div class="about-copy">
-
               <p>
                 Soy diseñador gráfico y creador de Orden Creativo.
               </p>
-
-              <br>
-
               <p>
                 Desde hace años integro creatividad, símbolos,
                 trabajo sistémico y procesos de transformación
                 para crear espacios donde las personas puedan
                 reconocerse y abrir nuevas posibilidades.
               </p>
-
-              <br>
-
               <p>
-                El Campo Sagrado nace de esa integración:
-                un espacio donde mirar la historia no significa
-                quedarse en ella, sino encontrar una nueva forma
-                de relacionarte con tu presente.
+                Constelaciones del Dinero nace de esa integración:
+                un recorrido donde mirar la historia con el dinero
+                no significa quedarse en ella, sino encontrar
+                una nueva forma de recibir y avanzar.
               </p>
-
             </div>
 
           </div>
 
         </div>
-
       </div>
-
     </section>
 
 
     <!-- OFFER -->
 
     <section class="offer">
-
       <div class="container">
-
         <div class="offer-inner">
 
           <div class="section-label">
@@ -1120,90 +1319,67 @@
           </div>
 
           <h2>
-            El Campo Sagrado
+            Constelaciones<br>del Dinero
           </h2>
 
           <p class="offer-description">
-            Un espacio personalizado para trabajar aquello que hoy
-            está pidiendo tu atención.
+            Un recorrido de 6 sesiones para trabajar tu relación con el
+            dinero desde la raíz, paso a paso, con una mirada sistémica
+            y creativa.
           </p>
 
           <div class="offer-box">
-
             <ul>
-
-              <li>
-                Encuentro individual 1:1
-              </li>
-
-              <li>
-                Espacio personalizado según tu situación
-              </li>
-
-              <li>
-                Mirada sistémica y simbólica
-              </li>
-
-              <li>
-                Material de integración posterior
-              </li>
-
-              <li>
-                Acompañamiento cercano
-              </li>
-
+              <li>6 sesiones individuales 1:1</li>
+              <li>Online — desde donde estés</li>
+              <li>Mirada sistémica y simbólica</li>
+              <li>Cuaderno de trabajo personalizado</li>
+              <li>Material de integración entre sesiones</li>
+              <li>Acompañamiento cercano y personalizado</li>
             </ul>
-
           </div>
 
           <a
             class="cta"
-            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20particip%C3%A9%20de%20la%20masterclass%20y%20quiero%20conocer%20el%20acompa%C3%B1amiento%20individual%20El%20Campo%20Sagrado."
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20el%20proceso%20de%20Constelaciones%20del%20Dinero."
             target="_blank"
+            rel="noopener noreferrer"
           >
             Quiero conocer el proceso
             <span class="cta-arrow">→</span>
           </a>
 
         </div>
-
       </div>
-
     </section>
 
 
     <!-- FAQ -->
 
     <section class="faq">
-
       <div class="container">
-
         <div class="faq-grid">
 
           <div>
-
             <div class="section-label">
               Preguntas
             </div>
-
             <h2>
               Antes de dar el próximo paso.
             </h2>
-
           </div>
 
           <div>
 
             <details>
               <summary>
-                ¿Para quién es este espacio?
+                ¿Para quién es este proceso?
               </summary>
-
               <p>
                 Para personas que sienten que hay algo que se repite
-                en su vida y quieren mirarlo desde una perspectiva
-                diferente, con disposición a participar activamente
-                de su propio proceso.
+                en su relación con el dinero —bloqueos, culpa, dificultad
+                para recibir— y quieren mirarlo desde una perspectiva
+                diferente, con disposición a participar activamente.
               </p>
             </details>
 
@@ -1211,36 +1387,45 @@
               <summary>
                 ¿Es terapia?
               </summary>
-
               <p>
-                No. El Campo Sagrado no reemplaza psicoterapia,
+                No. Constelaciones del Dinero no reemplaza psicoterapia,
                 tratamiento médico ni atención profesional de salud.
-                Es un espacio de acompañamiento y exploración personal.
+                Es un espacio de acompañamiento y exploración personal
+                desde la mirada sistémica.
               </p>
             </details>
 
             <details>
               <summary>
-                ¿Cómo se realiza?
+                ¿Cómo funciona?
               </summary>
-
               <p>
-                El proceso se realiza de manera online.
-                Una vez que me escriba podemos conversar sobre
-                tu situación y definir si este espacio es adecuado
-                para vos.
+                Son 6 sesiones online, de aproximadamente 60-75 minutos
+                cada una. Cada sesión tiene un tema y un recorrido.
+                Trabajamos con preguntas, ejercicios y constelaciones
+                guiadas para mirar tu historia desde el cuerpo y el corazón.
               </p>
             </details>
 
             <details>
               <summary>
-                ¿Cuánto dura?
+                ¿Cuánto dura el proceso completo?
               </summary>
-
               <p>
-                La duración y modalidad se definen según el proceso
-                que necesites. Te voy a explicar todos los detalles
-                cuando conversemos por WhatsApp.
+                Las 6 sesiones se desarrollan a lo largo de unas 6 a 8 semanas,
+                con un encuentro semanal. La frecuencia se adapta a tu ritmo.
+                Te explico todos los detalles cuando conversemos por WhatsApp.
+              </p>
+            </details>
+
+            <details>
+              <summary>
+                ¿Necesito saber de constelaciones antes?
+              </summary>
+              <p>
+                No. Cada sesión arranca desde lo que necesitás, no desde
+                teoría. Yo me encargo de sostener el espacio y guiarte
+                en cada paso. Solo necesitás disposición y ganas de mirar.
               </p>
             </details>
 
@@ -1248,29 +1433,24 @@
               <summary>
                 ¿Qué sucede después de escribirte?
               </summary>
-
               <p>
-                Primero vamos a conversar. Quiero conocer qué estás
+                Primero vamos a conversar. Quiero entender qué estás
                 atravesando y qué querés trabajar antes de proponerte
-                cualquier proceso.
+                el proceso. Sin compromiso, sin apuro.
               </p>
             </details>
 
           </div>
 
         </div>
-
       </div>
-
     </section>
 
 
     <!-- FINAL CTA -->
 
     <section class="final">
-
       <div class="container">
-
         <div class="final-inner">
 
           <div class="section-label">
@@ -1278,7 +1458,7 @@
           </div>
 
           <h2>
-            Si sentís que es momento de mirar de otra manera...
+            Si sentís que es momento de mirar tu historia con el dinero...
           </h2>
 
           <p>
@@ -1288,17 +1468,16 @@
 
           <a
             class="cta"
-            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20vengo%20de%20la%20masterclass%20y%20quiero%20conocer%20El%20Campo%20Sagrado."
+            href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20el%20proceso%20de%20Constelaciones%20del%20Dinero."
             target="_blank"
+            rel="noopener noreferrer"
           >
             Quiero conversar con vos
             <span class="cta-arrow">→</span>
           </a>
 
         </div>
-
       </div>
-
     </section>
 
   </main>
@@ -1307,19 +1486,21 @@
   <!-- FOOTER -->
 
   <footer>
-
     <div class="container footer-inner">
 
       <div>
-        Fernando Matías Acri · Orden Creativo
+        <img src="assets/orden-creativo-logo.png" alt="Fernando Matías Acri · Orden Creativo" class="footer-logo" width="120" height="24" loading="lazy" />
       </div>
 
       <div>
-        El Campo Sagrado
+        Constelaciones del Dinero
+      </div>
+
+      <div>
+        Fernando Matías Acri
       </div>
 
     </div>
-
   </footer>
 
 
@@ -1327,15 +1508,14 @@
 
   <a
     class="whatsapp"
-    href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20vengo%20de%20la%20masterclass%20y%20quiero%20conocer%20El%20Campo%20Sagrado."
+    href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20el%20proceso%20de%20Constelaciones%20del%20Dinero."
     target="_blank"
+    rel="noopener noreferrer"
     aria-label="Contactar por WhatsApp"
   >
-
     <svg viewBox="0 0 24 24">
       <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.3-6.1-3.5-8.3ZM12.2 21.6c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 1 1 8.1 4.6Zm5.3-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.8-1.8-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.9.7.8.3 1.5.3 2.1.2.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4Z"/>
     </svg>
-
   </a>
 
 </body>
