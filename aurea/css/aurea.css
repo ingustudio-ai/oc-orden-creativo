@@ -346,6 +346,51 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 .checklist li { display: flex; gap: 0.75rem; align-items: baseline; color: var(--crema); }
 .checklist span { color: var(--dorado); }
 
+/* Historia detrás de ÁureA */
+.story-prose { max-width: 72ch; margin-inline: auto; }
+.story-prose > p { margin-bottom: 1.15rem; }
+.story-list { margin: 1.1rem 0 1.4rem; }
+.story-phi {
+  margin: 2.4rem 0;
+  padding: 1.6rem 1.4rem;
+  border: 1px solid var(--borde-suave);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(217,178,100,.08), rgba(186,170,255,.04) 55%, transparent);
+}
+.story-phi-symbol {
+  font-family: var(--fuente-display);
+  letter-spacing: 0.22em;
+  color: var(--dorado);
+  font-size: 0.95rem;
+  margin: 0 0 0.6rem;
+}
+.story-phi-title {
+  font-family: var(--fuente-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--crema);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+.story-phi p { margin-bottom: 1rem; }
+.story-phi p:last-child { margin-bottom: 0; }
+.story-question {
+  margin: 2rem 0;
+  padding: 1.4rem 1.5rem;
+  border-left: 2px solid var(--dorado);
+  background: rgba(217,178,100,.05);
+  border-radius: 0 12px 12px 0;
+}
+.story-question p {
+  margin: 0;
+  font-family: var(--fuente-display);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.45;
+  color: var(--crema);
+  font-style: italic;
+}
+
 .mini-deck {
   display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: clamp(0.6rem, 1.6vw, 1.2rem); margin-top: clamp(2rem, 5vw, 3.5rem);
