@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÁUREA · Oráculo Sistémico de 22 Arcanos</title>
+<meta name="description" content="Áurea es un oráculo sistémico de 22 arcanos para explorar la historia familiar, los vínculos, los patrones y los procesos de transformación. Orden Creativo · Fernando Matías Acri.">
+<meta name="theme-color" content="#07060B">
+<meta property="og:title" content="ÁUREA · Oráculo Sistémico de 22 Arcanos">
+<meta property="og:description" content="Una imagen te muestra una parte. El sistema te revela el todo.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/aurea.css">
+</head>
+<body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="aurea-halo" aria-hidden="true"></div>
+
+<div id="config-banner" class="config-banner" hidden>
+  <strong>CONFIGURACIÓN:</strong> Supabase todavía no está configurado. Pegá <code>SUPABASE_URL</code> y <code>SUPABASE_ANON_KEY</code> en <code>js/aurea.js</code> para habilitar cuentas, códigos de activación y historial.
+</div>
+
+<header id="site-header" class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="#/" data-nav-home>
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="34" height="34" focusable="false">
+          <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="1" opacity=".55"/>
+          <path d="M24 5 L38 34 H10 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+          <circle cx="24" cy="26" r="7" fill="none" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">ÁUREA</span>
+        <span class="brand-sub">Oráculo Sistémico de 22 Arcanos</span>
+      </span>
+    </a>
+
+    <nav id="public-nav" class="public-nav" aria-label="Navegación principal">
+      <a href="#origen">El origen</a>
+      <a href="#arte">El arte</a>
+      <a href="#sistema">El sistema</a>
+      <a href="#lanzamiento">Lanzamiento</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="btn-sound" class="icon-btn" type="button" aria-pressed="false" title="Sonido armónico">
+        <span id="sound-glyph" aria-hidden="true">♪</span>
+        <span class="sr-only">Activar o desactivar el sonido</span>
+      </button>
+      <button id="btn-menu" class="icon-btn only-mobile" type="button" aria-expanded="false" aria-controls="public-nav">
+        <span aria-hidden="true">☰</span>
+        <span class="sr-only">Menú</span>
+      </button>
+      <a id="btn-login" class="btn btn-ghost btn-sm" href="#/ingreso">Ingresar</a>
+      <button id="btn-logout" class="btn btn-ghost btn-sm" type="button" hidden>Salir</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= LANDING PÚBLICA ================= -->
+  <section id="view-landing" class="view" data-view="landing">
+
+    <div id="hero" class="hero">
+      <div class="shell hero-inner">
+        <p class="eyebrow reveal">Orden Creativo · Fernando Matías Acri</p>
+        <h1 class="hero-title reveal">ÁUREA</h1>
+        <p class="hero-subtitle reveal">Oráculo Sistémico de 22 Arcanos</p>
+        <p class="hero-phrase reveal">“Una nueva forma de mirar nuestra historia.”</p>
+        <p class="hero-text reveal">Un lenguaje arquetípico para explorar los vínculos, los nudos y aquello que dentro de nuestra constelación familiar busca ser visto con amor, reconocimiento y orden.</p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-gold" href="#/registro">Crear mi cuenta</a>
+          <a class="btn btn-ghost" href="#origen">Conocer Áurea</a>
+        </div>
+        <p class="hero-claim reveal">“Una imagen te muestra una parte. El sistema te revela el todo.”</p>
+        <div class="phi-mark reveal" aria-hidden="true">
+          <span class="phi-symbol">φ</span>
+          <span class="phi-value">≈ 1,618</span>
+          <span class="phi-label">Proporción áurea</span>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+    </div>
+
+    <section id="origen" class="section">
+      <div class="shell grid-2">
+        <div class="section-head reveal">
+          <span class="section-index">I</span>
+          <h2 class="section-title">El origen</h2>
+          <p class="section-kicker">De la raíz a la conciencia. De la memoria a la libertad.</p>
+        </div>
+        <div class="prose reveal">
+          <p>Durante años acompañé procesos en los que una misma pregunta aparecía con distinta ropa: <em>¿por qué me pasa esto a mí?</em> Escuché árboles genealógicos cargados de silencios, nombres que nadie repetía, oficios que saltaban de generación en generación y ausencias que seguían ocupando una silla vacía.</p>
+          <p>Nací y crecí en una familia donde la historia se contaba a medias. Aprendí temprano que un sistema familiar no es una suma de personas: es una red de lealtades, de deudas, de amores malogrados y de bellezas que nadie nombró. Áurea nace de ese recorrido —de la terapia sistémica, del simbolismo del tarot contemporáneo y de la convicción de que mirar con orden también es una forma de amor.</p>
+          <p>No vengo a adivinar tu futuro. Vengo a ofrecerte un lenguaje para que puedas mirar tu propia historia con más espacio, más humor y más verdad. Ese es el origen de este oráculo y también la razón por la que existe.</p>
+          <p class="signature">Fernando Matías Acri · <span>Orden Creativo</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="arte" class="section section-alt">
+      <div class="shell grid-2 reverse">
+        <div class="section-head reveal">
+          <span class="section-index">II</span>
+          <h2 class="section-title">El arte</h2>
+          <p class="section-kicker">Veintidós puertas visuales construidas como pequeños altares.</p>
+        </div>
+        <div class="prose reveal">
+          <p>Cada arcano de Áurea es una pieza ilustrada: negro profundo, oro antiguo, luz crema y un cielo violeta que sostiene la escena. La estética es alquímica y editorial, deliberadamente sobria: nada grita, todo respira.</p>
+          <p>Los símbolos recurrentes —el árbol con retratos, la balanza, la rueda, la luna, el umbral— no son decoración. Son el vocabulario con el que el sistema familiar se deja ver. El arte no ilustra una predicción: prepara una mirada.</p>
+          <p>Trabajados con geometría sagrada y proporción áurea, los veintidós caminos se leen como una sola secuencia: de la raíz a la conciencia, de la memoria a la libertad.</p>
+        </div>
+      </div>
+      <div class="shell">
+        <div class="mini-deck reveal" aria-hidden="true">
+          <img src="assets/cards/00-el-errante.webp" alt="" loading="lazy">
+          <img src="assets/cards/08-el-orden.webp" alt="" loading="lazy">
+          <img src="assets/cards/13-el-cambio.webp" alt="" loading="lazy">
+          <img src="assets/cards/17-la-estrella.webp" alt="" loading="lazy">
+          <img src="assets/cards/21-el-mundo.webp" alt="" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section id="sistema" class="section">
+      <div class="shell grid-2">
+        <div class="section-head reveal">
+          <span class="section-index">III</span>
+          <h2 class="section-title">El sistema</h2>
+          <p class="section-kicker">Un oráculo que no adivina: ordena la mirada.</p>
+        </div>
+        <div class="prose reveal">
+          <p>Áurea se apoya en la mirada sistémica: el orden de llegada, la pertenencia, la reciprocidad y las lealtades invisibles. Cada carta puede trabajarse en tres niveles —<strong>Mirar</strong>: ¿qué muestra mi historia? · <strong>Mover</strong>: ¿qué puedo ordenar, devolver, reconocer o integrar? · <strong>Elegir</strong>: ¿qué hago diferente a partir de ahora?</p>
+          <p>Áurea no reemplaza un proceso terapéutico ni diagnostica. Es una herramienta simbólica de exploración personal: aumenta la conciencia y devuelve a cada persona la responsabilidad sobre su propia vida.</p>
+          <ul class="checklist">
+            <li><span>✦</span> Carta del día, consistente para cada fecha</li>
+            <li><span>✦</span> Tirada sistémica de tres cartas con síntesis</li>
+            <li><span>✦</span> Los 22 arcanos con movimiento e integración</li>
+            <li><span>✦</span> Historial propio de lecturas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="simbolo" class="section section-alt">
+      <div class="shell grid-2 reverse">
+        <div class="section-head reveal">
+          <span class="section-index">IV</span>
+          <h2 class="section-title">El símbolo</h2>
+          <p class="section-kicker">La imagen abre; el sistema completa.</p>
+        </div>
+        <div class="prose reveal">
+          <p>Un símbolo no se explica: se habita. Por eso cada arcano llega con una palabra clave, un concepto, un movimiento sistémico y una pregunta de integración. Cuatro capas que impiden que la carta se convierta en sentencia.</p>
+          <p class="pull-quote">“Una imagen te muestra una parte. El sistema te revela el todo.”</p>
+          <p>La proporción áurea —φ ≈ 1,618— ordena el mazo, la retícula y el ritmo visual. No es un adorno: es la promesa de que la forma también puede ser un mensaje de orden.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LANZAMIENTO / PREVENTA ================= -->
+    <section id="lanzamiento" class="section launch">
+      <div class="shell">
+        <div class="launch-card reveal">
+          <p class="eyebrow">Áurea</p>
+          <h2 class="launch-title">El universo está a punto de abrirse</h2>
+          <p class="launch-date">Martes 13 de octubre de 2026 · 13:00 hs · Argentina</p>
+
+          <div id="launch-pre" class="launch-pre">
+            <div id="countdown" class="countdown" role="timer" aria-live="off" aria-label="Cuenta regresiva para el lanzamiento">
+              <div class="cd-unit"><span id="cd-days" class="cd-num">--</span><span class="cd-label">Días</span></div>
+              <div class="cd-sep" aria-hidden="true">·</div>
+              <div class="cd-unit"><span id="cd-hours" class="cd-num">--</span><span class="cd-label">Horas</span></div>
+              <div class="cd-sep" aria-hidden="true">·</div>
+              <div class="cd-unit"><span id="cd-mins" class="cd-num">--</span><span class="cd-label">Min</span></div>
+              <div class="cd-sep" aria-hidden="true">·</div>
+              <div class="cd-unit"><span id="cd-secs" class="cd-num">--</span><span class="cd-label">Seg</span></div>
+            </div>
+
+            <p class="launch-note">El valor y todos los detalles del Kit Completo serán revelados el día del lanzamiento.</p>
+
+            <form id="wl-form" class="form" novalidate>
+              <p class="form-intro">Sumate a la lista de espera y recibí el aviso antes que nadie.</p>
+              <div class="field">
+                <label for="wl-name">Nombre completo</label>
+                <input id="wl-name" name="full_name" type="text" autocomplete="name" required placeholder="Tu nombre y apellido">
+              </div>
+              <div class="field">
+                <label for="wl-email">Email</label>
+                <input id="wl-email" name="email" type="email" autocomplete="email" required placeholder="tu@email.com">
+              </div>
+              <div class="field">
+                <label for="wl-phone">Teléfono / WhatsApp</label>
+                <input id="wl-phone" name="phone" type="tel" autocomplete="tel" placeholder="+54 9 11 0000-0000">
+              </div>
+              <button class="btn btn-gold btn-block" type="submit">Quiero estar en la lista de espera</button>
+              <p id="wl-msg" class="form-msg" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div id="launch-post" class="launch-post" hidden>
+            <p class="launch-status">Áurea ya está disponible</p>
+            <p class="launch-price">$49.900 <span>ARS</span></p>
+            <p class="launch-note">Kit completo: mazo de 22 arcanos, guía del oráculo, kit imprimible y biblioteca digital.</p>
+            <a id="btn-buy" class="btn btn-gold" href="#" target="_blank" rel="noopener">Quiero mi kit completo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <div class="footer-brand">
+          <span class="brand-name">ÁUREA</span>
+          <p>Oráculo Sistémico de 22 Arcanos</p>
+          <p class="footer-claim">“Una imagen te muestra una parte. El sistema te revela el todo.”</p>
+        </div>
+        <div class="footer-col">
+          <h3>Autor</h3>
+          <p>Fernando Matías Acri</p>
+          <p>Orden Creativo</p>
+        </div>
+        <div class="footer-col">
+          <h3>Navegar</h3>
+          <a href="#origen">El origen</a>
+          <a href="#arte">El arte</a>
+          <a href="#sistema">El sistema</a>
+          <a href="#lanzamiento">Lanzamiento</a>
+        </div>
+        <div class="footer-col">
+          <h3>Cuenta</h3>
+          <a href="#/registro">Crear mi cuenta</a>
+          <a href="#/ingreso">Ingresar</a>
+        </div>
+      </div>
+      <div class="shell footer-legal">
+        <p>Áurea es una herramienta simbólica de exploración personal. No constituye diagnóstico ni reemplaza psicoterapia, atención médica o intervención profesional.</p>
+        <p>© 2026 Orden Creativo · Fernando Matías Acri. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ================= AUTENTICACIÓN ================= -->
+  <section id="view-auth" class="view" data-view="auth" hidden>
+    <div class="shell auth-wrap">
+      <div class="auth-panel reveal">
+        <div class="auth-brand">
+          <span class="brand-name">ÁUREA</span>
+          <p class="auth-kicker">Un espacio simbólico para explorar nuestra historia familiar, vínculos, patrones, lealtades, memoria y procesos de transformación.</p>
+        </div>
+
+        <nav class="auth-tabs" aria-label="Accesos">
+          <button class="auth-tab is-active" type="button" data-auth="registro">Crear cuenta</button>
+          <button class="auth-tab" type="button" data-auth="ingreso">Ingresar</button>
+          <button class="auth-tab" type="button" data-auth="recuperar">Recuperar contraseña</button>
+        </nav>
+
+        <!-- Registro -->
+        <form id="form-register" class="form auth-form" data-auth-form="registro" novalidate>
+          <p class="form-intro">Tu cuenta está a punto de abrir la puerta a Áurea.</p>
+          <div class="field">
+            <label for="reg-name">Nombre completo</label>
+            <input id="reg-name" type="text" autocomplete="name" required placeholder="Tu nombre y apellido">
+          </div>
+          <div class="field">
+            <label for="reg-email">Email</label>
+            <input id="reg-email" type="email" autocomplete="email" required placeholder="tu@email.com">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="reg-pass">Contraseña</label>
+              <input id="reg-pass" type="password" autocomplete="new-password" required minlength="8" placeholder="Mínimo 8 caracteres">
+            </div>
+            <div class="field">
+              <label for="reg-pass2">Repetir contraseña</label>
+              <input id="reg-pass2" type="password" autocomplete="new-password" required minlength="8" placeholder="Repetí tu contraseña">
+            </div>
+          </div>
+          <div class="field">
+            <label for="reg-code">Código de activación</label>
+            <input id="reg-code" type="text" autocomplete="off" required placeholder="AUREA-001-2026" spellcheck="false">
+            <small class="field-hint">Lo recibís al comprar tu Kit Completo.</small>
+          </div>
+          <button class="btn btn-gold btn-block" type="submit">Crear mi cuenta</button>
+          <p id="reg-msg" class="form-msg" role="status" aria-live="polite"></p>
+          <p class="form-alt">¿Ya tenés cuenta? <button class="link-btn" type="button" data-auth="ingreso">Ingresá a Áurea</button></p>
+        </form>
+
+        <!-- Ingreso -->
+        <form id="form-login" class="form auth-form" data-auth-form="ingreso" hidden novalidate>
+          <p class="form-intro">Bienvenido/a de vuelta.</p>
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input id="login-email" type="email" autocomplete="email" required placeholder="tu@email.com">
+          </div>
+          <div class="field">
+            <label for="login-pass">Contraseña</label>
+            <input id="login-pass" type="password" autocomplete="current-password" required placeholder="Tu contraseña">
+          </div>
+          <button class="btn btn-gold btn-block" type="submit">Ingresar a Áurea</button>
+          <p id="login-msg" class="form-msg" role="status" aria-live="polite"></p>
+          <p class="form-alt">
+            <button class="link-btn" type="button" data-auth="recuperar">¿Olvidaste tu contraseña?</button>
+          </p>
+          <p class="form-alt">¿Todavía no tenés cuenta? <button class="link-btn" type="button" data-auth="registro">Crear mi cuenta</button></p>
+        </form>
+
+        <!-- Recuperar -->
+        <form id="form-forgot" class="form auth-form" data-auth-form="recuperar" hidden novalidate>
+          <p class="form-intro">Te enviamos un enlace para elegir una contraseña nueva.</p>
+          <div class="field">
+            <label for="forgot-email">Email</label>
+            <input id="forgot-email" type="email" autocomplete="email" required placeholder="tu@email.com">
+          </div>
+          <button class="btn btn-gold btn-block" type="submit">Enviar enlace</button>
+          <p id="forgot-msg" class="form-msg" role="status" aria-live="polite"></p>
+
+          <div id="reset-block" class="reset-block" hidden>
+            <p class="form-intro">Definí tu nueva contraseña.</p>
+            <div class="field">
+              <label for="reset-pass">Nueva contraseña</label>
+              <input id="reset-pass" type="password" autocomplete="new-password" required minlength="8" placeholder="Mínimo 8 caracteres">
+            </div>
+            <div class="field">
+              <label for="reset-pass2">Repetir contraseña</label>
+              <input id="reset-pass2" type="password" autocomplete="new-password" required minlength="8" placeholder="Repetí la contraseña">
+            </div>
+            <button class="btn btn-gold btn-block" type="button" id="btn-reset-save">Guardar contraseña</button>
+            <p id="reset-msg" class="form-msg" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <!-- Activación -->
+        <form id="form-activate" class="form auth-form" data-auth-form="activar" hidden novalidate>
+          <p class="form-intro">Activá el acceso a tu Kit Completo.</p>
+          <div class="field">
+            <label for="act-code">Código de activación</label>
+            <input id="act-code" type="text" autocomplete="off" required placeholder="AUREA-001-2026" spellcheck="false">
+          </div>
+          <button class="btn btn-gold btn-block" type="submit">Activar acceso</button>
+          <p id="act-msg" class="form-msg" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-footnote">La autenticación la gestiona Supabase Auth. Áurea nunca guarda contraseñas en tu navegador.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ÁREA PRIVADA ================= -->
+  <section id="view-app" class="view" data-view="app" hidden>
+    <div class="shell app-wrap">
+
+      <div class="app-head reveal">
+        <p class="eyebrow">Áurea</p>
+        <h1 class="app-title" id="app-greeting">Bienvenido/a</h1>
+        <p class="app-sub">Elegí una dimensión de trabajo y permití que el símbolo te devuelva una mirada comprensiva.</p>
+      </div>
+
+      <nav class="app-menu" aria-label="Menú del área privada">
+        <button class="menu-chip is-active" type="button" data-panel="carta"><span aria-hidden="true">✦</span> Carta del día</button>
+        <button class="menu-chip" type="button" data-panel="tirada"><span aria-hidden="true">◇</span> Tirada de 3 cartas</button>
+        <button class="menu-chip" type="button" data-panel="arcanos"><span aria-hidden="true">❖</span> Los 22 Arcanos</button>
+        <button class="menu-chip" type="button" data-panel="biblioteca"><span aria-hidden="true">📖</span> Biblioteca Áurea</button>
+        <button class="menu-chip" type="button" data-panel="lecturas"><span aria-hidden="true">✧</span> Mis lecturas</button>
+        <button class="menu-chip" type="button" data-panel="sobre"><span aria-hidden="true">∞</span> Sobre Áurea</button>
+      </nav>
+
+      <!-- Carta del día -->
+      <section id="panel-carta" class="panel" data-panel-view="carta">
+        <header class="panel-head">
+          <h2>Carta del día</h2>
+          <p id="daily-date" class="panel-meta"></p>
+        </header>
+
+        <div class="daily-layout">
+          <div class="flip daily-flip" id="daily-flip">
+            <button class="flip-inner" id="daily-inner" type="button" aria-label="Girar la carta">
+              <span class="face face-back">
+                <img src="assets/cards/dorso.webp" alt="Reverso de la carta de Áurea" class="card-art">
+                <span class="face-hint">Tocá para revelar</span>
+              </span>
+              <span class="face face-front">
+                <span class="face-front-inner" id="daily-front"></span>
+              </span>
+            </button>
+          </div>
+
+          <div class="daily-info" id="daily-info" hidden>
+            <p class="arcano-label" id="daily-label"></p>
+            <h3 id="daily-name"></h3>
+            <p class="arcano-keyword" id="daily-keyword"></p>
+            <dl class="arcano-dl">
+              <div><dt>Símbolo</dt><dd id="daily-symbol"></dd></div>
+              <div><dt>Significado</dt><dd id="daily-description"></dd></div>
+              <div><dt>Movimiento sistémico</dt><dd id="daily-movement"></dd></div>
+              <div><dt>Pregunta de integración</dt><dd id="daily-question"></dd></div>
+            </dl>
+            <button class="btn btn-gold" type="button" id="btn-daily-deep">Profundizar en este arcano</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tirada de 3 cartas -->
+      <section id="panel-tirada" class="panel" data-panel-view="tirada" hidden>
+        <header class="panel-head">
+          <h2>Tirada de 3 cartas</h2>
+          <p class="panel-meta">Origen · Presente · Movimiento</p>
+        </header>
+
+        <form id="spread-form" class="form spread-form" novalidate>
+          <div class="field">
+            <label for="spread-question">¿Qué quiero comprender en este momento?</label>
+            <input id="spread-question" type="text" maxlength="180" placeholder="Escribí tu pregunta o el nudo que querés mirar">
+          </div>
+          <button class="btn btn-gold" type="submit" id="btn-draw">Tirar las tres cartas</button>
+        </form>
+
+        <div id="spread-stage" class="spread-stage" hidden>
+          <article class="spread-slot" data-position="0">
+            <p class="slot-label"><span>1</span> El origen / La raíz</p>
+            <div class="flip slot-flip"><div class="flip-inner" data-slot-face></div></div>
+            <div class="slot-info" data-slot-info hidden></div>
+          </article>
+          <article class="spread-slot" data-position="1">
+            <p class="slot-label"><span>2</span> Lo presente / La tensión</p>
+            <div class="flip slot-flip"><div class="flip-inner" data-slot-face></div></div>
+            <div class="slot-info" data-slot-info hidden></div>
+          </article>
+          <article class="spread-slot" data-position="2">
+            <p class="slot-label"><span>3</span> El movimiento / La integración</p>
+            <div class="flip slot-flip"><div class="flip-inner" data-slot-face></div></div>
+            <div class="slot-info" data-slot-info hidden></div>
+          </article>
+        </div>
+
+        <div id="synthesis" class="synthesis" hidden>
+          <h3>Síntesis sistémica</h3>
+          <p id="synthesis-text"></p>
+          <div class="synthesis-actions">
+            <button class="btn btn-ghost" type="button" id="btn-new-spread">Nueva tirada</button>
+            <span id="spread-status" class="form-msg" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Los 22 Arcanos -->
+      <section id="panel-arcanos" class="panel" data-panel-view="arcanos" hidden>
+        <header class="panel-head">
+          <h2>Los 22 Arcanos</h2>
+          <p class="panel-meta">Tocá una carta para leer su mensaje completo</p>
+        </header>
+        <div id="arcans-grid" class="arcans-grid"></div>
+      </section>
+
+      <!-- Biblioteca -->
+      <section id="panel-biblioteca" class="panel" data-panel-view="biblioteca" hidden>
+        <header class="panel-head">
+          <h2>Biblioteca Áurea</h2>
+          <p class="panel-meta">Material de acompañamiento para tu práctica</p>
+        </header>
+        <div id="library-grid" class="library-grid"></div>
+      </section>
+
+      <!-- Mis lecturas -->
+      <section id="panel-lecturas" class="panel" data-panel-view="lecturas" hidden>
+        <header class="panel-head">
+          <h2>Mis lecturas</h2>
+          <p class="panel-meta">Tu historial de tiradas, guardado en tu cuenta</p>
+        </header>
+        <div id="readings-list" class="readings-list"></div>
+        <p id="readings-empty" class="empty-state" hidden>Todavía no guardaste ninguna lectura. Hacé una tirada de tres cartas y va a aparecer acá.</p>
+      </section>
+
+      <!-- Sobre Áurea -->
+      <section id="panel-sobre" class="panel" data-panel-view="sobre" hidden>
+        <header class="panel-head">
+          <h2>Sobre Áurea</h2>
+          <p class="panel-meta">Oráculo Sistémico de 22 Arcanos</p>
+        </header>
+        <div class="prose wide">
+          <p class="pull-quote">“Una imagen te muestra una parte. El sistema te revela el todo.”</p>
+          <p>Áurea es un espacio simbólico para explorar nuestra historia familiar, vínculos, patrones, lealtades, memoria y procesos de transformación. Un lenguaje arquetípico para mirar nuestra experiencia: no para predecirla.</p>
+          <p>Cada carta reúne un número, un símbolo, una palabra clave, un significado, un movimiento sistémico y una pregunta de integración. Tres niveles de trabajo —<strong>Mirar</strong>, <strong>Mover</strong>, <strong>Elegir</strong>— sostienen cualquier lectura.</p>
+          <p>El recorrido completo se lee como un movimiento: reconocer la pertenencia, observar los patrones, devolver las cargas y ocupar el propio lugar. La integración aparece cuando la memoria deja de ser una sentencia y se convierte en información para elegir.</p>
+          <div class="about-meta">
+            <div><dt>Autor</dt><dd>Fernando Matías Acri</dd></div>
+            <div><dt>Marca</dt><dd>Orden Creativo</dd></div>
+            <div><dt>Proporción</dt><dd>φ ≈ 1,618</dd></div>
+            <div><dt>Arcanos</dt><dd>22 caminos</dd></div>
+          </div>
+          <p class="footnote">Áurea es una herramienta simbólica de exploración personal. No constituye diagnóstico ni reemplaza psicoterapia o atención profesional.</p>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= MODAL ================= -->
+<div id="modal" class="modal" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">✕</button>
+    <div id="modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/aurea.js"></script>
+</body>
+</html>
