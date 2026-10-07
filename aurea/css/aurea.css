@@ -28,7 +28,8 @@
   --borde-suave: rgba(217, 178, 100, 0.14);
 
   --fuente-display: "Cinzel", "Times New Roman", serif;
-  --fuente-texto: "Cormorant Garamond", Georgia, serif;
+  --fuente-texto: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fuente-cita: "Cormorant Garamond", Georgia, serif;
 
   --ancho: 1180px;
   --radio: 18px;
@@ -52,8 +53,8 @@ body {
   background-attachment: fixed;
   color: var(--crema);
   font-family: var(--fuente-texto);
-  font-size: 18px;
-  line-height: 1.65;
+  font-size: 19px;
+  line-height: 1.72;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -328,18 +329,24 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   font-size: 1.1rem; max-width: 30ch;
 }
 
-.prose { color: var(--crema-dim); font-size: 1.08rem; }
+.prose {
+  color: var(--crema-dim);
+  font-size: 1.35rem;
+  line-height: 1.75;
+}
 .prose.wide { max-width: 72ch; }
 .prose strong { color: var(--dorado-claro); font-weight: 600; }
 .prose em { color: var(--crema); }
+.prose > p { margin-bottom: 1.2rem; }
 
 .signature { margin-top: 1.6rem; font-family: var(--fuente-display); letter-spacing: 0.14em; font-size: 0.8rem; color: var(--dorado); text-transform: uppercase; }
 .signature span { color: var(--crema-muted); }
 
 .pull-quote {
-  font-size: clamp(1.35rem, 3vw, 1.75rem); font-style: italic;
+  font-family: var(--fuente-cita);
+  font-size: clamp(1.5rem, 3.2vw, 2rem); font-style: italic;
   color: var(--dorado-claro); border-left: 2px solid var(--dorado);
-  padding-left: 1.2rem; margin: 1.6rem 0;
+  padding-left: 1.2rem; margin: 1.8rem 0; line-height: 1.4;
 }
 
 .checklist { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: 0.7rem; }
@@ -455,7 +462,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 
 /* ---------- Formularios ---------- */
 .form { display: grid; gap: 1rem; max-width: 520px; margin-inline: auto; text-align: left; }
-.form-intro { font-style: italic; color: var(--dorado-claro); text-align: center; margin: 0; }
+.form-intro { font-family: var(--fuente-cita); font-style: italic; font-size: 1.12rem; color: var(--dorado-claro); text-align: center; margin: 0; }
 
 .field { display: grid; gap: 0.4rem; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -467,23 +474,23 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 
 .field input {
-  width: 100%; min-height: 48px;
-  padding: 0.7rem 1rem;
+  width: 100%; min-height: 52px;
+  padding: 0.75rem 1rem;
   background: rgba(0, 0, 0, 0.35);
   border: 1px solid var(--borde-suave); border-radius: 10px;
-  color: var(--crema); font-family: var(--fuente-texto); font-size: 1.05rem;
+  color: var(--crema); font-family: var(--fuente-texto); font-size: 1.22rem;
   transition: border-color 0.25s var(--transicion), background 0.25s var(--transicion);
 }
 .field input::placeholder { color: rgba(157, 148, 131, 0.6); }
 .field input:focus { outline: none; border-color: var(--dorado); background: rgba(0, 0, 0, 0.5); }
-.field-hint { color: var(--crema-muted); font-size: 0.85rem; font-style: italic; }
+.field-hint { color: var(--crema-muted); font-size: 0.92rem; font-style: italic; }
 
-.form-msg { min-height: 1.2em; font-size: 0.98rem; text-align: center; margin: 0; }
+.form-msg { min-height: 1.2em; font-size: 1.05rem; text-align: center; margin: 0; }
 .form-msg.is-ok { color: #b9d9a8; }
 .form-msg.is-error { color: #e9a2a2; }
 .form-msg.is-info { color: var(--dorado-claro); }
 
-.form-alt { text-align: center; color: var(--crema-muted); font-size: 0.98rem; margin: 0; }
+.form-alt { text-align: center; color: var(--crema-muted); font-size: 1.05rem; margin: 0; }
 
 /* ---------- Footer ---------- */
 .site-footer { padding: clamp(3rem, 7vw, 5rem) 0 2.4rem; background: rgba(5, 4, 9, 0.9); }
@@ -663,7 +670,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   font-family: var(--fuente-display); font-size: 0.62rem;
   letter-spacing: 0.24em; text-transform: uppercase; color: var(--dorado);
 }
-.arcano-dl dd { margin: 0; color: var(--crema-dim); font-size: 1.04rem; white-space: pre-line; }
+.arcano-dl dd { margin: 0; color: var(--crema-dim); font-size: 1.25rem; line-height: 1.7; white-space: pre-line; }
 
 /* ---------- Consulta gratuita (landing) ---------- */
 .free-read { max-width: 920px; margin-inline: auto; }
@@ -694,8 +701,8 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 .free-cta[hidden] { display: none; }
 .free-cta-text {
-  color: var(--crema-dim); max-width: 52ch; margin: 0 auto 1.2rem;
-  font-size: 1.02rem; line-height: 1.55;
+  color: var(--crema-dim); max-width: 54ch; margin: 0 auto 1.2rem;
+  font-size: 1.12rem; line-height: 1.7;
 }
 .free-cta-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
 
@@ -735,7 +742,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 .slot-info .si-keyword { font-style: italic; color: var(--dorado-claro); margin-bottom: 0.7rem; font-size: 1rem; }
 .slot-info dl { display: grid; gap: 0.7rem; margin: 0; }
 .slot-info dt { font-family: var(--fuente-display); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
-.slot-info dd { margin: 0; font-size: 0.98rem; color: var(--crema-dim); }
+.slot-info dd { margin: 0; font-size: 1.08rem; line-height: 1.65; color: var(--crema-dim); }
 
 .synthesis {
   margin-top: clamp(2rem, 5vw, 3rem);
@@ -752,7 +759,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   font-size: clamp(1.1rem, 3vw, 1.5rem); letter-spacing: 0.22em;
   text-transform: uppercase; color: var(--dorado-claro); margin-bottom: 1rem;
 }
-.synthesis p { color: var(--crema-dim); font-size: 1.1rem; line-height: 1.75; }
+.synthesis p { color: var(--crema-dim); font-size: 1.3rem; line-height: 1.8; }
 .synthesis-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; margin-top: 1.4rem; }
 
 /* ---------- Grilla de arcanos ---------- */
@@ -808,8 +815,8 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 .reading-main { min-width: 0; flex: 1 1 320px; }
 .reading-date { font-family: var(--fuente-display); font-size: 0.64rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--dorado); }
-.reading-question { color: var(--crema); font-size: 1.05rem; margin: 0.35rem 0 0.3rem; overflow-wrap: anywhere; }
-.reading-cards { color: var(--crema-muted); font-size: 0.98rem; font-style: italic; margin: 0; }
+.reading-question { color: var(--crema); font-size: 1.15rem; margin: 0.35rem 0 0.4rem; overflow-wrap: anywhere; }
+.reading-cards { color: var(--crema-muted); font-size: 1.05rem; font-style: italic; margin: 0; }
 .reading-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 .reading-actions .btn { min-height: 42px; padding: 0.5rem 1.1rem; font-size: 0.62rem; }
 .btn-danger { border-color: rgba(233, 162, 162, 0.4); color: #e9a2a2; }
@@ -890,7 +897,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 .modal-reading-card .mrc-position { font-family: var(--fuente-display); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dorado); }
 .modal-reading-card h4 { margin: 0.35rem 0 0.15rem; font-size: 1.1rem; color: var(--crema); }
 .modal-reading-card .mrc-kw { font-style: italic; color: var(--dorado-claro); margin: 0 0 0.5rem; }
-.modal-reading-card p { margin: 0; color: var(--crema-dim); font-size: 0.98rem; }
+.modal-reading-card p { margin: 0; color: var(--crema-dim); font-size: 1.08rem; line-height: 1.65; }
 
 /* ---------- Toast ---------- */
 .toast {
@@ -926,7 +933,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 
 @media (max-width: 760px) {
-  body { font-size: 17px; }
+  body { font-size: 18px; }
   .only-mobile { display: inline-grid; }
   .public-nav {
     position: absolute; top: 100%; left: 0; right: 0;
