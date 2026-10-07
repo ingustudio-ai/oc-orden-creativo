@@ -1326,6 +1326,16 @@ function writeFreeDraw(data) {
   try { localStorage.setItem(FREE_DRAW_KEY, JSON.stringify(data)); } catch (e) { /* modo privado */ }
 }
 
+/** Índice aleatorio entre los 22 arcanos (0–21). */
+function randomArcanoIndex() {
+  if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+    const buf = new Uint32Array(1);
+    crypto.getRandomValues(buf);
+    return buf[0] % CARDS.length;
+  }
+  return Math.floor(Math.random() * CARDS.length);
+}
+
 function fillFreeInfo(card) {
   const set = (id, text) => { const el = $(id); if (el) el.textContent = text; };
   set("#free-label", "Arcano " + card.roman + " · " + card.stage);
@@ -1408,7 +1418,7 @@ function handleFreeDraw(event) {
 
   const data = {
     q: question,
-    n: Math.floor(Math.random() * CARDS.length),
+    n: randomArcanoIndex(),
     at: Date.now(),
   };
   writeFreeDraw(data);
