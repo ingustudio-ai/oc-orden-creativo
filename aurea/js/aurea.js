@@ -8,8 +8,8 @@
    Pegá acá las credenciales de tu proyecto Supabase.
    Usá SOLO la URL y la anon key. Nunca una SERVICE_ROLE KEY.
    ================================================================= */
-const SUPABASE_URL = "PEGAR_AQUI";
-const SUPABASE_ANON_KEY = "PEGAR_AQUI";
+const SUPABASE_URL = "https://ybuvfshlppmtkkgynijb.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlidXZmc2hscHBtdGtrZ3luaWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzOTAyNDAsImV4cCI6MjEwNjk2NjI0MH0.4ZkgUIcVQurDLf7R9PIIwt15Gc5H1BXAAncHrBRmiS4";
 
 /* URL de compra del Kit Completo (se muestra después del lanzamiento) */
 const BUY_URL = "PEGAR_AQUI_URL_DE_COMPRA";
