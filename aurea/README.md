@@ -95,18 +95,20 @@ Sin esto, el registro y la recuperación de contraseña no redirigen bien.
 
 ### 7. Generar códigos de activación
 
+Los códigos **no aparecen en la web**. Los generás vos y se los pasás a quienes compran el Kit Completo (email, WhatsApp, etc.).
+
 En SQL Editor:
 
 ```sql
 insert into public.activation_codes (code) values
-  ('AUREA-001-2026'),
-  ('AUREA-002-2026')
+  ('TU-CODIGO-AQUI'),
+  ('OTRO-CODIGO-AQUI')
 on conflict (code) do nothing;
 ```
 
-Los códigos van en mayúsculas al canjearse (`AUREA-001-2026`). El cliente los pide al registrarse o en **Activar acceso**.
+Los códigos van en mayúsculas al canjearse. El comprador los ingresa en el registro o en **Activar acceso**.
 
-No expongas la lista de códigos al cliente: solo existe en la base y se valida vía RPC `redeem_activation_code`.
+No expongas la lista de códigos al cliente: solo existe en la base y se valida vía RPC `redeem_activation_code`. El placeholder del formulario dice «Tu código de activación» a propósito: no muestra ningún ejemplo.
 
 ### 8. Servir el sitio
 
