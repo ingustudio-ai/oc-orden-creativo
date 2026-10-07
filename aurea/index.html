@@ -44,6 +44,7 @@
       <a href="#origen">El origen</a>
       <a href="#arte">El arte</a>
       <a href="#sistema">El sistema</a>
+      <a href="#consulta">Consulta</a>
       <a href="#lanzamiento">Lanzamiento</a>
     </nav>
 
@@ -191,6 +192,7 @@
           <p>Áurea se apoya en la mirada sistémica: el orden de llegada, la pertenencia, la reciprocidad y las lealtades invisibles. Cada carta puede trabajarse en tres niveles —<strong>Mirar</strong>: ¿qué muestra mi historia? · <strong>Mover</strong>: ¿qué puedo ordenar, devolver, reconocer o integrar? · <strong>Elegir</strong>: ¿qué hago diferente a partir de ahora?</p>
           <p>Áurea no reemplaza un proceso terapéutico ni diagnostica. Es una herramienta simbólica de exploración personal: aumenta la conciencia y devuelve a cada persona la responsabilidad sobre su propia vida.</p>
           <ul class="checklist">
+            <li><span>✦</span> Consulta pública gratuita con significado</li>
             <li><span>✦</span> Carta del día, consistente para cada fecha</li>
             <li><span>✦</span> Tirada sistémica de tres cartas con síntesis</li>
             <li><span>✦</span> Los 22 arcanos con movimiento e integración</li>
@@ -211,6 +213,71 @@
           <p>Un símbolo no se explica: se habita. Por eso cada arcano llega con una palabra clave, un concepto, un movimiento sistémico y una pregunta de integración. Cuatro capas que impiden que la carta se convierta en sentencia.</p>
           <p class="pull-quote">“Una imagen te muestra una parte. El sistema te revela el todo.”</p>
           <p>La proporción áurea —φ ≈ 1,618— ordena el mazo, la retícula y el ritmo visual. No es un adorno: es la promesa de que la forma también puede ser un mensaje de orden.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONSULTA GRATUITA ================= -->
+    <section id="consulta" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="section-index">V</span>
+          <h2 class="section-title">Consulta gratuita</h2>
+          <p class="section-kicker">Una pregunta. Una carta. Un significado.</p>
+        </div>
+
+        <div class="free-read reveal">
+          <div id="free-form-wrap">
+            <form id="free-form" class="form free-form" novalidate>
+              <p class="form-intro">Escribí una pregunta y recibí una carta de ÁureA con su significado. Una consulta gratuita por visitante.</p>
+              <div class="field">
+                <label for="free-question">Tu pregunta</label>
+                <input id="free-question" type="text" maxlength="180" required placeholder="¿Qué quiero comprender en este momento?">
+                <small class="field-hint">Mirá el símbolo; después llevate la pregunta con vos.</small>
+              </div>
+              <button class="btn btn-gold btn-block" type="submit">Consultar a ÁureA</button>
+              <p id="free-msg" class="form-msg" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div id="free-result" class="free-result" hidden>
+            <p class="free-question-label" id="free-q-label"></p>
+
+            <div class="free-layout">
+              <div class="flip free-flip" id="free-flip">
+                <button class="flip-inner" id="free-inner" type="button" aria-label="Girar la carta">
+                  <span class="face face-back">
+                    <img src="assets/cards/dorso.webp" alt="Reverso de la carta de Áurea" class="card-art">
+                    <span class="face-hint">Tocá para revelar</span>
+                  </span>
+                  <span class="face face-front">
+                    <span class="face-front-inner" id="free-front"></span>
+                  </span>
+                </button>
+              </div>
+
+              <div class="daily-info free-info" id="free-info" hidden>
+                <p class="arcano-label" id="free-label"></p>
+                <h3 id="free-name"></h3>
+                <p class="arcano-keyword" id="free-keyword"></p>
+                <dl class="arcano-dl">
+                  <div><dt>Símbolo</dt><dd id="free-symbol"></dd></div>
+                  <div><dt>Significado</dt><dd id="free-description"></dd></div>
+                  <div><dt>Movimiento sistémico</dt><dd id="free-movement"></dd></div>
+                  <div><dt>Pregunta de integración</dt><dd id="free-question-meaning"></dd></div>
+                  <div><dt>Frase sanadora</dt><dd id="free-healing"></dd></div>
+                </dl>
+              </div>
+            </div>
+
+            <div id="free-cta" class="free-cta" hidden>
+              <p class="free-cta-text">Esa fue tu consulta gratuita. Creá tu cuenta para explorar la carta del día, la tirada de tres y los 22 arcanos.</p>
+              <div class="free-cta-actions">
+                <a class="btn btn-gold" href="#/registro">Crear mi cuenta</a>
+                <a class="btn btn-ghost" href="#/ingreso">Ya tengo cuenta</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

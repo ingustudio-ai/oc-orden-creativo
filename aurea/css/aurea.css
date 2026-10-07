@@ -665,6 +665,43 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 .arcano-dl dd { margin: 0; color: var(--crema-dim); font-size: 1.04rem; white-space: pre-line; }
 
+/* ---------- Consulta gratuita (landing) ---------- */
+.free-read { max-width: 920px; margin-inline: auto; }
+.free-form { max-width: 560px; margin-inline: auto; }
+.free-form .btn { justify-self: center; }
+
+.free-question-label {
+  font-family: var(--fuente-display); font-size: 0.7rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--dorado-claro); text-align: center; margin-bottom: 1.4rem;
+}
+.free-question-label::before { content: "«"; margin-right: 0.35em; opacity: 0.7; }
+.free-question-label::after { content: "»"; margin-left: 0.35em; opacity: 0.7; }
+
+.free-layout {
+  display: grid; gap: clamp(1.8rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  align-items: start;
+}
+.free-flip { max-width: 320px; width: 100%; margin-inline: auto; }
+.free-info[hidden] { display: none; }
+
+.free-cta {
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--borde-suave);
+  text-align: center;
+}
+.free-cta[hidden] { display: none; }
+.free-cta-text {
+  color: var(--crema-dim); max-width: 52ch; margin: 0 auto 1.2rem;
+  font-size: 1.02rem; line-height: 1.55;
+}
+.free-cta-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+
+.free-result[hidden] { display: none; }
+.free-result { animation: fadeUp 0.7s var(--transicion) both; }
+
 /* ---------- Tirada ---------- */
 .spread-form { max-width: 640px; margin-bottom: clamp(1.8rem, 4vw, 2.6rem); }
 .spread-form .btn { justify-self: center; }
@@ -877,6 +914,8 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   .grid-2.reverse .section-head { order: 0; }
   .daily-layout { grid-template-columns: 1fr; }
   .daily-flip { max-width: 300px; }
+  .free-layout { grid-template-columns: 1fr; }
+  .free-flip { max-width: 300px; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
 }
 

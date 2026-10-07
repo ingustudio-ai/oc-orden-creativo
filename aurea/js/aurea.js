@@ -1309,6 +1309,121 @@ function renderLibrary() {
   });
 }
 
+/* ========================= CONSULTA GRATUITA (LANDING) ========================= */
+const FREE_DRAW_KEY = "aurea:free_draw";
+
+function readFreeDraw() {
+  try {
+    const raw = localStorage.getItem(FREE_DRAW_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (data && typeof data.n === "number" && cardByNumber(data.n)) return data;
+  } catch (e) { /* dato corrupto: se descarta */ }
+  return null;
+}
+
+function writeFreeDraw(data) {
+  try { localStorage.setItem(FREE_DRAW_KEY, JSON.stringify(data)); } catch (e) { /* modo privado */ }
+}
+
+function fillFreeInfo(card) {
+  const set = (id, text) => { const el = $(id); if (el) el.textContent = text; };
+  set("#free-label", "Arcano " + card.roman + " · " + card.stage);
+  set("#free-name", card.name);
+  set("#free-keyword", card.keyword);
+  set("#free-symbol", card.symbol);
+  set("#free-description", card.description);
+  set("#free-movement", card.movement);
+  set("#free-question-meaning", card.question);
+  set("#free-healing", card.healing);
+}
+
+function renderFreeResult(data, opts) {
+  const card = cardByNumber(data.n);
+  if (!card) return;
+  const options = opts || {};
+
+  const formWrap = $("#free-form-wrap");
+  const result = $("#free-result");
+  const qLabel = $("#free-q-label");
+  const front = $("#free-front");
+  const flip = $("#free-flip");
+  const inner = $("#free-inner");
+  const info = $("#free-info");
+  const cta = $("#free-cta");
+
+  if (formWrap) formWrap.hidden = true;
+  if (result) result.hidden = false;
+  if (qLabel) qLabel.textContent = data.q || "";
+  if (front) front.innerHTML = cardFaceHTML(card, "Carta para:");
+  fillFreeInfo(card);
+
+  if (inner && flip && !inner.dataset.bound) {
+    inner.dataset.bound = "1";
+    inner.addEventListener("click", () => {
+      const revealed = flip.classList.toggle("is-flipped");
+      if (info) info.hidden = !revealed;
+      if (revealed) {
+        Sound.reveal();
+        bindCardImages($("#free-front"));
+      }
+    });
+  }
+
+  if (options.autoFlip) {
+    if (flip) flip.classList.add("is-flipped");
+    if (info) info.hidden = false;
+    bindCardImages($("#free-front"));
+  } else {
+    if (flip) flip.classList.remove("is-flipped");
+    if (info) info.hidden = true;
+    if (options.animate) {
+      setTimeout(() => {
+        if (flip) flip.classList.add("is-flipped");
+        if (info) info.hidden = false;
+        Sound.reveal();
+        bindCardImages($("#free-front"));
+      }, 700);
+    }
+  }
+
+  if (cta) cta.hidden = false;
+}
+
+function handleFreeDraw(event) {
+  event.preventDefault();
+  const msgEl = $("#free-msg");
+  const input = $("#free-question");
+  const question = input ? input.value.trim() : "";
+
+  if (question.length < 4) {
+    return setMsg(msgEl, "Escribí tu pregunta para consultar a ÁureA.", "error");
+  }
+
+  const existing = readFreeDraw();
+  if (existing) {
+    renderFreeResult(existing, { autoFlip: true });
+    return;
+  }
+
+  const data = {
+    q: question,
+    n: Math.floor(Math.random() * CARDS.length),
+    at: Date.now(),
+  };
+  writeFreeDraw(data);
+  setMsg(msgEl, "", null);
+  renderFreeResult(data, { animate: true });
+}
+
+function initFreeDraw() {
+  const form = $("#free-form");
+  if (form) form.addEventListener("submit", handleFreeDraw);
+
+  const existing = readFreeDraw();
+  if (existing) renderFreeResult(existing, { autoFlip: true });
+}
+
 /* ========================= EVENTOS GLOBALES ========================= */
 function bindGlobalEvents() {
   window.addEventListener("hashchange", renderRoute);
@@ -1377,6 +1492,8 @@ function bindGlobalEvents() {
 
   const loginLink = $("#btn-login");
   if (loginLink) loginLink.addEventListener("click", (e) => { e.preventDefault(); go("#/ingreso"); });
+
+  initFreeDraw();
 }
 
 /* ========================= INICIO ========================= */
