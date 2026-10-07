@@ -178,6 +178,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   transition: transform 0.25s var(--transicion), box-shadow 0.25s var(--transicion),
               background 0.25s var(--transicion), border-color 0.25s var(--transicion), color 0.25s var(--transicion);
 }
+.btn[hidden] { display: none !important; }
 
 .btn-gold {
   background: linear-gradient(135deg, #f4e3bd 0%, var(--dorado) 45%, #a5812f 100%);

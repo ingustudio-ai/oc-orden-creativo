@@ -41,10 +41,10 @@
     </a>
 
     <nav id="public-nav" class="public-nav" aria-label="Navegación principal">
+      <a href="#consulta">Consulta</a>
       <a href="#origen">El origen</a>
       <a href="#arte">El arte</a>
       <a href="#sistema">El sistema</a>
-      <a href="#consulta">Consulta</a>
       <a href="#lanzamiento">Lanzamiento</a>
     </nav>
 
@@ -75,9 +75,9 @@
         <p class="hero-subtitle reveal">Oráculo Sistémico de 22 Arcanos</p>
         <p class="hero-phrase reveal">“Una nueva forma de mirar nuestra historia.”</p>
         <p class="hero-text reveal">Un lenguaje arquetípico para explorar los vínculos, los nudos y aquello que dentro de nuestra constelación familiar busca ser visto con amor, reconocimiento y orden.</p>
-        <div class="hero-actions reveal">
+<div class="hero-actions reveal">
           <a class="btn btn-gold" href="#/registro">Crear mi cuenta</a>
-          <a class="btn btn-ghost" href="#origen">Conocer Áurea</a>
+          <a class="btn btn-ghost" href="#consulta">Consulta gratis</a>
         </div>
         <p class="hero-claim reveal">“Una imagen te muestra una parte. El sistema te revela el todo.”</p>
         <div class="phi-mark reveal" aria-hidden="true">
@@ -88,6 +88,71 @@
       </div>
       <div class="scroll-hint" aria-hidden="true"><span></span></div>
     </div>
+
+    <!-- ================= CONSULTA GRATUITA ================= -->
+    <section id="consulta" class="section">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="section-index">✦</span>
+          <h2 class="section-title">Consulta gratuita</h2>
+          <p class="section-kicker">Una pregunta. Una carta. Un significado.</p>
+        </div>
+
+        <div class="free-read reveal">
+          <div id="free-form-wrap">
+            <form id="free-form" class="form free-form" novalidate>
+              <p class="form-intro">Escribí una pregunta y recibí una carta de ÁureA con su significado. Una consulta gratuita por visitante.</p>
+              <div class="field">
+                <label for="free-question">Tu pregunta</label>
+                <input id="free-question" type="text" maxlength="180" required placeholder="¿Qué quiero comprender en este momento?">
+                <small class="field-hint">Mirá el símbolo; después llevate la pregunta con vos.</small>
+              </div>
+              <button class="btn btn-gold btn-block" type="submit">Consultar a ÁureA</button>
+              <p id="free-msg" class="form-msg" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div id="free-result" class="free-result" hidden>
+            <p class="free-question-label" id="free-q-label"></p>
+
+            <div class="free-layout">
+              <div class="flip free-flip" id="free-flip">
+                <button class="flip-inner" id="free-inner" type="button" aria-label="Girar la carta">
+                  <span class="face face-back">
+                    <img src="assets/cards/dorso.webp" alt="Reverso de la carta de ÁureA" class="card-art">
+                    <span class="face-hint">Tocá para revelar</span>
+                  </span>
+                  <span class="face face-front">
+                    <span class="face-front-inner" id="free-front"></span>
+                  </span>
+                </button>
+              </div>
+
+              <div class="daily-info free-info" id="free-info" hidden>
+                <p class="arcano-label" id="free-label"></p>
+                <h3 id="free-name"></h3>
+                <p class="arcano-keyword" id="free-keyword"></p>
+                <dl class="arcano-dl">
+                  <div><dt>Símbolo</dt><dd id="free-symbol"></dd></div>
+                  <div><dt>Significado</dt><dd id="free-description"></dd></div>
+                  <div><dt>Movimiento sistémico</dt><dd id="free-movement"></dd></div>
+                  <div><dt>Pregunta de integración</dt><dd id="free-question-meaning"></dd></div>
+                  <div><dt>Frase sanadora</dt><dd id="free-healing"></dd></div>
+                </dl>
+              </div>
+            </div>
+
+            <div id="free-cta" class="free-cta" hidden>
+              <p class="free-cta-text">Esa fue tu consulta gratuita. Creá tu cuenta para explorar la carta del día, la tirada de tres y los 22 arcanos.</p>
+              <div class="free-cta-actions">
+                <a class="btn btn-gold" href="#/registro">Crear mi cuenta</a>
+                <a class="btn btn-ghost" href="#/ingreso">Ya tengo cuenta</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="origen" class="section">
       <div class="shell">
@@ -217,72 +282,7 @@
       </div>
     </section>
 
-    <!-- ================= CONSULTA GRATUITA ================= -->
-    <section id="consulta" class="section">
-      <div class="shell">
-        <div class="section-head reveal">
-          <span class="section-index">V</span>
-          <h2 class="section-title">Consulta gratuita</h2>
-          <p class="section-kicker">Una pregunta. Una carta. Un significado.</p>
-        </div>
-
-        <div class="free-read reveal">
-          <div id="free-form-wrap">
-            <form id="free-form" class="form free-form" novalidate>
-              <p class="form-intro">Escribí una pregunta y recibí una carta de ÁureA con su significado. Una consulta gratuita por visitante.</p>
-              <div class="field">
-                <label for="free-question">Tu pregunta</label>
-                <input id="free-question" type="text" maxlength="180" required placeholder="¿Qué quiero comprender en este momento?">
-                <small class="field-hint">Mirá el símbolo; después llevate la pregunta con vos.</small>
-              </div>
-              <button class="btn btn-gold btn-block" type="submit">Consultar a ÁureA</button>
-              <p id="free-msg" class="form-msg" role="status" aria-live="polite"></p>
-            </form>
-          </div>
-
-          <div id="free-result" class="free-result" hidden>
-            <p class="free-question-label" id="free-q-label"></p>
-
-            <div class="free-layout">
-              <div class="flip free-flip" id="free-flip">
-                <button class="flip-inner" id="free-inner" type="button" aria-label="Girar la carta">
-                  <span class="face face-back">
-                    <img src="assets/cards/dorso.webp" alt="Reverso de la carta de Áurea" class="card-art">
-                    <span class="face-hint">Tocá para revelar</span>
-                  </span>
-                  <span class="face face-front">
-                    <span class="face-front-inner" id="free-front"></span>
-                  </span>
-                </button>
-              </div>
-
-              <div class="daily-info free-info" id="free-info" hidden>
-                <p class="arcano-label" id="free-label"></p>
-                <h3 id="free-name"></h3>
-                <p class="arcano-keyword" id="free-keyword"></p>
-                <dl class="arcano-dl">
-                  <div><dt>Símbolo</dt><dd id="free-symbol"></dd></div>
-                  <div><dt>Significado</dt><dd id="free-description"></dd></div>
-                  <div><dt>Movimiento sistémico</dt><dd id="free-movement"></dd></div>
-                  <div><dt>Pregunta de integración</dt><dd id="free-question-meaning"></dd></div>
-                  <div><dt>Frase sanadora</dt><dd id="free-healing"></dd></div>
-                </dl>
-              </div>
-            </div>
-
-            <div id="free-cta" class="free-cta" hidden>
-              <p class="free-cta-text">Esa fue tu consulta gratuita. Creá tu cuenta para explorar la carta del día, la tirada de tres y los 22 arcanos.</p>
-              <div class="free-cta-actions">
-                <a class="btn btn-gold" href="#/registro">Crear mi cuenta</a>
-                <a class="btn btn-ghost" href="#/ingreso">Ya tengo cuenta</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= LANZAMIENTO / PREVENTA ================= -->
+<!-- ================= LANZAMIENTO / PREVENTA ================= -->
     <section id="lanzamiento" class="section launch">
       <div class="shell">
         <div class="launch-card reveal">
@@ -346,6 +346,7 @@
         </div>
         <div class="footer-col">
           <h3>Navegar</h3>
+          <a href="#consulta">Consulta</a>
           <a href="#origen">El origen</a>
           <a href="#arte">El arte</a>
           <a href="#sistema">El sistema</a>
