@@ -11,13 +11,6 @@
 const SUPABASE_URL = "https://ybuvfshlppmtkkgynijb.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlidXZmc2hscHBtdGtrZ3luaWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzOTAyNDAsImV4cCI6MjEwNjk2NjI0MH0.4ZkgUIcVQurDLf7R9PIIwt15Gc5H1BXAAncHrBRmiS4";
 
-/* URL de compra del Kit Completo (se muestra después del lanzamiento) */
-const BUY_URL = "PEGAR_AQUI_URL_DE_COMPRA";
-
-/* Lanzamiento oficial: martes 13 de octubre de 2026, 13:00 hs Argentina (UTC-3) */
-const LAUNCH_DATE = "2026-10-13T13:00:00-03:00";
-const LAUNCH_PRICE = "$49.900 ARS";
-
 /* Recursos de la Biblioteca Áurea (URLs configurables) */
 const AUREA_RESOURCES = {
   guide: "PEGAR_AQUI_URL_GUIA",
@@ -861,48 +854,7 @@ async function initAuth() {
   }
 }
 
-/* ========================= LANZAMIENTO / WAITLIST ========================= */
-function initCountdown() {
-  const target = new Date(LAUNCH_DATE).getTime();
-  const pre = $("#launch-pre");
-  const post = $("#launch-post");
-  const buy = $("#btn-buy");
-
-  if (buy) {
-    if (isConfiguredUrl(BUY_URL)) {
-      buy.href = BUY_URL;
-    } else {
-      buy.href = "#";
-      buy.addEventListener("click", (e) => {
-        e.preventDefault();
-        toast("Falta configurar la URL de compra en js/aurea.js (BUY_URL).");
-      });
-    }
-  }
-
-  function tick() {
-    const diff = target - Date.now();
-    if (diff <= 0) {
-      if (pre) pre.hidden = true;
-      if (post) post.hidden = false;
-      const price = $(".launch-price");
-      if (price) price.innerHTML = escapeHtml(LAUNCH_PRICE).replace("ARS", "<span>ARS</span>");
-      return;
-    }
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const mins = Math.floor((diff % 3600000) / 60000);
-    const secs = Math.floor((diff % 60000) / 1000);
-    const set = (id, v) => { const el = $(id); if (el) el.textContent = pad2(v); };
-    set("#cd-days", days);
-    set("#cd-hours", hours);
-    set("#cd-mins", mins);
-    set("#cd-secs", secs);
-    setTimeout(tick, 1000);
-  }
-  tick();
-}
-
+/* ========================= WAITLIST ========================= */
 async function handleWaitlist(event) {
   event.preventDefault();
   const msgEl = $("#wl-msg");
@@ -923,7 +875,7 @@ async function handleWaitlist(event) {
 
   if (error) return setMsg(msgEl, "No se pudo guardar tu datos. Verificá tu conexión e intentá de nuevo.", "error");
 
-  setMsg(msgEl, "Ya estás en la lista de espera. Te avisaremos el día del lanzamiento.", "ok");
+  setMsg(msgEl, "Ya estás en la lista de espera. Si sos de los primeros 13, te escribimos con la propuesta fundadora y tu regalo.", "ok");
   $("#wl-form").reset();
   Sound.reveal();
 }
@@ -1513,7 +1465,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initStarfield();
   initReveal();
   initDailyCard();
-  initCountdown();
   bindGlobalEvents();
   initAuth().then(() => {
     updateGreeting();
