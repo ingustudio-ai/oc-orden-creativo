@@ -301,65 +301,6 @@ const SUPABASE_READY =
   SUPABASE_ANON_KEY.length > 40 &&
   !/PEGAR_AQUI/i.test(SUPABASE_ANON_KEY);
 
-/* ========================= SONIDO ARMÓNICO ========================= */
-const Sound = {
-  ctx: null,
-  on: false,
-  init() {
-    try { this.on = localStorage.getItem("aurea:sonido") === "1"; } catch (e) { this.on = false; }
-    const btn = $("#btn-sound");
-    if (btn) {
-      btn.classList.toggle("is-on", this.on);
-      btn.setAttribute("aria-pressed", String(this.on));
-      const glyph = $("#sound-glyph");
-      if (glyph) glyph.textContent = this.on ? "♫" : "♪";
-      btn.addEventListener("click", () => this.toggle());
-    }
-  },
-  toggle() {
-    this.on = !this.on;
-    try { localStorage.setItem("aurea:sonido", this.on ? "1" : "0"); } catch (e) { /* preferencia visual */ }
-    const btn = $("#btn-sound");
-    if (btn) {
-      btn.classList.toggle("is-on", this.on);
-      btn.setAttribute("aria-pressed", String(this.on));
-    }
-    const glyph = $("#sound-glyph");
-    if (glyph) glyph.textContent = this.on ? "♫" : "♪";
-    if (this.on) { this.ensure(); this.play([196.0, 293.66, 440.0], 2.2, 0.05); }
-  },
-  ensure() {
-    if (!this.ctx) {
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx) return null;
-      this.ctx = new Ctx();
-    }
-    if (this.ctx.state === "suspended") this.ctx.resume();
-    return this.ctx;
-  },
-  play(freqs, duration = 1.6, volume = 0.06) {
-    if (!this.on) return;
-    const ctx = this.ensure();
-    if (!ctx) return;
-    const now = ctx.currentTime;
-    freqs.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = i % 2 === 0 ? "sine" : "triangle";
-      osc.frequency.value = freq;
-      const start = now + i * 0.06;
-      gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.exponentialRampToValueAtTime(volume, start + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-      osc.connect(gain).connect(ctx.destination);
-      osc.start(start);
-      osc.stop(start + duration + 0.1);
-    });
-  },
-  flip() { this.play([392.0, 587.33], 1.4, 0.05); },
-  reveal() { this.play([261.63, 392.0, 523.25], 2.4, 0.045); },
-};
-
 /* ========================= FONDO ESTRELLADO ========================= */
 function initStarfield() {
   const canvas = $("#starfield");
@@ -543,7 +484,6 @@ function arcanoModalHTML(card) {
 function openArcano(n) {
   const card = cardByNumber(n);
   if (!card) return;
-  Sound.flip();
   openModal(arcanoModalHTML(card));
 }
 
@@ -879,7 +819,6 @@ async function handleWaitlist(event) {
 
   setMsg(msgEl, "Ya estás en la lista de espera. Si sos de los primeros 13, te escribimos con la propuesta fundadora y tu regalo.", "ok");
   $("#wl-form").reset();
-  Sound.reveal();
 }
 
 /* ========================= CARTA DEL DÍA ========================= */
@@ -938,7 +877,6 @@ function initDailyCard() {
       if (revealed) {
         fillDailyInfo(card);
         if (info) info.hidden = false;
-        Sound.reveal();
         bindCardImages($("#daily-front"));
       }
     });
@@ -1022,7 +960,6 @@ function renderSpread(picked) {
 
     setTimeout(() => {
       flip.classList.add("is-flipped");
-      Sound.flip();
       setTimeout(() => { info.hidden = false; }, 500);
     }, 300 + i * 750);
   });
@@ -1037,7 +974,6 @@ async function handleDraw(event) {
   const picked = pickThree();
 
   state.spread = { question: question, cards: picked };
-  Sound.reveal();
   renderSpread(picked);
 
   const synthesis = $("#synthesis");
@@ -1328,7 +1264,6 @@ function renderFreeResult(data, opts) {
       const revealed = flip.classList.toggle("is-flipped");
       if (info) info.hidden = !revealed;
       if (revealed) {
-        Sound.reveal();
         bindCardImages($("#free-front"));
       }
     });
@@ -1345,7 +1280,6 @@ function renderFreeResult(data, opts) {
       setTimeout(() => {
         if (flip) flip.classList.add("is-flipped");
         if (info) info.hidden = false;
-        Sound.reveal();
         bindCardImages($("#free-front"));
       }, 700);
     }
@@ -1463,7 +1397,6 @@ function bindGlobalEvents() {
 /* ========================= INICIO ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   initSupabase();
-  Sound.init();
   initStarfield();
   initReveal();
   initDailyCard();

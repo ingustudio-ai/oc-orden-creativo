@@ -158,7 +158,7 @@ Landing pública
 
 - **Solo** `SUPABASE_URL` + `anon` key en el cliente.
 - Contraseñas las gestiona Supabase Auth; Áurea no las almacena en `localStorage`.
-- En `localStorage` solo se guarda la preferencia de sonido (`aurea:sonido`).
+- En `localStorage` solo se guarda la consulta gratuita del visitante (`aurea:free_draw`).
 - RLS: cada usuario solo ve/edita sus `profiles`, `readings`; la waitlist acepta inserts anónimos; los `activation_codes` no son legibles por el cliente (solo la RPC).
 - Nunca publiques `service_role` ni `.env` con secretos en el repo público.
 

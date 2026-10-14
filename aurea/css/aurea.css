@@ -161,7 +161,6 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   transition: border-color 0.25s var(--transicion), background 0.25s var(--transicion);
 }
 .icon-btn:hover { border-color: var(--borde); background: rgba(217, 178, 100, 0.08); }
-.icon-btn.is-on { background: rgba(217, 178, 100, 0.16); border-color: var(--dorado); }
 
 .only-mobile { display: none; }
 
