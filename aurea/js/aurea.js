@@ -13,6 +13,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 /* Recursos de la Biblioteca Áurea (URLs configurables) */
 const AUREA_RESOURCES = {
+  manual: "assets/AUREA_Manual_Completo_Oraculo_del_Linaje.pdf",
   guide: "PEGAR_AQUI_URL_GUIA",
   printable: "PEGAR_AQUI_URL_KIT_IMPRIMIBLE",
   spreads: "PEGAR_AQUI_URL_GUIA_DE_TIRADAS",
@@ -20,6 +21,7 @@ const AUREA_RESOURCES = {
 };
 
 const RESOURCE_META = [
+  { key: "manual", icon: "📘", title: "Manual de uso", text: "Guía completa para empezar: consulta del día, tirada de tres, los 22 arcanos, biblioteca e historial.", cta: "Abrir PDF" },
   { key: "guide", icon: "📖", title: "Guía Áurea", text: "El recorrido completo por los 22 arcanos: concepto, mirada sistémica y ejercicio de integración.", cta: "Abrir" },
   { key: "printable", icon: "🖨", title: "Kit imprimible", text: "Mazo imprimible en alta calidad para trabajar en casa, en talleres o en sesiones.", cta: "Descargar" },
   { key: "spreads", icon: "✦", title: "Guía de tiradas", text: "Tres cartas, una carta, diario de linaje: cómo abrir una consulta con orden.", cta: "Abrir" },
