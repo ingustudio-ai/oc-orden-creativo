@@ -941,6 +941,82 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   border: 1px solid var(--borde-suave); border-radius: 999px; padding: 0.35rem 0.8rem;
 }
 
+/* ---------- Slide · profundizar arcano ---------- */
+.slide { position: fixed; inset: 0; z-index: 95; }
+.slide[hidden] { display: none; }
+.slide-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(4, 3, 8, 0.72);
+  backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity 0.35s ease;
+}
+.slide.is-open .slide-backdrop { opacity: 1; }
+.slide-panel {
+  position: absolute; top: 0; right: 0;
+  width: min(560px, 100%); height: 100%;
+  overflow-y: auto; overscroll-behavior: contain;
+  background: linear-gradient(165deg, rgba(28, 20, 50, 0.98), rgba(8, 6, 16, 0.99));
+  border-left: 1px solid var(--borde);
+  box-shadow: -24px 0 60px -30px rgba(0, 0, 0, 0.9);
+  transform: translateX(102%);
+  transition: transform 0.4s var(--transicion);
+  padding: clamp(1.4rem, 4vw, 2.2rem) clamp(1.2rem, 4vw, 2rem) 2.5rem;
+}
+.slide.is-open .slide-panel { transform: translateX(0); }
+.slide-close {
+  position: sticky; top: 0; float: right; z-index: 2;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--borde); background: rgba(10, 8, 18, 0.85);
+  color: var(--dorado-claro); font-size: 1rem; cursor: pointer;
+  transition: background 0.2s ease;
+}
+.slide-close:hover { background: rgba(217, 178, 100, 0.16); }
+.slide-hero { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 180px) minmax(0, 1fr); align-items: start; margin-bottom: 0.4rem; }
+.slide-hero .modal-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--borde); }
+.slide-hero .modal-card img, .slide-hero .card-fallback { width: 100%; aspect-ratio: 720 / 1246; object-fit: cover; display: block; }
+.slide-healing {
+  margin-top: 1.6rem; padding: 1.2rem 1.3rem;
+  border: 1px solid rgba(217, 178, 100, 0.45); border-radius: 14px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(217, 178, 100, 0.14), transparent 65%),
+    rgba(217, 178, 100, 0.05);
+}
+.slide-healing-label {
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: var(--fuente-display); font-size: 0.62rem;
+  letter-spacing: 0.26em; text-transform: uppercase; color: var(--dorado);
+  margin-bottom: 0.55rem;
+}
+.slide-healing p {
+  margin: 0; font-family: var(--fuente-cita);
+  font-size: 1.35rem; line-height: 1.5; color: var(--dorado-claro);
+}
+.slide-deep { display: grid; gap: 1rem; margin-top: 1.6rem; }
+.slide-deep-block {
+  border: 1px solid var(--borde-suave); border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025); padding: 1.15rem 1.25rem;
+}
+.slide-deep-block p:last-child {
+  margin: 0; color: var(--crema-dim); font-size: 1.08rem; line-height: 1.72;
+}
+.slide-deep-label {
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: var(--fuente-display); font-size: 0.62rem;
+  letter-spacing: 0.26em; text-transform: uppercase; color: var(--dorado);
+  margin-bottom: 0.55rem;
+}
+.slide-deep-hellinger {
+  border-color: rgba(217, 178, 100, 0.4);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(217, 178, 100, 0.1), transparent 55%),
+    rgba(255, 255, 255, 0.02);
+}
+@media (max-width: 560px) {
+  .slide-hero { grid-template-columns: 1fr; }
+  .slide-hero .modal-card { max-width: 220px; margin-inline: auto; }
+  .slide-hero > div:last-child { text-align: center; }
+}
+
 .modal-reading-head { text-align: center; margin-bottom: 1.4rem; }
 .modal-reading-cards { display: grid; gap: 1rem; }
 .modal-reading-card {

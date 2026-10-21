@@ -33,25 +33,34 @@ const CARDS = [
   {
     n: 0, roman: "0", name: "El Errante", keyword: "La Exclusión", symbol: "El que quedó fuera",
     tarot: "El Loco", stage: "I. La Raíz",
-    description: "Representa a quien quedó fuera del sistema: el olvidado, el rechazado, el desaparecido, el secreto familiar o aquella persona cuya historia dejó de ser nombrada.\n\nPuede señalar una sensación de no pertenecer, de estar siempre «afuera» o de caminar sin encontrar un lugar propio. También puede invitarte a mirar aquello que tu familia dejó de nombrar: a veces no estamos repitiendo una historia conocida, estamos intentando dar lugar a una historia excluida.",
+    description: "Representa a quien quedó fuera del sistema: el olvidado, el rechazado, el desaparecido, el secreto familiar o aquella persona cuya historia dejó de ser nombrada.\n\nPuede señalar una sensación de no pertenecer, de estar siempre «afuera» o de caminar sin encontrar un lugar propio. También puede invitarte a mirar aquello que tu familia dejó de nombrar.",
     question: "¿A quién o a qué historia estoy dejando afuera?",
-    movement: "Colocá frente a vos un objeto que represente a esa persona, historia o parte de vos que sentís excluida. Miralo en silencio y decí: «Ahora te veo. Reconozco que pertenecés a nuestra historia. No necesito repetir tu destino para darte un lugar.» Después colocá el objeto dentro del espacio familiar simbólico.",
+    systemic: "«Ahora te veo. Pertenecés a nuestra historia. Yo tomo mi lugar.»",
+    theory: "El cero es vacío y potencial a la vez. El Errante no es el que falla: es el umbral, el que queda fuera de la puerta y, por eso mismo, porta lo que el sistema no quiso mirar. Su bastón dice que aun sin lugar hay camino; su haz de flores, que lo excluido también es vida.",
+    vsTarot: "En el tarot, El Loco pisa el borde sin mirar atrás; el riesgo es el salto. En ÁureA el riesgo no es el paso: es la exclusión. El Errante no camina por descuido: camina porque alguien dejó de nombrarlo, y su destino busca un lugar donde ser visto.",
+    hellinger: "Habla del derecho de pertenencia. Quien es excluido del sistema —aborto, muerto, desheredado, desaparecido— es representado casi siempre por alguien que viene después y repite su destino sin saberlo. El orden sanador es simple y duro a la vez: devolverle el lugar y asumir el propio. Pertenecer no es estar cerca: es dejar de ser negado.",
     healing: "Te doy un lugar en mi corazón y tomo mi propio lugar en la vida.",
   },
   {
     n: 1, roman: "I", name: "El Origen", keyword: "La Raíz", symbol: "La raíz que sostiene",
     tarot: "El Mago", stage: "I. La Raíz",
-    description: "El comienzo del linaje. La raíz de la cual provenimos y todo aquello que recibimos antes de poder elegir.\n\nInvita a volver al origen. A recordar que antes de ser individuo fuimos parte de una historia. Puede aparecer cuando necesitás comprender de dónde vienen determinados valores, creencias o formas de vivir.",
+    description: "El comienzo del linaje. La raíz de la cual provenimos y todo aquello que recibimos antes de poder elegir.\n\nInvita a volver al origen. A recordar que antes de ser individuo fuimos parte de una historia. Puede aparecer cuando necesitás comprender de dónde vienen determinados valores o formas de vivir.",
     question: "¿Qué recibí de quienes estuvieron antes de mí?",
-    movement: "Imaginá detrás tuyo a tus padres, detrás de ellos a tus abuelos y detrás a las generaciones anteriores. Respirá profundamente y decí: «De ustedes recibí la vida. Tomo aquello que puedo tomar. Lo demás lo dejo con ustedes.» Sentí tus pies apoyados en el suelo.",
+    systemic: "«De ustedes recibí la vida. Tomo lo que puedo. Lo demás queda con ustedes.»",
+    theory: "La raíz no se ve, pero sostiene el árbol. Este arcano nombra lo anterior a la biografía: la herencia que llega antes de la elección. No es un pasado muerto: es el suelo. Sin suelo no hay crecimiento; con suelo no hay destino escrito.",
+    vsTarot: "El Mago levanta la mano y crea desde el cielo; su poder es individual. El Origen apunta hacia abajo: su fuerza viene de lo recibido. Donde el tarot celebra la capacidad del sujeto, ÁureA recuerda que toda capacidad se apoya en una historia que no elegimos.",
+    hellinger: "Hellinger sostiene que la vida es una cadena de dones: los mayores dan, los menores reciben. El desorden aparece cuando un hijo quiere ser igual a sus padres, darles o salvarlos. Este arcano invita a la humildad del receptor: recibir la vida sin cobrar deuda y sin querer devolverla.",
     healing: "Tomo la vida que llegó hasta mí y la llevo hacia adelante.",
   },
   {
     n: 2, roman: "II", name: "La Guardiana", keyword: "El Secreto", symbol: "El umbral callado",
     tarot: "La Sacerdotisa", stage: "I. La Raíz",
-    description: "Aquello que fue silenciado, protegido u ocultado: secretos, pérdidas, adopciones, historias no contadas y acontecimientos que quedaron fuera de la narrativa familiar.\n\nPuede señalar que existe algo que todavía no está listo para ser comprendido completamente. No siempre significa que debas descubrir un secreto: a veces significa reconocer simplemente que existe algo que no conocés.",
+    description: "Aquello que fue silenciado, protegido u ocultado: secretos, pérdidas, adopciones, historias no contadas.\n\nPuede señalar que existe algo que todavía no está listo para ser comprendido. No siempre significa que debas descubrir un secreto: a veces significa reconocer simplemente que existe algo que no conocés.",
     question: "¿Qué necesita ser respetado aunque todavía no pueda ser revelado?",
-    movement: "Colocá una mano sobre el corazón y otra sobre el abdomen. Imaginá una puerta frente a vos. Decí: «Respeto aquello que fue ocultado. No necesito saberlo todo para honrar mi historia. Tomo solamente aquello que hoy puedo comprender.»",
+    systemic: "«Respeto lo que fue ocultado. No necesito saberlo todo para honrar mi historia.»",
+    theory: "El umbral callado protege y encierra a la vez. La Sacerdotisa guarda llaves; aquí el misterio no es oracular: es familiar. Hay silencios que sostuvieron la continuidad del sistema. Honrarlos no es perpetuarlos: es no arrancarlos a la fuerza antes de tiempo.",
+    vsTarot: "La Sacerdotisa se sienta entre dos columnas, dueña del misterio sagrado. La Guardiana custodia un secreto humano: lo no contado, lo que no debe contarse todavía. Su velo no es iluminación: es límite ético hacia lo que el sistema aún no puede mostrar.",
+    hellinger: "Hay secretos que pertenecen a los mayores y que un hijo no tiene por qué cargar como misión. Hellinger diferencia el respeto por lo oculto de la curiosidad que invade. El buen orden dice: yo honro lo que no me fue confiado; si algo vuelve a mí, lo recibo con seriedad, no como chisme.",
     healing: "Puedo vivir en paz incluso con aquello que todavía desconozco.",
   },
   {
@@ -59,31 +68,43 @@ const CARDS = [
     tarot: "La Emperatriz", stage: "I. La Raíz",
     description: "La fuerza femenina que transmite vida, cuidado, nutrición, memoria y continuidad.\n\nHabla de la relación con la madre y con las mujeres del linaje. Puede señalar la necesidad de recibir, cuidar, nutrir o permitirte vivir con mayor plenitud.",
     question: "¿Puedo recibir la vida sin tener que pagarla con sacrificio?",
-    movement: "Sentate cómodamente. Imaginá a tu madre detrás de vos y a las mujeres de generaciones anteriores detrás de ella. Decí: «Mamá, recibo la vida de vos. Honro a las mujeres que estuvieron antes. Ahora me permito hacer algo propio con esta vida.»",
+    systemic: "«Mamá, recibo la vida de vos. Honro a las mujeres que estuvieron antes.»",
+    theory: "El seno que nutre no es solo maternidad biológica: es la línea de la vida que continúa. Simbólicamente une tierra, cuerpo y memoria. Cuando se distorsiona, la nutrición se vuelve control o sacrificio; cuando está en orden, la vida fluye y el disfrute deja de ser culpa.",
+    vsTarot: "La Emperatriz es naturaleza, sensualidad y abundancia. La Matriarca suma la memoria del linaje femenino: no solo da vida, la transmite. Su símbolo no celebra solo la fertilidad: honra a las madres, abuelas y bisabuelas que hicieron posible este aliento.",
+    hellinger: "En el orden de Hellinger, la madre es el puente de la vida, no su dueña. El hijo que se convierte en salvador o en pareja sustituta rompe el orden. Este arcano devuelve a cada quien su rol: la madre da lo que puede; el hijo recibe y crea algo propio sin cargar con el destino de la madre.",
     healing: "Recibo la vida y me permito disfrutarla.",
   },
   {
     n: 4, roman: "IV", name: "El Patriarca", keyword: "La Autoridad", symbol: "La piedra angular",
     tarot: "El Emperador", stage: "I. La Raíz",
-    description: "El masculino ancestral: estructura, protección, autoridad, límites, dirección y también las rigideces heredadas.\n\nInvita a revisar cómo te relacionás con autoridad, límites, responsabilidad y poder. Puede señalar una autoridad externa que todavía llevás dentro.",
+    description: "El masculino ancestral: estructura, protección, autoridad, límites, dirección y también las rigideces heredadas.\n\nInvita a revisar cómo te relacionás con autoridad, límites, responsabilidad y poder.",
     question: "¿Qué autoridad heredé y cuál quiero construir?",
-    movement: "Parate firmemente con ambos pies apoyados. Imaginá detrás tuyo a los hombres de tu linaje. Decí: «Honro la fuerza que recibí. Tomo la protección y la estructura que me sirven. Ya no necesito continuar aquello que me limita.»",
+    systemic: "«Honro la fuerza que recibí. Tomo lo que protege. Suelto lo que limita.»",
+    theory: "La piedra angular ordena la construcción. Este arcano nombra el padre simbólico: quien pone forma, límite y dirección. Su sombra es la rigidez —el imperativo de ser fuerte a cualquier costo—; su don, la estructura que permite que la vida tenga suelo y techo.",
+    vsTarot: "El Emperador se sienta en su trono y gobierna. El Patriarca también sostiene el sistema, pero en ÁureA se le pregunta si su autoridad es vida o control. Donde el tarot enfatiza el poder, este arcano examina el linaje de los hombres y el costo de la dureza heredada.",
+    hellinger: "Hellinger habla del buen lugar del padre: proteger el espacio de la madre y del hijo, sin fundirse con ellos. Cuando un hijo asume la autoridad del padre o la excesiva responsabilidad, el orden se invierte. Este arcano devuelve la jerarquía: los mayores protegen; el pequeño crece.",
     healing: "Puedo ser fuerte sin repetir la dureza de quienes vinieron antes.",
   },
   {
     n: 5, roman: "V", name: "El Ancestro", keyword: "El Legado", symbol: "El cofre heredado",
     tarot: "El Hierofante", stage: "I. La Raíz",
-    description: "Lo recibido de quienes estuvieron antes: valores, historias, talentos, recursos, heridas, conocimientos y posibilidades.\n\nInvita a preguntarte qué heredaste además de las dificultades. El linaje no transmite solamente cargas: también transmite recursos.",
+    description: "Lo recibido de quienes estuvieron antes: valores, historias, talentos, recursos, heridas, conocimientos y posibilidades.\n\nInvita a preguntarte qué heredaste además de las dificultades. El linaje no transmite solamente cargas.",
     question: "¿Qué tesoro de mi historia todavía no estoy reconociendo?",
-    movement: "Tomá un objeto que represente algo valioso recibido de tu familia. Sostenelo entre tus manos y decí: «Reconozco lo valioso que llegó hasta mí. Lo recibo con gratitud. Lo transformaré en algo nuevo.»",
+    systemic: "«Reconozco lo valioso que llegó hasta mí. Lo recibo. Lo transformo en algo nuevo.»",
+    theory: "El cofre heredado es el arquetipo del legado dual: adentro hay dolor y también dones. El Ancestro enseña que la herencia no es un veredicto. Se puede abrir el cofre, elegir lo que sirve y honrar lo que no puede llevarse adelante sin negar el origen.",
+    vsTarot: "El Hierofante transmite doctrina, fe e institución. El Ancestro transmite linaje: no una religión, sino una historia concreta con nombres y silencios. Su autoridad no viene de la jerarquía sagrada, sino de la cadena de quienes sostuvieron la vida antes que nosotros.",
+    hellinger: "Los ancestros no son idealizados: son humanos, con culpa y dignidad. Hellinger invita a mirarlos sin condena ni romanticismo. El cofre es el lugar simbólico donde lo recibido puede ser agradecido y, a la vez, diferenciado: yo no tengo que cargar lo que era de ellos.",
     healing: "Honro mi legado y lo convierto en creación.",
   },
   {
     n: 6, roman: "VI", name: "Los Amantes", keyword: "El Vínculo", symbol: "El nudo del vínculo",
     tarot: "Los Amantes", stage: "II. El Vínculo",
-    description: "El vínculo de pareja y la capacidad de elegir desde el amor consciente sin repetir destinos familiares.\n\nHabla de vínculos, elección, deseo y lealtades invisibles. Puede aparecer para preguntar si estás eligiendo desde el presente o desde una historia antigua.",
+    description: "El vínculo de pareja y la capacidad de elegir desde el amor consciente sin repetir destinos familiares.\n\nHabla de vínculos, elección, deseo y lealtades invisibles.",
     question: "¿Estoy eligiendo a esta persona o estoy intentando reparar una historia anterior?",
-    movement: "Imaginá a tu pareja frente a vos y, detrás de cada uno, a sus respectivos sistemas familiares. Decí: «Tu historia es tuya. Mi historia es mía. Podemos encontrarnos sin cargar con aquello que pertenece a nuestros antepasados.»",
+    systemic: "«Tu historia es tuya. La mía es mía. Podemos encontrarnos sin cargar con lo de antes.»",
+    theory: "El nudo no es solo unión: es también enredo simbólico. La carta pregunta desde dónde se elige. El amor puede ser encuentro de dos libertades o repetición de un guion heredado. El símbolo invita a diferenciar el nudo que une del nudo que ata.",
+    vsTarot: "Los Amantes del tarot celebran la elección amorosa y a veces la dualidad moral. En ÁureA la elección se examina bajo la mirada del sistema: no basta con elegir; hay que saber qué historia se está repitiendo en cada deseo de unión.",
+    hellinger: "Hellinger observa que muchas parejas actúan lealtades invisibles: uno repite el destino de un excluido del otro sistema, o la unión compensa una pérdida ancestral. El amor sano respeta la pertenencia de cada uno a su familia de origen. Elegir es, también, soltar la fantasía de reparar el pasado del otro.",
     healing: "Te elijo desde quien soy hoy, no desde lo que mi historia necesita reparar.",
   },
   {
@@ -91,7 +112,10 @@ const CARDS = [
     tarot: "El Carro", stage: "II. El Vínculo",
     description: "La generación que recibe algo del sistema y debe decidir qué continúa y qué transforma.\n\nEs una carta de movimiento y decisión. Te pregunta qué estás llevando hacia el futuro y qué necesitás dejar atrás.",
     question: "¿Qué quiero continuar y qué elijo transformar?",
-    movement: "Imaginá una línea detrás tuyo que representa a tus generaciones anteriores y otra delante que representa a las generaciones futuras. Tomá simbólicamente una pequeña rama. Elegí conscientemente qué querés llevar hacia adelante.",
+    systemic: "«Honro lo recibido. Elijo con conciencia qué continúa a través de mí.»",
+    theory: "La rama que continúa es el símbolo de la transmisión consciente. El heredero no es un duplicado del tronco: es un nuevo crecimiento que recibe savia y, al mismo tiempo, abre dirección propia. La herencia se completa cuando se transforma.",
+    vsTarot: "El Carro del tarot es victoria, control y avance triunfal. El Heredero es más íntimo: no se trata de ganar, sino de decidir qué se transmite. El movimiento no es hacia la conquista exterior, sino hacia la continuidad de la vida con elección.",
+    hellinger: "En el orden de Hellinger, los hijos no continúan el destino de los padres: reciben la vida y la llevan a su propia dirección. El heredero enredado repite; el heredero en orden agradece y sigue. La lealtad verdadera es honrar el don sin sacrificar la propia biografía.",
     healing: "Honro lo que recibí y elijo conscientemente qué continúa a través de mí.",
   },
   {
@@ -99,7 +123,10 @@ const CARDS = [
     tarot: "La Justicia", stage: "II. El Vínculo",
     description: "Cada persona ocupa un lugar. Representa equilibrio, jerarquía, reconocimiento y pertenencia.\n\nInvita a observar dónde existe desorden: alguien ocupando un lugar que no corresponde, alguien olvidado o responsabilidades asumidas por otra generación.",
     question: "¿Estoy ocupando mi lugar o estoy viviendo una vida que pertenece a alguien más?",
-    movement: "Colocá tres objetos representando Ancestros — Padres — Yo. Ubicalos en ese orden. Observá la distancia entre ellos y decí: «Ustedes son los grandes. Yo soy el pequeño. Tomo mi lugar y dejo con ustedes aquello que les pertenece.»",
+    systemic: "«Ustedes son los grandes. Yo soy el pequeño. Cada uno en su lugar.»",
+    theory: "La balanza del linaje pesa pertenencia y jerarquía. El orden no es frialdad: es la forma en que el sistema respira. Cuando alguien asume un lugar ajeno —un hijo que cuida al padre, un hermano que reemplaza a otro—, la balanza se descarga y el sistema busca un correctivo.",
+    vsTarot: "La Justicia del tarot pesa actos y castiga o recompensa. El Orden de ÁureA no juzga culpas: reordena lugares. Su escala mide jerarquía y pertenencia, no mérito moral. No se trata de merecer un sitio, sino de no usurpar el de otro.",
+    hellinger: "Aquí viven los órdenes del amor de Hellinger: jerarquía (los mayores antes), cronología (cada quien en su tiempo) y equilibrio entre dar y recibir. El «buen orden» devuelve a cada uno su lugar. Sanar no es compensar el destino ajeno: es asumir el propio con gratitud.",
     healing: "Cuando cada uno ocupa su lugar, yo puedo ocupar el mío.",
   },
   {
@@ -107,23 +134,32 @@ const CARDS = [
     tarot: "El Ermitaño", stage: "II. El Vínculo",
     description: "La ausencia de alguien importante: un padre que no estuvo, un hijo perdido, un familiar desaparecido o un vacío dentro del árbol.\n\nPuede señalar un vacío que sigue teniendo presencia. La ausencia también pertenece al sistema.",
     question: "¿Qué ausencia sigue ocupando un lugar en mi vida?",
-    movement: "Colocá una silla vacía frente a vos. Imaginá allí a quien estuvo ausente. Decí: «Reconozco tu ausencia. Sé que formás parte de mi historia. No necesito llenar tu lugar. Yo tomo el mío.»",
+    systemic: "«Reconozco tu ausencia. No lleno tu lugar. Yo tomo el mío.»",
+    theory: "La ausencia iluminada es el vacío que aún proyecta luz. El Ermitaño busca solo; el Buscador busca lo que falta. Simbólicamente, el espacio vacío no es nada: es un punto de atracción del sistema, tan vivo como un recuerdo.",
+    vsTarot: "El Ermitaño se retira con su linterna hacia la sabiduría interior. El Buscador no se retira: indaga el hueco del árbol genealógico. La soledad del tarot se transforma aquí en duelo incompleto o en búsqueda de alguien que el sistema dejó de nombrar.",
+    hellinger: "Hellinger insiste: lo excluido o el muerto sin duelo sigue presente en el sistema, y alguien lo carga. La ausencia no se llena con identificación ni con fantasías de rescate. El movimiento sanador es nombrar, honrar y devolver el destino a quien pertenece.",
     healing: "Puedo honrar tu ausencia sin convertirla en mi destino.",
   },
   {
     n: 10, roman: "X", name: "La Repetición", keyword: "Los Patrones", symbol: "La rueda de los retratos",
     tarot: "La Rueda de la Fortuna", stage: "III. El Patrón",
-    description: "Patrones que se repiten generación tras generación: vínculos, pérdidas, conflictos, comportamientos, nombres, destinos o formas de vivir.\n\nEs una invitación a detener el piloto automático. La repetición puede convertirse en conciencia cuando logramos verla.",
+    description: "Patrones que se repiten generación tras generación: vínculos, pérdidas, conflictos, nombres, destinos.\n\nEs una invitación a detener el piloto automático. La repetición se convierte en conciencia cuando logramos verla.",
     question: "¿Qué historia parece repetirse a través de mí?",
-    movement: "Escribí una situación que se haya repetido. Debajo escribí «Antes ocurrió…» y luego «Conmigo puede ser diferente porque…». Cerrá el ejercicio dando un paso físico hacia adelante.",
-    healing: "Puedo reconocer la repetición sin tener que continuarla.",
+    systemic: "«Reconozco el patrón. No tengo que continuarlo. Puedo elegir otro camino.»",
+    theory: "La rueda de los retratos es el mandala del destino heredado. Lo que no se elabora tiende a repetirse en forma, no en contenido exacto. La carta no condena el ciclo: lo vuelve visible, y lo visible deja de ser destino ciego.",
+    vsTarot: "La Rueda de la Fortuna gira por azar y fortuna. La Repetición gira por lealtad y memoria. No es suerte: es un guion que el sistema escribe de nuevo hasta que alguien dice «basta con verlo».",
+    hellinger: "El entrelazamiento hellingeriano: un descendiente carga sentimientos o destinos que no le corresponden —culpa, lealtad al sufrimiento de un excluido— y repite. La salida no es romper el vínculo, sino honrar al otro y devolverle su historia. La repetición cesa cuando se ve con amor y verdad.",
+    healing: "Puedo reconocir la repetición sin tener que continuarla.",
   },
   {
     n: 11, roman: "XI", name: "La Fuerza", keyword: "La Resiliencia", symbol: "El león amansado",
     tarot: "La Fuerza", stage: "III. El Patrón",
-    description: "La capacidad de sobrevivir, resistir y transformar aquello que fue recibido.\n\nRecuerda que tu historia contiene dificultades, pero también capacidad de respuesta. No se trata de romantizar el sufrimiento, sino de reconocer que sobrevivir no tiene por qué convertirse en la única forma de vivir.",
+    description: "La capacidad de sobrevivir, resistir y transformar aquello que fue recibido.\n\nNo se trata de romantizar el sufrimiento, sino de reconocer que sobrevivir no tiene por qué convertirse en la única forma de vivir.",
     question: "¿Qué fuerza desarrollé para sobrevivir y cómo puedo usarla ahora para vivir?",
-    movement: "Apoyá ambas manos sobre el pecho. Respirá profundamente y decí: «Reconozco todo lo que tuve que atravesar. Agradezco la fuerza que desarrollé. Ahora puedo utilizarla para crear, no solamente para resistir.»",
+    systemic: "«Reconozco mi fuerza. La uso para crear, no solo para resistir.»",
+    theory: "El león amansado es la potencia domada sin violencia: instinto que se vuelve presencia. La fuerza aquí no es dureza exterior: es la capacidad interior de sostener lo vivido sin quedar atrapada en el modo superviviente.",
+    vsTarot: "La Fuerza del tarot domestica al león con suavidad: virtud que gobierna los instintos. En ÁureA el león también es el trauma y la respuesta de sobrevivencia. La victoria no es controlar: es dejar de vivir en alerta permanente.",
+    hellinger: "Quienes atravesaron situaciones extremas desarrollan lealtad al sufrimiento: si yo me libero, traiciono a quienes no pudieron. Hellinger diferencia compasión de identificación. Honrar lo vivido incluye el permiso de vivir mejor que quien estuvo antes.",
     healing: "Ya no necesito sobrevivir aquello que hoy puedo transformar.",
   },
   {
@@ -131,7 +167,10 @@ const CARDS = [
     tarot: "El Colgado", stage: "III. El Patrón",
     description: "El sacrificio inconsciente, la identificación con alguien del sistema y la sensación de quedar suspendido en una historia que no comenzó con uno mismo.\n\nPuede mostrar una vida detenida por una lealtad invisible.",
     question: "¿Por quién estoy sacrificando mi propia vida?",
-    movement: "Parate con los brazos relajados. Imaginá detrás tuyo a la persona con cuyo destino sentís una identificación. Decí: «Te veo. Honro lo que viviste. Pero tu destino no necesita continuar a través de mí.» Después soltá físicamente las manos.",
+    systemic: "«Te veo. Honro tu destino. Tu destino no tiene que continuar a través de mí.»",
+    theory: "El nudo invisible ata sin cuerda. El Colgado del tarot elige la suspensión; el Sacrificio de ÁureA muchas veces no elige: hereda la inmovilidad. El símbolo muestra una vida puesta entre paréntesis por amor mal entendido.",
+    vsTarot: "El Colgado suspende la mirada y ve al revés: iniciación, entrega voluntaria. El Sacrificio puede ser entrega consciente o redención inconsciente. La diferencia está en la libertad: no todo sacrificio es santo; muchos son deudas que el sistema cobra sin factura.",
+    hellinger: "Lealtad invisible: amar al otro repitiendo su sufrimiento. Hellinger propone el movimiento de soltar con respeto —«te llevo en el corazón, pero vivo mi vida»—. El amor que es verdad no necesita mártires; necesita a los vivos presentes en su propia biografía.",
     healing: "Puedo amarte sin repetir tu sufrimiento.",
   },
   {
@@ -139,15 +178,21 @@ const CARDS = [
     tarot: "La Muerte", stage: "IV. La Transformación",
     description: "El cierre de un ciclo y la posibilidad de dejar morir una forma antigua de pertenecer.\n\nNo habla de muerte literal. Habla de aquello que terminó y necesita dejar de ser sostenido para permitir el nacimiento de algo nuevo.",
     question: "¿Qué forma antigua de mí necesita terminar?",
-    movement: "Escribí una frase que represente aquello que querés dejar atrás. Rompé el papel. Mientras lo hacés, decí: «Honro lo que fue. Agradezco lo aprendido. Permito que esta etapa termine.»",
+    systemic: "«Honro lo que fue. Permito que esta etapa termine. Doy lugar a lo nuevo.»",
+    theory: "La semilla que rompe contiene el muerte de la forma y el nacimiento del ser. Transformar no es mejorar: es cambiar de estado. El símbolo recuerda que sin disolución no hay continuidad: el abono del ciclo viejo alimenta la siguiente siembra.",
+    vsTarot: "La Muerte del tarot es corte, final y crisis. El Cambio de ÁureA insiste en la semilla: no solo lo que muere, sino lo que se prepara a nacer. El énfasis no es el fin en sí, sino la forma que puede venir después.",
+    hellinger: "Aceptar la realidad —lo que fue, es y no puede deshacerse— es uno de los movimientos más profundos de Hellinger. El duelo es el arte de dejar ir sin negar. Cuando un ciclo familiar termina con verdad, el sistema recupera energía para la vida.",
     healing: "Dejo morir lo que ya cumplió su propósito y doy lugar a lo nuevo.",
   },
   {
     n: 14, roman: "XIV", name: "La Alquimia", keyword: "La Reconciliación", symbol: "Los opuestos que se encuentran",
     tarot: "La Templanza", stage: "IV. La Transformación",
-    description: "La integración de opuestos: masculino y femenino, pasado y presente, dolor y amor, pertenencia y libertad.\n\nInvita a dejar de pelear internamente con partes de tu historia. No significa aprobar aquello que ocurrió; significa poder integrarlo sin quedar definido por ello.",
+    description: "La integración de opuestos: masculino y femenino, pasado y presente, dolor y amor, pertenencia y libertad.\n\nNo significa aprobar aquello que ocurrió; significa poder integrarlo sin quedar definido por ello.",
     question: "¿Qué partes de mi historia estoy intentando mantener separadas?",
-    movement: "Colocá dos objetos frente a vos: uno representa aquello que querés integrar y el otro aquello que rechazás. Acercalos lentamente hasta colocarlos juntos. Decí: «Reconozco ambas partes. No necesito elegir una y negar la otra. Integro lo aprendido y continúo mi camino.»",
+    systemic: "«Reconozco ambas partes. Integro lo aprendido y continúo mi camino.»",
+    theory: "La alquimia une lo que la mente separó. Los opuestos no se anulan: se tensan en una tercera posición. El símbolo de los dos vasos comunica que la reconciliación es un flujo, no una fusión. La paz nace de la totalidad, no del triunfo de un polo.",
+    vsTarot: "La Templanza mezcla agua y vino en equilibrio angelical. La Alquimia hereda ese gesto y lo aplica a la historia personal: no se trata de mezclarlo todo, sino de permitir que lo negado vuelva al mismo recipiente que la vida.",
+    hellinger: "Hellinger habla del amor que es verdad: ver lo real sin adornos y, aun así, permanecer en contacto. La reconciliación sistémica no borra culpas; devuelve la realidad a cada quien. Integrar es dejar de dividir el mundo en buenos y malos, para poder amar completo.",
     healing: "Integro mi historia sin quedar atrapado en ella.",
   },
   {
@@ -155,39 +200,54 @@ const CARDS = [
     tarot: "El Diablo", stage: "IV. La Transformación",
     description: "Aquello que el sistema no quiso mirar: secretos, culpas, exclusiones, traumas y aspectos negados.\n\nLa sombra no es necesariamente algo malo. Es aquello que todavía no ha sido integrado a la conciencia.",
     question: "¿Qué parte de mí o de mi historia estoy intentando no mirar?",
-    movement: "Parate frente a un espejo. Observá tu rostro durante unos segundos. Decí: «También esto forma parte de mí. No necesito juzgarlo para poder mirarlo. Puedo elegir qué hacer con aquello que encuentro.»",
+    systemic: "«También esto forma parte de mí. Puedo mirarlo sin juzgarlo.»",
+    theory: "El rostro no mirado no es monstruo: es lo que quedó fuera del foco. La sombra contiene miedo y también vitalidad reprimida. Iluminarla no es exhibirla: es asumirla como parte de la totalidad para que deje de manejar el destino desde atrás del telón.",
+    vsTarot: "El Diablo del tarot marca atadura, tentación y materialismo. La Sombra de ÁureA no es pecado: es lo negado por el sistema —el secreto, el excluido, la culpa colectiva—. El poder de la carta no está en la tentación, sino en la ceguera que el ocultamiento produce.",
+    hellinger: "Lo que no se mira en la familia —abortos, violencias, locura, pobreza, crimen— carga a la generación siguiente. Hellinger no pide confesión pública: pide reconocimiento interior y, cuando corresponde, duelo. Mirar la sombra con respeto es el primer acto de libertad.",
     healing: "Lo que puedo mirar con conciencia deja de gobernarme desde la oscuridad.",
   },
   {
     n: 16, roman: "XVI", name: "La Torre", keyword: "La Ruptura", symbol: "El rayo que parte la torre",
     tarot: "La Torre", stage: "IV. La Transformación",
-    description: "El acontecimiento que rompe el equilibrio del sistema: separación, migración, guerra, pérdida, exilio, crisis o verdad revelada.\n\nRepresenta esos momentos en los que la estructura conocida ya no puede sostenerse. A veces anuncia la caída de una estructura que ya estaba rota.",
+    description: "El acontecimiento que rompe el equilibrio del sistema: separación, migración, guerra, pérdida, exilio, crisis o verdad revelada.\n\nRepresenta esos momentos en los que la estructura conocida ya no puede sostenerse.",
     question: "¿Qué estructura de mi vida ya no puede continuar como antes?",
-    movement: "Construí una pequeña torre con objetos. Quitá uno por uno los elementos que representan viejas estructuras. Cuando la torre caiga, observá qué queda y preguntate: «¿Qué permanece cuando lo conocido deja de sostenerme?»",
+    systemic: "«Cuando lo conocido cae, busco lo que permanece.»",
+    theory: "El rayo no es castigo: es claridad abrupta. La torre es la construcción de mentiras útiles o de roles rígidos que se derrumban para liberar. Aunque duela, el derrumbe revela cimientos: a veces solo al caer se ve sobre qué se estaba parado.",
+    vsTarot: "La Torre del tarot es catástrofe y revelación divina. En ÁureA el rayo también puede ser una verdad familiar que por fin se nombra: migración, exilio, separación. El énfasis está en la estructura que ya no podía seguir fingiendo solidez.",
+    hellinger: "Muchas crisis sistémicas son el costo de un orden mentiroso: secretos que estallan, lealtades rotas. Hellinger invita a sostener la realidad cuando la estructura cae, sin buscar culpables rápidos. Lo que se derrumba era, a veces, el obstáculo para el amor verdadero.",
     healing: "Cuando una estructura cae, puedo construir desde un lugar más verdadero.",
   },
   {
     n: 17, roman: "XVII", name: "La Estrella", keyword: "La Esperanza", symbol: "La semilla bajo el cielo",
     tarot: "La Estrella", stage: "V. La Conciencia",
-    description: "La posibilidad de que una nueva generación transforme el destino sin negar de dónde viene.\n\nEs la carta de la esperanza consciente. No propone olvidar el pasado. Propone permitir que el futuro sea diferente.",
+    description: "La posibilidad de que una nueva generación transforme el destino sin negar de dónde viene.\n\nNo propone olvidar el pasado. Propone permitir que el futuro sea diferente.",
     question: "¿Qué nueva posibilidad quiero ofrecerle a mi historia?",
-    movement: "Plantá una semilla real. Mientras la cubrís con tierra, imaginá detrás tuyo a las generaciones anteriores y delante tuyo a las generaciones futuras. Decí: «Recibo la vida de quienes estuvieron antes. Yo agrego algo nuevo. Que lo que nazca desde mí pueda tener más libertad.»",
+    systemic: "«Recibo la vida de antes. Yo agrego algo nuevo. Que nazca con más libertad.»",
+    theory: "La semilla bajo el cielo es la promesa contenida. La Estrella no niega la oscuridad previa: la convierte en suelo. Simbólicamente une profundidad (semilla) y horizonte (cielo): el futuro se siembra desde lo heredado, no contra lo heredado.",
+    vsTarot: "La Estrella del tarot vierte agua y regenera tras la Torre. La Estrella de ÁureA subraya la transmisión: la esperanza es generacional. No es solo consuelo personal: es permiso para que venga una vida distinta a través de quien se atreve a imaginarla.",
+    hellinger: "El movimiento de Hellinger hacia adelante se llama vivir. Los hijos pueden honrar a los mayores viviendo plenamente. La esperanza sistémica no borra la historia: la agradece y deja de usarla como cadena. Lo nuevo nace cuando el pasado es reconocido, no cuando es negado.",
     healing: "Mi historia me precede, pero no determina todo lo que puedo crear.",
   },
   {
     n: 18, roman: "XVIII", name: "La Luna", keyword: "La Memoria Inconsciente", symbol: "El agua que refleja",
     tarot: "La Luna", stage: "V. La Conciencia",
-    description: "Los contenidos emocionales heredados que viven debajo de la conciencia: miedos, sueños, recuerdos y patrones invisibles.\n\nInvita a mirar aquello que todavía no puede explicarse racionalmente. No todo lo que sentimos comenzó en el presente, pero sentir algo no demuestra por sí mismo su origen ancestral.",
+    description: "Los contenidos emocionales heredados que viven debajo de la conciencia: miedos, sueños, recuerdos y patrones invisibles.\n\nNo todo lo que sentimos comenzó en el presente, pero sentir algo no demuestra por sí solo su origen ancestral.",
     question: "¿Qué emoción aparece en mí y qué necesita ser escuchado?",
-    movement: "Sentate frente a un recipiente con agua. Observá su superficie. Sin buscar explicaciones, preguntate: «¿Qué siento ahora?». Nombrá la emoción sin intentar justificarla.",
+    systemic: "«Nombro lo que siento sin convertirlo en sentencia.»",
+    theory: "El agua que refleja distorsiona y revela a la vez. La Luna gobierna lo no racional: el cuerpo, el sueño, la intuición y el miedo. El símbolo pide humildad epistémica: no toda emoción es verdad última, pero toda emoción merece ser escuchada.",
+    vsTarot: "La Luna del tarot induce ilusión, viaje nocturno y miedo animal. La Luna de ÁureA es memoria inconsciente y clima emocional heredado. Su pregunta no es «qué me engaña», sino «qué eco suena en mí que quizás no empezó conmigo».",
+    hellinger: "Hellinger observa que los sentimientos del presente a menudo son amplificados por destinos del pasado —culpa excesiva, miedo de pertenecer, alegría prohibida—. La solución no es diagnosticar el origen con certeza, sino devolver proporción: sentir sin cargar al sistema desde el cuerpo de uno.",
     healing: "Escucho lo profundo de mí sin convertir cada emoción en una sentencia.",
   },
   {
     n: 19, roman: "XIX", name: "El Sol", keyword: "La Vida Plena", symbol: "El mediodía de la vida",
     tarot: "El Sol", stage: "V. La Conciencia",
-    description: "Vitalidad, alegría, presencia y permiso para vivir plenamente más allá de las cargas heredadas.\n\nEs una de las cartas más luminosas del mazo. Habla de recuperar el derecho a disfrutar, crear, amar, expresarte y ocupar espacio.",
+    description: "Vitalidad, alegría, presencia y permiso para vivir plenamente más allá de las cargas heredadas.\n\nHabla de recuperar el derecho a disfrutar, crear, amar, expresarte y ocupar espacio.",
     question: "¿Dónde necesito permitirme vivir más plenamente?",
-    movement: "Parate frente a una ventana o bajo la luz del sol. Abrí los brazos. Imaginá que detrás tuyo están quienes te dieron la vida. Decí: «Gracias por la vida. La recibo. Y ahora me permito vivirla.»",
+    systemic: "«Gracias por la vida. La recibo. Y ahora me permito vivirla.»",
+    theory: "El mediodía es el momento en que la sombra es más corta: la vida se ve entera. El Sol no es éxito exterior: es presencia sin exilio interior. Simbólicamente, el cuerpo, el juego y la luz cotidiana se liberan de la urgencia de justificar el derecho a existir.",
+    vsTarot: "El Sol del tarot es claridad, infancia y victoria sobre la niebla. El Sol de ÁureA es especialmente un acto de pertenencia: vivir con plenitud puede ser el mejor homenaje a quienes no pudieron hacerlo. La alegría deja de ser lujo y se vuelve reconocimiento.",
+    hellinger: "Los niños llevan la vida de los mayores hacia adelante. Vivir plena y alegremente no es olvido: es la forma en que el sistema continúa. Hellinger diría que la gratitud por la vida es el movimiento que cierra el duelo y abre el futuro.",
     healing: "Honro a quienes vinieron antes viviendo plenamente mi propia vida.",
   },
   {
@@ -195,15 +255,21 @@ const CARDS = [
     tarot: "El Juicio", stage: "VI. El Despertar",
     description: "El momento en que una persona comprende que está repitiendo algo del sistema y decide mirar su historia de otra manera.\n\nEs el despertar. Algo que antes parecía inevitable comienza a ser visto como una posibilidad de elección.",
     question: "¿Qué estoy viendo ahora que antes no podía ver?",
-    movement: "Imaginá detrás tuyo a todo tu linaje. Luego mirá hacia adelante. Decí: «Ahora puedo verlo. Gracias por haber llegado hasta mí. A partir de este momento puedo elegir de otra manera.» Da un paso hacia adelante.",
+    systemic: "«Ahora puedo verlo. Gracias por haber llegado hasta mí. Puedo elegir otra manera.»",
+    theory: "La trompeta no ordena: llama. El despertar no es un castigo divino sino una invitación a la conciencia. El umbral entre destino y elección es fino: una sola mirada nueva sobre lo viejo cambia el peso de la herencia.",
+    vsTarot: "El Juicio del tarot evoca resurrección y llamado final. El Llamado de ÁureA es secular y cotidiano: el instante en que el patrón se hace visible. No hay tribunal: hay responsabilidad. Ver es el primer acto de libertad.",
+    hellinger: "El insight hellingeriano no es solo insight cognitivo: es movimiento del alma. Cuando alguien ve con verdad su lealtad y devuelve lo ajeno, el sistema entero respira distinto. El llamado es hacia la responsabilidad adulta: amar sin enredo y pertenecer sin sumisión.",
     healing: "Cuando puedo ver mi historia, puedo comenzar a elegir mi respuesta.",
   },
   {
     n: 21, roman: "XXI", name: "El Mundo", keyword: "La Integración", symbol: "El círculo que se cierra",
     tarot: "El Mundo", stage: "VI. El Despertar",
-    description: "El cierre del recorrido: reconocer el sistema, tomar la vida recibida y ocupar el propio lugar.\n\nRepresenta integración, pertenencia y culminación. No significa que todo esté resuelto. Significa que ya no necesitás negar ninguna parte de tu recorrido para seguir avanzar.",
+    description: "El cierre del recorrido: reconocer el sistema, tomar la vida recibida y ocupar el propio lugar.\n\nNo significa que todo esté resuelto. Significa que ya no necesitás negar ninguna parte de tu recorrido para seguir avanzando.",
     question: "¿Qué puedo integrar para sentirme completo y avanzar?",
-    movement: "Parate en el centro de un círculo. Imaginá detrás tuyo a tus ancestros y delante de vos tu futuro. Abrí los brazos y decí: «Honro lo que fue. Recibo la vida. Reconozco mi lugar. Y ahora camino hacia mi propia vida.»",
+    systemic: "«Honro lo que fue. Reconozco mi lugar. Camino hacia mi propia vida.»",
+    theory: "El círculo que se cierra no es círculo vicioso: es totalidad. Los cuatro extremos del símbolo sugieren los polos de la existencia integrados. El Mundo es pertenencia sin fusionarse, memoria sin peso muerto y destino sin negar el origen.",
+    vsTarot: "El Mundo del tarot es culminación, éxito y danza cósmica. El Mundo de ÁureA es integración sistémica: no el final del viaje, sino el momento en que el viajero ya no discute con su mapa. La victoria es la paz con la historia.",
+    hellinger: "Hellinger habla del alma en paz con la realidad. El movimiento final es agradecer la vida tal como vino —con pérdidas y dones— y seguir caminando. Quien se separa con amor del pasado sin negarlo deja de cargar el destino del sistema y empieza a caminar el propio.",
     healing: "Tomo la vida que recibí, honro mi historia y avanzo hacia mi propio destino.",
   },
 ];
@@ -454,37 +520,89 @@ function bindCardImages(root = document) {
   });
 }
 
-function arcanoModalHTML(card) {
+function openArcano(n) {
+  const card = cardByNumber(n);
+  if (!card) return;
+  openSlide(arcanoSlideHTML(card));
+}
+
+/* ========================= SLIDE · PROFUNDIZAR ========================= */
+let slideLastFocused = null;
+
+function openSlide(html) {
+  const slide = $("#slide");
+  if (!slide) return;
+  slideLastFocused = document.activeElement;
+  $("#slide-body").innerHTML = html;
+  slide.hidden = false;
+  document.body.style.overflow = "hidden";
+  bindCardImages($("#slide-body"));
+  requestAnimationFrame(() => {
+    slide.classList.add("is-open");
+    const closeBtn = $(".slide-close", slide);
+    if (closeBtn) closeBtn.focus();
+  });
+}
+
+function closeSlide() {
+  const slide = $("#slide");
+  if (!slide || slide.hidden) return;
+  slide.classList.remove("is-open");
+  document.body.style.overflow = "";
+  window.setTimeout(() => {
+    if (!slide.classList.contains("is-open")) {
+      slide.hidden = true;
+      $("#slide-body").innerHTML = "";
+    }
+  }, 400);
+  if (slideLastFocused && typeof slideLastFocused.focus === "function") slideLastFocused.focus();
+}
+
+function arcanoSlideHTML(card) {
   return (
-    '<div class="modal-hero">' +
+    '<div class="slide-hero">' +
       '<div class="modal-card">' +
         (getCardImage(card.n)
           ? '<img class="card-art" data-card="' + card.n + '" src="' + getCardImage(card.n) + '" alt="' + escapeHtml(card.name) + '">'
           : '<div class="card-fallback"><span class="fb-num">' + escapeHtml(card.roman) + '</span><span class="fb-name">' + escapeHtml(card.name) + "</span></div>") +
       "</div>" +
       "<div>" +
-        '<p class="modal-label" id="modal-title">Arcano ' + escapeHtml(card.roman) + "</p>" +
+        '<p class="modal-label" id="slide-title">Arcano ' + escapeHtml(card.roman) + "</p>" +
         '<h3 class="modal-title">' + escapeHtml(card.name) + "</h3>" +
         '<p class="modal-keyword">' + escapeHtml(card.keyword) + "</p>" +
         '<div class="modal-block"><h4>Símbolo</h4><p>' + escapeHtml(card.symbol) + "</p></div>" +
-        '<div class="modal-block"><h4>Descripción</h4><p>' + escapeHtml(card.description) + "</p></div>" +
-        '<div class="modal-block"><h4>Movimiento sistémico</h4><p>' + escapeHtml(card.movement) + "</p></div>" +
-        '<div class="modal-block"><h4>Pregunta de integración</h4><p>' + escapeHtml(card.question) + "</p></div>" +
-        '<p class="modal-quote">' + escapeHtml(card.healing) + "</p>" +
-        '<div class="modal-tags">' +
-          '<span class="modal-tag">Arcano de referencia: ' + escapeHtml(card.tarot) + "</span>" +
-          '<span class="modal-tag">' + escapeHtml(card.stage) + "</span>" +
-          '<span class="modal-tag">Mirar · Mover · Elegir</span>' +
-        "</div>" +
       "</div>" +
+    "</div>" +
+    '<div class="modal-block"><h4>Significado</h4><p>' + escapeHtml(card.description) + "</p></div>" +
+    '<div class="slide-healing">' +
+      '<p class="slide-healing-label"><span aria-hidden="true">✦</span> Frase sistémica</p>' +
+      "<p>" + escapeHtml(card.systemic) + "</p>" +
+    "</div>" +
+    '<div class="modal-block"><h4>Pregunta de integración</h4><p>' + escapeHtml(card.question) + "</p></div>" +
+    '<div class="slide-healing">' +
+      '<p class="slide-healing-label"><span aria-hidden="true">✦</span> Frase sanadora</p>' +
+      "<p>«" + escapeHtml(card.healing) + "»</p>" +
+    "</div>" +
+    '<div class="slide-deep">' +
+      '<div class="slide-deep-block">' +
+        '<p class="slide-deep-label"><span aria-hidden="true">📖</span> Lectura simbólica</p>' +
+        "<p>" + escapeHtml(card.theory) + "</p>" +
+      "</div>" +
+      '<div class="slide-deep-block">' +
+        '<p class="slide-deep-label"><span aria-hidden="true">🃏</span> En el tarot: ' + escapeHtml(card.tarot) + "</p>" +
+        "<p>" + escapeHtml(card.vsTarot) + "</p>" +
+      "</div>" +
+      '<div class="slide-deep-block slide-deep-hellinger">' +
+        '<p class="slide-deep-label"><span aria-hidden="true">🌀</span> Mirada sistémica · Bert Hellinger</p>' +
+        "<p>" + escapeHtml(card.hellinger) + "</p>" +
+      "</div>" +
+    "</div>" +
+    '<div class="modal-tags">' +
+      '<span class="modal-tag">Arcano de referencia: ' + escapeHtml(card.tarot) + "</span>" +
+      '<span class="modal-tag">' + escapeHtml(card.stage) + "</span>" +
+      '<span class="modal-tag">Mirar · Mover · Elegir</span>' +
     "</div>"
   );
-}
-
-function openArcano(n) {
-  const card = cardByNumber(n);
-  if (!card) return;
-  openModal(arcanoModalHTML(card));
 }
 
 /* ========================= RUTAS ========================= */
@@ -896,7 +1014,7 @@ function fillDailyInfo(card) {
   set("#daily-keyword", card.keyword);
   set("#daily-symbol", card.symbol);
   set("#daily-description", card.description);
-  set("#daily-movement", card.movement);
+  set("#daily-systemic", card.systemic);
   set("#daily-question", card.question);
 }
 
@@ -954,7 +1072,7 @@ function renderSpread(picked) {
       '<p class="si-keyword">' + escapeHtml(card.keyword) + " · " + escapeHtml(card.symbol) + "</p>" +
       "<dl>" +
         "<div><dt>Número</dt><dd>Arcano " + escapeHtml(card.roman) + "</dd></div>" +
-        "<div><dt>Movimiento sistémico</dt><dd>" + escapeHtml(card.movement) + "</dd></div>" +
+        "<div><dt>Frase sistémica</dt><dd>" + escapeHtml(card.systemic) + "</dd></div>" +
         "<div><dt>Pregunta de integración</dt><dd>" + escapeHtml(card.question) + "</dd></div>" +
       "</dl>";
 
@@ -1233,7 +1351,7 @@ function fillFreeInfo(card) {
   set("#free-keyword", card.keyword);
   set("#free-symbol", card.symbol);
   set("#free-description", card.description);
-  set("#free-movement", card.movement);
+  set("#free-systemic", card.systemic);
   set("#free-question-meaning", card.question);
   set("#free-healing", card.healing);
 }
@@ -1330,6 +1448,9 @@ function bindGlobalEvents() {
     const closer = event.target.closest("[data-modal-close]");
     if (closer) { closeModal(); return; }
 
+    const slideCloser = event.target.closest("[data-slide-close]");
+    if (slideCloser) { closeSlide(); return; }
+
     const authTrigger = event.target.closest("[data-auth]");
     if (authTrigger) {
       const key = authTrigger.dataset.auth;
@@ -1349,7 +1470,7 @@ function bindGlobalEvents() {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeModal();
+    if (event.key === "Escape") { closeModal(); closeSlide(); }
   });
 
   const menuBtn = $("#btn-menu");
