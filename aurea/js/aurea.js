@@ -624,6 +624,7 @@ function showView(name) {
   const logoutBtn = $("#btn-logout");
   if (loginBtn) loginBtn.hidden = !!state.user || !isLanding;
   if (logoutBtn) logoutBtn.hidden = !state.user;
+  if (name === "app") updateGreeting();
 }
 
 function showAuthForm(key) {
@@ -715,12 +716,19 @@ async function loadProfile() {
 function updateGreeting() {
   const el = $("#app-greeting");
   if (!el) return;
-  const name =
-    (state.profile && state.profile.full_name) ||
-    (state.user && state.user.user_metadata && state.user.user_metadata.full_name) ||
-    (state.user && state.user.email) ||
-    "";
-  const first = String(name).trim().split(/\s+/)[0] || "";
+  const meta = (state.user && state.user.user_metadata) || {};
+  const candidates = [
+    state.profile && state.profile.full_name,
+    meta.full_name,
+    meta.name,
+    state.user && state.user.email,
+  ];
+  let name = "";
+  for (let i = 0; i < candidates.length; i++) {
+    const raw = String(candidates[i] || "").trim();
+    if (raw) { name = raw; break; }
+  }
+  const first = name.split(/\s+/)[0] || "";
   el.textContent = first ? "Bienvenido/a, " + first : "Bienvenido/a";
 }
 
