@@ -1069,10 +1069,11 @@ function renderSpread(picked) {
     info.hidden = true;
     info.innerHTML =
       "<h4>" + escapeHtml(card.name) + "</h4>" +
-      '<p class="si-keyword">' + escapeHtml(card.keyword) + " · " + escapeHtml(card.symbol) + "</p>" +
+      '<p class="si-keyword">' + escapeHtml(card.keyword) + "</p>" +
       "<dl>" +
-        "<div><dt>Número</dt><dd>Arcano " + escapeHtml(card.roman) + "</dd></div>" +
-        "<div><dt>Frase sistémica</dt><dd>" + escapeHtml(card.systemic) + "</dd></div>" +
+        "<div><dt>Significado</dt><dd>" + escapeHtml(card.description) + "</dd></div>" +
+        "<div><dt>Correspondencia al tarot: " + escapeHtml(card.tarot) + "</dt><dd>" + escapeHtml(card.vsTarot) + "</dd></div>" +
+        "<div><dt>Mirada de Hellinger</dt><dd>" + escapeHtml(card.hellinger) + "</dd></div>" +
         "<div><dt>Pregunta de integración</dt><dd>" + escapeHtml(card.question) + "</dd></div>" +
       "</dl>";
 
