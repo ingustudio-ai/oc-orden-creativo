@@ -1020,10 +1020,20 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  padding: clamp(1.2rem, 4vw, 2rem) clamp(1.05rem, 4vw, 2rem) calc(2.2rem + env(safe-area-inset-bottom, 0px));
+  padding: clamp(1.2rem, 4vw, 2rem) clamp(1.05rem, 4vw, 2rem) 1.6rem;
   scrollbar-gutter: stable;
 }
 .slide-body > * { width: 100%; max-width: 760px; margin-inline: auto; }
+
+/* Pie fijo: botón de cierre grande, siempre a la vista */
+.slide-foot {
+  flex: 0 0 auto;
+  display: flex; justify-content: center;
+  padding: 0.7rem clamp(1.05rem, 4vw, 2rem) calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(8, 6, 16, 0.55), rgba(8, 6, 16, 1) 45%);
+  border-top: 1px solid var(--borde-suave);
+}
+.slide-done { width: 100%; max-width: 760px; min-height: 52px; letter-spacing: 0.16em; }
 
 .slide-hero { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 180px) minmax(0, 1fr); align-items: start; margin-bottom: 0.4rem; }
 .slide-hero .modal-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--borde); }

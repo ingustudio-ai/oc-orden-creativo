@@ -570,12 +570,12 @@ function initSlideDrag() {
   if (!bar || !panel || bar.dataset.dragBound) return;
   bar.dataset.dragBound = "1";
 
-  let dragMoved = false;
+  let lastDragAt = 0;
 
   bar.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
     if (event.target.closest("[data-slide-close]")) return;
-    dragMoved = false;
+    lastDragAt = 0;
     slideDrag = {
       id: event.pointerId,
       startY: event.clientY,
@@ -591,7 +591,7 @@ function initSlideDrag() {
     if (!slideDrag || event.pointerId !== slideDrag.id) return;
     const dy = Math.max(0, event.clientY - slideDrag.startY);
     slideDrag.dy = dy;
-    if (dy > 8) dragMoved = true;
+    if (dy > 8) lastDragAt = Date.now();
     panel.style.transform = "translateY(" + dy + "px)";
   });
 
@@ -613,7 +613,7 @@ function initSlideDrag() {
   // Un toque simple en la barra (sin arrastre) también cierra el panel.
   bar.addEventListener("click", (event) => {
     if (event.target.closest("[data-slide-close]")) return;
-    if (dragMoved) { dragMoved = false; return; }
+    if (Date.now() - lastDragAt < 500) return;
     closeSlide();
   });
 }
