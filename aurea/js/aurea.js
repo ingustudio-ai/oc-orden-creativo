@@ -563,16 +563,19 @@ function closeSlide() {
   if (slideLastFocused && typeof slideLastFocused.focus === "function") slideLastFocused.focus();
 }
 
-/* Arrastrar la barra hacia abajo para cerrar (mobile) */
+/* Barra del sheet: arrastrar hacia abajo o tocar para cerrar */
 function initSlideDrag() {
   const bar = $(".slide-bar");
   const panel = $(".slide-panel");
   if (!bar || !panel || bar.dataset.dragBound) return;
   bar.dataset.dragBound = "1";
 
+  let dragMoved = false;
+
   bar.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
     if (event.target.closest("[data-slide-close]")) return;
+    dragMoved = false;
     slideDrag = {
       id: event.pointerId,
       startY: event.clientY,
@@ -588,6 +591,7 @@ function initSlideDrag() {
     if (!slideDrag || event.pointerId !== slideDrag.id) return;
     const dy = Math.max(0, event.clientY - slideDrag.startY);
     slideDrag.dy = dy;
+    if (dy > 8) dragMoved = true;
     panel.style.transform = "translateY(" + dy + "px)";
   });
 
@@ -605,6 +609,13 @@ function initSlideDrag() {
 
   bar.addEventListener("pointerup", endDrag);
   bar.addEventListener("pointercancel", endDrag);
+
+  // Un toque simple en la barra (sin arrastre) también cierra el panel.
+  bar.addEventListener("click", (event) => {
+    if (event.target.closest("[data-slide-close]")) return;
+    if (dragMoved) { dragMoved = false; return; }
+    closeSlide();
+  });
 }
 
 function arcanoSlideHTML(card) {

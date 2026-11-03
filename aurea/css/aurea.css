@@ -985,7 +985,10 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   border-bottom: 1px solid var(--borde-suave);
   touch-action: none;
   cursor: grab;
+  transition: background 0.2s ease;
 }
+.slide-bar:hover { background: rgba(18, 14, 32, 0.97); }
+.slide-bar:active { background: rgba(217, 178, 100, 0.08); }
 .slide-bar.is-dragging { cursor: grabbing; }
 .slide-bar-title {
   flex: 1 1 auto; min-width: 0;
