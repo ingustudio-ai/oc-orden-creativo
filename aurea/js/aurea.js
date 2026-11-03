@@ -523,24 +523,29 @@ function bindCardImages(root = document) {
 function openArcano(n) {
   const card = cardByNumber(n);
   if (!card) return;
-  openSlide(arcanoSlideHTML(card));
+  openSlide(arcanoSlideHTML(card), card.name);
 }
 
-/* ========================= SLIDE · PROFUNDIZAR ========================= */
+/* ========================= BOTTOM SHEET · PROFUNDIZAR ========================= */
 let slideLastFocused = null;
+let slideDrag = null;
 
-function openSlide(html) {
+function openSlide(html, title) {
   const slide = $("#slide");
   if (!slide) return;
   slideLastFocused = document.activeElement;
-  $("#slide-body").innerHTML = html;
+  const body = $("#slide-body");
+  body.innerHTML = html;
+  body.scrollTop = 0;
+  const barTitle = $("#slide-bar-title");
+  if (barTitle) barTitle.textContent = title || "Profundizar en el arcano";
   slide.hidden = false;
   document.body.style.overflow = "hidden";
-  bindCardImages($("#slide-body"));
+  bindCardImages(body);
   requestAnimationFrame(() => {
     slide.classList.add("is-open");
     const closeBtn = $(".slide-close", slide);
-    if (closeBtn) closeBtn.focus();
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
   });
 }
 
@@ -554,8 +559,52 @@ function closeSlide() {
       slide.hidden = true;
       $("#slide-body").innerHTML = "";
     }
-  }, 400);
+  }, 480);
   if (slideLastFocused && typeof slideLastFocused.focus === "function") slideLastFocused.focus();
+}
+
+/* Arrastrar la barra hacia abajo para cerrar (mobile) */
+function initSlideDrag() {
+  const bar = $(".slide-bar");
+  const panel = $(".slide-panel");
+  if (!bar || !panel || bar.dataset.dragBound) return;
+  bar.dataset.dragBound = "1";
+
+  bar.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    if (event.target.closest("[data-slide-close]")) return;
+    slideDrag = {
+      id: event.pointerId,
+      startY: event.clientY,
+      dy: 0,
+      time: Date.now(),
+    };
+    panel.style.transition = "none";
+    bar.classList.add("is-dragging");
+    try { bar.setPointerCapture(event.pointerId); } catch (e) { /* sin captura */ }
+  });
+
+  bar.addEventListener("pointermove", (event) => {
+    if (!slideDrag || event.pointerId !== slideDrag.id) return;
+    const dy = Math.max(0, event.clientY - slideDrag.startY);
+    slideDrag.dy = dy;
+    panel.style.transform = "translateY(" + dy + "px)";
+  });
+
+  function endDrag(event) {
+    if (!slideDrag || event.pointerId !== slideDrag.id) return;
+    const dy = slideDrag.dy;
+    const elapsed = Math.max(1, Date.now() - slideDrag.time);
+    const fast = dy / elapsed > 0.55;
+    slideDrag = null;
+    bar.classList.remove("is-dragging");
+    panel.style.transition = "";
+    panel.style.transform = "";
+    if (dy > 120 || (fast && dy > 40)) closeSlide();
+  }
+
+  bar.addEventListener("pointerup", endDrag);
+  bar.addEventListener("pointercancel", endDrag);
 }
 
 function arcanoSlideHTML(card) {
@@ -1547,6 +1596,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initStarfield();
   initReveal();
   initDailyCard();
+  initSlideDrag();
   bindGlobalEvents();
   initAuth().then(() => {
     updateGreeting();

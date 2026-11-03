@@ -941,36 +941,87 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   border: 1px solid var(--borde-suave); border-radius: 999px; padding: 0.35rem 0.8rem;
 }
 
-/* ---------- Slide · profundizar arcano ---------- */
-.slide { position: fixed; inset: 0; z-index: 95; }
+/* ---------- Bottom sheet · profundizar arcano ---------- */
+.slide {
+  position: fixed; inset: 0; z-index: 95;
+  display: flex; align-items: flex-end;
+  height: 100%;
+  height: 100dvh;
+}
 .slide[hidden] { display: none; }
+
 .slide-backdrop {
   position: absolute; inset: 0;
-  background: rgba(4, 3, 8, 0.72);
+  background: rgba(4, 3, 8, 0.78);
   backdrop-filter: blur(4px);
   opacity: 0; transition: opacity 0.35s ease;
 }
 .slide.is-open .slide-backdrop { opacity: 1; }
+
 .slide-panel {
-  position: absolute; top: 0; right: 0;
-  width: min(560px, 100%); height: 100%;
-  overflow-y: auto; overscroll-behavior: contain;
-  background: linear-gradient(165deg, rgba(28, 20, 50, 0.98), rgba(8, 6, 16, 0.99));
-  border-left: 1px solid var(--borde);
-  box-shadow: -24px 0 60px -30px rgba(0, 0, 0, 0.9);
-  transform: translateX(102%);
-  transition: transform 0.4s var(--transicion);
-  padding: clamp(1.4rem, 4vw, 2.2rem) clamp(1.2rem, 4vw, 2rem) 2.5rem;
+  position: relative;
+  display: flex; flex-direction: column;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  border-radius: var(--radio) var(--radio) 0 0;
+  border-top: 1px solid var(--borde);
+  background: linear-gradient(180deg, rgba(28, 20, 50, 0.99) 0%, rgba(12, 9, 22, 1) 38%, rgba(8, 6, 16, 1) 100%);
+  box-shadow: 0 -30px 80px -30px rgba(0, 0, 0, 0.95);
+  transform: translateY(100%);
+  transition: transform 0.48s cubic-bezier(0.22, 0.9, 0.28, 1);
+  will-change: transform;
 }
-.slide.is-open .slide-panel { transform: translateX(0); }
+.slide.is-open .slide-panel { transform: translateY(0); }
+
+/* Barra fija del sheet: queda visible al scrollear el contenido */
+.slide-bar {
+  position: relative; flex: 0 0 auto;
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: calc(0.55rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 1.9rem) 0.55rem;
+  background: rgba(10, 8, 18, 0.95);
+  border-bottom: 1px solid var(--borde-suave);
+  touch-action: none;
+  cursor: grab;
+}
+.slide-bar.is-dragging { cursor: grabbing; }
+.slide-bar-title {
+  flex: 1 1 auto; min-width: 0;
+  margin: 0; text-align: center;
+  font-family: var(--fuente-display);
+  font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--crema-muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.slide-grabber {
+  position: absolute; top: 0.4rem; left: 50%;
+  width: 46px; height: 4px; margin-left: -23px;
+  border-radius: 999px;
+  background: rgba(243, 234, 217, 0.3);
+}
 .slide-close {
-  position: sticky; top: 0; float: right; z-index: 2;
-  width: 42px; height: 42px; border-radius: 50%;
+  flex: 0 0 auto;
+  width: 44px; height: 44px; border-radius: 50%;
   border: 1px solid var(--borde); background: rgba(10, 8, 18, 0.85);
-  color: var(--dorado-claro); font-size: 1rem; cursor: pointer;
-  transition: background 0.2s ease;
+  color: var(--dorado-claro); font-size: 1rem; line-height: 1; cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
-.slide-close:hover { background: rgba(217, 178, 100, 0.16); }
+.slide-close:hover, .slide-close:focus-visible { background: rgba(217, 178, 100, 0.16); border-color: var(--dorado); }
+
+/* Contenido scrolleable del sheet */
+.slide-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: clamp(1.2rem, 4vw, 2rem) clamp(1.05rem, 4vw, 2rem) calc(2.2rem + env(safe-area-inset-bottom, 0px));
+  scrollbar-gutter: stable;
+}
+.slide-body > * { width: 100%; max-width: 760px; margin-inline: auto; }
+
 .slide-hero { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 180px) minmax(0, 1fr); align-items: start; margin-bottom: 0.4rem; }
 .slide-hero .modal-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--borde); }
 .slide-hero .modal-card img, .slide-hero .card-fallback { width: 100%; aspect-ratio: 720 / 1246; object-fit: cover; display: block; }
@@ -1011,10 +1062,27 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
     radial-gradient(circle at 100% 0%, rgba(217, 178, 100, 0.1), transparent 55%),
     rgba(255, 255, 255, 0.02);
 }
+
+@media (min-width: 900px) {
+  .slide-panel { border-radius: 20px 20px 0 0; }
+  .slide-bar { padding-top: 1.1rem; }
+}
+
 @media (max-width: 560px) {
+  .slide-panel { border-radius: 16px 16px 0 0; }
   .slide-hero { grid-template-columns: 1fr; }
-  .slide-hero .modal-card { max-width: 220px; margin-inline: auto; }
+  .slide-hero .modal-card { max-width: 190px; margin-inline: auto; }
   .slide-hero > div:last-child { text-align: center; }
+  .slide-healing { margin-top: 1.3rem; padding: 1.05rem 1.1rem; }
+  .slide-healing p { font-size: 1.18rem; }
+  .slide-deep-block { padding: 1rem 1.05rem; }
+  .slide-deep-block p:last-child { font-size: 1.04rem; }
+  .slide-close { width: 46px; height: 46px; }
+}
+
+@media (max-width: 380px) {
+  .slide-bar-title { display: none; }
+  .slide-body { padding-inline: 0.95rem; }
 }
 
 .modal-reading-head { text-align: center; margin-bottom: 1.4rem; }

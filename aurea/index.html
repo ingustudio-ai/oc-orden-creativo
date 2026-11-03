@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ÁUREA · Oráculo Sistémico de 22 Arcanos</title>
 <meta name="description" content="Áurea es un oráculo sistémico de 22 arcanos para explorar la historia familiar, los vínculos, los patrones y los procesos de transformación. Orden Creativo · Fernando Matías Acri.">
 <meta name="theme-color" content="#07060B">
@@ -613,13 +613,17 @@
   </div>
 </div>
 
-<!-- ================= SLIDE · PROFUNDIZAR ARCANO ================= -->
+<!-- ================= BOTTOM SHEET · PROFUNDIZAR ARCANO ================= -->
 <div id="slide" class="slide" hidden>
   <div class="slide-backdrop" data-slide-close></div>
-  <aside class="slide-panel" role="dialog" aria-modal="true" aria-labelledby="slide-title">
-    <button class="slide-close" type="button" data-slide-close aria-label="Cerrar">✕</button>
+  <section class="slide-panel" role="dialog" aria-modal="true" aria-labelledby="slide-title">
+    <header class="slide-bar" data-slide-drag>
+      <span class="slide-grabber" aria-hidden="true"></span>
+      <p class="slide-bar-title" id="slide-bar-title">Profundizar en el arcano</p>
+      <button class="slide-close" type="button" data-slide-close aria-label="Cerrar">✕</button>
+    </header>
     <div id="slide-body" class="slide-body"></div>
-  </aside>
+  </section>
 </div>
 
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
