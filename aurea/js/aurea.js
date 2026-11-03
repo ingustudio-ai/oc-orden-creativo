@@ -775,9 +775,26 @@ async function handleRegister(event) {
   if (error) return setMsg(msgEl, mapAuthError(error), "error");
 
   if (!data.session) {
-    setMsg(msgEl, "Cuenta creada. Revisá tu correo para confirmar tu cuenta.", "ok");
+    // Si la confirmación por email está desactivada en Supabase pero el signUp
+    // no devolvió sesión, probamos iniciar sesión directamente.
+    const retry = await sbClient.auth.signInWithPassword({ email, password: pass });
+    if (retry && !retry.error && retry.data && retry.data.session) {
+      state.user = retry.data.user;
+      await loadProfile();
+      const okRetry = await redeemCode(code, msgEl);
+      if (okRetry) {
+        toast("Tu acceso a Áurea está activo.");
+        go("#/app/carta");
+        return;
+      }
+      setMsg(msgEl, (($("#reg-msg").textContent || "") + " Tu cuenta fue creada: usá el código desde «Activar acceso»."), "info");
+      setTimeout(() => go("#/activar"), 2200);
+      return;
+    }
+
+    setMsg(msgEl, "Cuenta creada. Revisá tu correo para confirmar tu cuenta y después ingresá.", "ok");
     $("#login-email").value = email;
-    setTimeout(() => go("#/ingreso"), 1400);
+    setTimeout(() => go("#/ingreso"), 1600);
     return;
   }
 

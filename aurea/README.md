@@ -93,7 +93,21 @@ Dashboard → **Authentication** → **URL Configuration**:
 
 Sin esto, el registro y la recuperación de contraseña no redirigen bien.
 
-### 7. Generar códigos de activación
+### 7. Registro sin confirmación por email
+
+Para que cada cliente nuevo entre directo, sin esperar ni confirmar el correo:
+
+Dashboard → **Authentication** → **Sign In / Providers** (o **Providers**) → **Email**:
+
+- **Confirm email**: desactivado (off)
+- **Enable email provider**: activado (on)
+- **Save**
+
+Con eso, `signUp` devuelve sesión al instante y el código de activación se canjea en el mismo paso, llevando al cliente a `#/app/carta`.
+
+Además, `handleRegister` tiene un reintento: si el `signUp` no devuelve sesión pero la cuenta ya existe, intenta `signInWithPassword` con las mismas credenciales. Así el alta funciona aunque «Confirm email» quede activado por error (en ese caso Supabase sí puede exigir la confirmación).
+
+### 8. Generar códigos de activación
 
 Los códigos **no aparecen en la web**. Los generás vos y se los pasás a quienes compran el Kit Completo (email, WhatsApp, etc.).
 
@@ -110,7 +124,7 @@ Los códigos van en mayúsculas al canjearse. El comprador los ingresa en el reg
 
 No expongas la lista de códigos al cliente: solo existe en la base y se valida vía RPC `redeem_activation_code`. El placeholder del formulario dice «Tu código de activación» a propósito: no muestra ningún ejemplo.
 
-### 8. Servir el sitio
+### 9. Servir el sitio
 
 En local, desde `aurea/`:
 
@@ -123,10 +137,10 @@ python -m http.server 8080
 
 Abrí `http://localhost:8080`. En producción, subí la carpeta `aurea/` a tu hosting estático (Netlify, Vercel, Cloudflare Pages, Nginx, etc.).
 
-### 9. Probar el flujo
+### 10. Probar el flujo
 
 1. Landing → **Crear mi cuenta** → registrar con nombre, email, contraseña y código.
-2. Si Supabase pide confirmar email, revisá el correo y volvé a **Ingresar**.
+2. El alta debe entrar directo a `#/app/carta`, sin paso de confirmación por correo.
 3. Con acceso activo entrá a `#/app/carta` → carta del día → tirada de 3 → **Mis lecturas**.
 4. Verificá que un segundo usuario **no** vea las lecturas del primero.
 5. Verificá que un código ya usado muestre: **«Este código ya fue utilizado.»**
@@ -139,7 +153,7 @@ Abrí `http://localhost:8080`. En producción, subí la carpeta `aurea/` a tu ho
 ```
 Landing pública
   ├─ Waitlist (insert en `waitlist`)
-  ├─ Crear cuenta → signUp → código → RPC redeem_activation_code
+  ├─ Crear cuenta → signUp (sin confirm email) → código → RPC redeem_activation_code → #/app/carta
   ├─ Ingresar → signInWithPassword → profiles.has_access
   │     └─ si no hay acceso → #/activar → código
   └─ Recuperar contraseña → resetPasswordForEmail → #/recuperar
@@ -183,6 +197,7 @@ Landing pública
 |---------|----------------|
 | Banner «Supabase todavía no está configurado» | Faltan URL o anon key en `js/aurea.js` |
 | «No se pudo cargar la librería de Supabase» | CDN bloqueado o sin internet al cargar `supabase.min.js` |
+| «No se pudo conectar con el servidor. Verificá tu conexión» | El proyecto de Supabase está pausado o eliminado (el dominio `*.supabase.co` no resuelve). Restauralo en el dashboard |
 | Registro no crea profile | El trigger `on_auth_user_created` no se ejecutó; revisá el SQL |
 | Código inválido / ya usado | Mensajes distintos en `redeem_activation_code`; verificá la tabla `activation_codes` |
 | «Tu cuenta existe pero todavía no tiene acceso» | El código no se canjeó o `profiles.has_access` es `false` |
