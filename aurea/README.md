@@ -2,7 +2,7 @@
 
 Espacio digital de **ÁUREA** — Orden Creativo · Fernando Matías Acri.
 
-- Landing pública con preventa / lista de espera
+- Landing pública con preventa y compra directa por WhatsApp
 - Autenticación real con Supabase Auth
 - Área privada: carta del día, tirada de 3, 22 arcanos, biblioteca e historial
 - Estética oscura, dorada y violeta · φ ≈ 1,618 · Cinzel + Cormorant Garamond
@@ -53,7 +53,7 @@ El script crea:
 | `profiles` | Nombre, email, teléfono y `has_access` |
 | `activation_codes` | Códigos del Kit Completo (único, canjeable una vez) |
 | `readings` | Historial de tiradas de 3 cartas |
-| `waitlist` | Lista de espera de la landing |
+| `waitlist` | Tabla conservada en la base, ya sin uso en la landing |
 | `handle_new_user()` | Crea el profile al registrarse |
 | `redeem_activation_code()` | Activa el acceso (RPC) |
 | RLS + grants | Cada usuario solo ve/edita lo propio |
@@ -152,7 +152,7 @@ Abrí `http://localhost:8080`. En producción, subí la carpeta `aurea/` a tu ho
 
 ```
 Landing pública
-  ├─ Waitlist (insert en `waitlist`)
+  ├─ Botones de compra → WhatsApp (Kit digital / Áurea completa)
   ├─ Crear cuenta → signUp (sin confirm email) → código → RPC redeem_activation_code → #/app/carta
   ├─ Ingresar → signInWithPassword → profiles.has_access
   │     └─ si no hay acceso → #/activar → código
@@ -173,7 +173,7 @@ Landing pública
 - **Solo** `SUPABASE_URL` + `anon` key en el cliente.
 - Contraseñas las gestiona Supabase Auth; Áurea no las almacena en `localStorage`.
 - En `localStorage` solo se guarda la consulta gratuita del visitante (`aurea:free_draw`).
-- RLS: cada usuario solo ve/edita sus `profiles`, `readings`; la waitlist acepta inserts anónimos; los `activation_codes` no son legibles por el cliente (solo la RPC).
+- RLS: cada usuario solo ve/edita sus `profiles`, `readings`; los `activation_codes` no son legibles por el cliente (solo la RPC).
 - Nunca publiques `service_role` ni `.env` con secretos en el repo público.
 
 ---
@@ -184,10 +184,9 @@ Landing pública
 |-----------|---------|----------|
 | `SUPABASE_URL` | `js/aurea.js` | URL del proyecto Supabase |
 | `SUPABASE_ANON_KEY` | `js/aurea.js` | Clave pública anon |
-| `BUY_URL` | `js/aurea.js` | Checkout del Kit Completo |
-| `LAUNCH_DATE` | `js/aurea.js` | ISO del lanzamiento (default: 2026-10-13T13:00:00-03:00) |
-| `LAUNCH_PRICE` | `js/aurea.js` | Precio mostrado después del lanzamiento |
 | `AUREA_RESOURCES` | `js/aurea.js` | URLs de la biblioteca |
+
+Los botones de compra de la landing apuntan a `https://wa.me/5491131404044` con el mensaje precargado según la opción. Para cambiar el número o los textos, editá los dos enlaces con clase `offer-btn` en `index.html`.
 
 ---
 
@@ -201,7 +200,7 @@ Landing pública
 | Registro no crea profile | El trigger `on_auth_user_created` no se ejecutó; revisá el SQL |
 | Código inválido / ya usado | Mensajes distintos en `redeem_activation_code`; verificá la tabla `activation_codes` |
 | «Tu cuenta existe pero todavía no tiene acceso» | El código no se canjeó o `profiles.has_access` es `false` |
-| Waitlist: error al guardar | Email duplicado (`waitlist.email` es único) o RLS mal configurado |
+| Botones de compra no abren WhatsApp | Revisá el número en los enlaces `wa.me` de `index.html` |
 | Recuperación de contraseña no llega | Site URL / Redirect URLs mal seteadas en Authentication |
 
 ---

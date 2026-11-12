@@ -999,31 +999,6 @@ async function initAuth() {
   }
 }
 
-/* ========================= WAITLIST ========================= */
-async function handleWaitlist(event) {
-  event.preventDefault();
-  const msgEl = $("#wl-msg");
-  const name = $("#wl-name").value.trim();
-  const email = $("#wl-email").value.trim();
-  const phone = $("#wl-phone").value.trim();
-
-  if (!name) return setMsg(msgEl, "Ingresá tu nombre completo.", "error");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setMsg(msgEl, "Ingresá un email válido.", "error");
-
-  if (!SUPABASE_READY || !sbClient) {
-    return setMsg(msgEl, "Supabase todavía no está configurado: tu dato no se pudo guardar todavía.", "error");
-  }
-
-  const { error } = await sbClient
-    .from("waitlist")
-    .insert({ full_name: name, email: email, phone: phone || null, source: "landing-aurea" });
-
-  if (error) return setMsg(msgEl, "No se pudo guardar tu datos. Verificá tu conexión e intentá de nuevo.", "error");
-
-  setMsg(msgEl, "Ya estás en la lista de espera. Si sos de los primeros 13, te escribimos con la propuesta fundadora y tu regalo.", "ok");
-  $("#wl-form").reset();
-}
-
 /* ========================= CARTA DEL DÍA ========================= */
 function dailyIndexFor(date) {
   const key =
@@ -1587,8 +1562,6 @@ function bindGlobalEvents() {
   if (resetSave) resetSave.addEventListener("click", handleReset);
   const activate = $("#form-activate");
   if (activate) activate.addEventListener("submit", handleActivate);
-  const waitlist = $("#wl-form");
-  if (waitlist) waitlist.addEventListener("submit", handleWaitlist);
 
   const spreadForm = $("#spread-form");
   if (spreadForm) spreadForm.addEventListener("submit", handleDraw);
