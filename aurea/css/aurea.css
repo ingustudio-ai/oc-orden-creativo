@@ -243,6 +243,52 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   filter: drop-shadow(0 12px 34px rgba(217, 178, 100, 0.22));
 }
 
+/* Logo triangular animado sobre el título */
+.hero-logo {
+  width: clamp(84px, 11vw, 124px);
+  margin: 0 auto 1.1rem;
+  color: var(--dorado);
+  filter: drop-shadow(0 0 20px rgba(217, 178, 100, 0.28));
+}
+.hero-logo svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.hero-logo .logo-halo {
+  transform-origin: 60px 60px;
+  animation: logoHalo 6s ease-in-out infinite;
+}
+.hero-logo .logo-ring {
+  transform-origin: 60px 60px;
+  animation: logoSpin 34s linear infinite;
+}
+.hero-logo .logo-ring-2 {
+  transform-origin: 60px 60px;
+  animation: logoSpin 52s linear infinite reverse;
+}
+.hero-logo .logo-triangle {
+  stroke-dasharray: 250;
+  stroke-dashoffset: 250;
+  animation: logoDraw 1.9s 0.25s ease-out forwards, logoGlow 5s 2.2s ease-in-out infinite;
+}
+.hero-logo .logo-core {
+  transform-origin: 60px 60px;
+  animation: logoCore 5.5s ease-in-out infinite;
+}
+
+@keyframes logoSpin { to { transform: rotate(360deg); } }
+@keyframes logoDraw { to { stroke-dashoffset: 0; } }
+@keyframes logoGlow {
+  0%, 100% { opacity: 0.78; }
+  50% { opacity: 1; }
+}
+@keyframes logoCore {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+@keyframes logoHalo {
+  0%, 100% { opacity: 0.55; transform: scale(0.98); }
+  50% { opacity: 0.95; transform: scale(1.05); }
+}
+
 .hero-subtitle {
   font-family: var(--fuente-display);
   font-size: clamp(0.72rem, 2.2vw, 1rem);
@@ -1176,6 +1222,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   .btn { width: 100%; }
   .header-actions .btn { width: auto; }
   .hero-actions { flex-direction: column; }
+  .hero-logo { width: 76px; margin-bottom: 0.9rem; }
   .arcans-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .footer-inner { grid-template-columns: 1fr; }
   .modal-body { padding: 0 1.1rem 1.6rem; }
