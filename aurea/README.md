@@ -159,12 +159,14 @@ Landing pública
   └─ Recuperar contraseña → resetPasswordForEmail → #/recuperar
 
 Área privada (#/app/*)
-  ├─ Carta del día (determinística por fecha)
+  ├─ Carta del día (determinística por usuario + fecha)
   ├─ Tirada de 3 → síntesis → insert en `readings`
   ├─ 22 arcanos + modal
   ├─ Biblioteca (URLs configurables)
   └─ Mis lecturas → ver / eliminar (RLS propio)
 ```
+
+La **carta del día** se calcula con una semilla formada por el `id` del usuario y la fecha: cada persona ve la misma carta durante todo el día, pero distinta de la de otros usuarios. Con 22 arcanos, dos personas pueden coincidir por azar.
 
 ---
 

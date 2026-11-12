@@ -684,7 +684,10 @@ function showView(name) {
   const logoutBtn = $("#btn-logout");
   if (loginBtn) loginBtn.hidden = !!state.user || !isLanding;
   if (logoutBtn) logoutBtn.hidden = !state.user;
-  if (name === "app") updateGreeting();
+  if (name === "app") {
+    updateGreeting();
+    initDailyCard();
+  }
 }
 
 function showAuthForm(key) {
@@ -1000,9 +1003,14 @@ async function initAuth() {
 }
 
 /* ========================= CARTA DEL DÍA ========================= */
-function dailyIndexFor(date) {
+function dailySeed() {
+  return (state.user && state.user.id) || "";
+}
+
+function dailyIndexFor(date, seed) {
   const key =
-    date.getFullYear() + "-" + pad2(date.getMonth() + 1) + "-" + pad2(date.getDate());
+    date.getFullYear() + "-" + pad2(date.getMonth() + 1) + "-" + pad2(date.getDate()) +
+    "|" + (seed || "");
   let hash = 2166136261;
   for (let i = 0; i < key.length; i++) {
     hash ^= key.charCodeAt(i);
@@ -1030,7 +1038,9 @@ function cardFaceHTML(card, altPrefix) {
 
 function initDailyCard() {
   const now = new Date();
-  const card = CARDS[dailyIndexFor(now)];
+  const card = CARDS[dailyIndexFor(now, dailySeed())];
+  const previous = state.daily;
+  const changed = !previous || previous.n !== card.n;
   state.daily = card;
 
   const dateEl = $("#daily-date");
@@ -1043,18 +1053,30 @@ function initDailyCard() {
   }
 
   const front = $("#daily-front");
-  if (front) front.innerHTML = cardFaceHTML(card, "Arcano del día:");
+  if (front && (changed || !front.innerHTML.trim())) {
+    front.innerHTML = cardFaceHTML(card, "Arcano del día:");
+  }
 
+  // Si cambió el usuario o el día, se oculta la carta revelada anterior.
   const flip = $("#daily-flip");
+  const info = $("#daily-info");
+  if (changed) {
+    if (flip) flip.classList.remove("is-flipped");
+    if (info) info.hidden = true;
+  } else if (flip && flip.classList.contains("is-flipped")) {
+    fillDailyInfo(card);
+  }
+
   const inner = $("#daily-inner");
-  if (inner && flip && !inner.dataset.bound) {
+  if (inner && !inner.dataset.bound) {
     inner.dataset.bound = "1";
     inner.addEventListener("click", () => {
+      if (!state.daily) return;
       const revealed = flip.classList.toggle("is-flipped");
-      const info = $("#daily-info");
+      const infoEl = $("#daily-info");
       if (revealed) {
-        fillDailyInfo(card);
-        if (info) info.hidden = false;
+        fillDailyInfo(state.daily);
+        if (infoEl) infoEl.hidden = false;
         bindCardImages($("#daily-front"));
       }
     });
@@ -1063,7 +1085,9 @@ function initDailyCard() {
   const deep = $("#btn-daily-deep");
   if (deep && !deep.dataset.bound) {
     deep.dataset.bound = "1";
-    deep.addEventListener("click", () => openArcano(card.n));
+    deep.addEventListener("click", () => {
+      if (state.daily) openArcano(state.daily.n);
+    });
   }
 }
 
