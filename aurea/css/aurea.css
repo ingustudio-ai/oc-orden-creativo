@@ -487,6 +487,15 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   font-size: 0.68rem;
   letter-spacing: 0.12em;
 }
+.offer-ship {
+  font-size: 0.9rem; line-height: 1.5;
+  color: var(--dorado-claro);
+  background: rgba(217, 178, 100, 0.08);
+  border: 1px solid rgba(217, 178, 100, 0.28);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+}
+.offer-ship span { color: var(--crema-muted); }
 
 /* ---------- Regalo primeros 13 ---------- */
 .gift-block {
