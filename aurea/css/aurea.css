@@ -597,6 +597,14 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 
 .form-alt { text-align: center; color: var(--crema-muted); font-size: 1.05rem; margin: 0; }
 
+/* ---------- Captcha (Cloudflare Turnstile) ---------- */
+.turnstile-slot {
+  display: flex; justify-content: center;
+  margin: 0.1rem 0 0.4rem;
+  min-height: 0;
+}
+.turnstile-slot[hidden] { display: none; }
+
 /* ---------- Footer ---------- */
 .site-footer { padding: clamp(3rem, 7vw, 5rem) 0 2.4rem; background: rgba(5, 4, 9, 0.9); }
 .footer-inner {

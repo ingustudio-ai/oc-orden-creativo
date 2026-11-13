@@ -30,3 +30,10 @@ create-assets.ps1
 !aurea/
 !aurea/**/*.md
 !aurea/**/.gitkeep
+
+# Backups de Supabase: contienen datos personales, nunca se versionan
+aurea/backups/
+
+# Pero sí los scripts del proyecto (viven dentro de aurea/)
+!aurea/scripts/
+!aurea/scripts/**

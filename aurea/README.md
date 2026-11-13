@@ -21,6 +21,9 @@ aurea/
 ├── assets/
 │   ├── cards/              # 22 arcanos + dorso (WebP)
 │   └── images/favicon.svg
+├── scripts/
+│   └── backup-supabase.ps1 # Backup con pg_dump + retención
+├── backups/                # Local, ignorado por Git
 └── supabase/supabase.sql   # Esquema, RLS y función de activación
 ```
 
@@ -176,7 +179,69 @@ La **carta del día** se calcula con una semilla formada por el `id` del usuario
 - Contraseñas las gestiona Supabase Auth; Áurea no las almacena en `localStorage`.
 - En `localStorage` solo se guarda la consulta gratuita del visitante (`aurea:free_draw`).
 - RLS: cada usuario solo ve/edita sus `profiles`, `readings`; los `activation_codes` no son legibles por el cliente (solo la RPC).
+- `waitlist` quedó **sin lectura desde el cliente**: la tabla se conserva con los datos históricos, pero `anon` y `authenticated` solo pueden insertar. Se consulta desde el dashboard o con la `service_role` key.
+- CAPTCHA opcional (Cloudflare Turnstile) en registro, ingreso y recuperación de contraseña.
 - Nunca publiques `service_role` ni `.env` con secretos en el repo público.
+
+### Cerrar la fuga de la lista de espera
+
+Si el proyecto se creó con una versión anterior de `supabase.sql`, corré esto una vez en el **SQL Editor** de Supabase:
+
+```sql
+drop policy if exists "waitlist_select_own_email" on public.waitlist;
+drop policy if exists "waitlist_select_any" on public.waitlist;
+revoke all on public.waitlist from anon, authenticated;
+grant insert on public.waitlist to anon, authenticated;
+```
+
+Verificación (debe devolver 0 filas para un usuario logueado):
+
+```sql
+select * from public.waitlist limit 1;
+```
+
+> Los datos históricos siguen disponibles desde **Table Editor** con tu cuenta del dashboard.
+
+### CAPTCHA · Cloudflare Turnstile
+
+El código ya está integrado y **desactivado por defecto**: con `TURNSTILE_SITE_KEY` vacío no aparece ningún widget ni se bloquea el acceso.
+
+Para activarlo:
+
+1. Crear un widget en [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile) con el dominio del sitio.
+2. Pegar la **Site Key** en `js/aurea.js` → `const TURNSTILE_SITE_KEY = "...";`.
+3. En Supabase → **Authentication → Attack Protection**, activar *Enable CAPTCHA protection*, elegir **Turnstile** y pegar la **Secret Key**.
+4. Publicar. Los formularios de registro, ingreso y recuperación muestran la verificación.
+
+Si Cloudflare no carga (bloqueador de anuncios, red), el widget queda oculto y Supabase devuelve el error de captcha, que se muestra como «No pudimos verificar que sos una persona…».
+
+---
+
+## Backups
+
+El plan Free de Supabase **no incluye backups automáticos**. El script `scripts/backup-supabase.ps1` genera un `.dump` completo (tablas, RLS, funciones y datos) y aplica retención.
+
+Requisitos: PostgreSQL 15 o superior instalado (`winget install PostgreSQL.PostgreSQL.15`) para tener `pg_dump` en el PATH.
+
+```powershell
+# Cadena de conexión: Supabase → Project Settings → Database → Session pooler
+$env:SUPABASE_DB_URL = "postgresql://postgres.PROYECTO:CLAVE@HOST:5432/postgres"
+
+.\aurea\scripts\backup-supabase.ps1                     # retención 30 días
+.\aurea\scripts\backup-supabase.ps1 -RetentionDays 90   # retención 90 días
+```
+
+- Los archivos se guardan en `aurea/backups/` (ignorada por Git: contienen datos personales).
+- Recomendado: ejecutarlo **una vez por semana** o antes de cada cambio de esquema.
+- Restaurar:
+
+```powershell
+pg_restore --clean --if-exists --no-owner --no-privileges -d "$env:SUPABASE_DB_URL" aurea-AAAAMMDD-HHMMSS.dump
+```
+
+- Programarlo en Windows (Task Scheduler) apuntando a `powershell.exe -File "...\aurea\scripts\backup-supabase.ps1"`.
+
+> Cuando el proyecto pase a Supabase **Pro** (US$25/mes) los backups diarios de 7 días vienen incluidos y el script queda como respaldo adicional.
 
 ---
 
@@ -186,6 +251,7 @@ La **carta del día** se calcula con una semilla formada por el `id` del usuario
 |-----------|---------|----------|
 | `SUPABASE_URL` | `js/aurea.js` | URL del proyecto Supabase |
 | `SUPABASE_ANON_KEY` | `js/aurea.js` | Clave pública anon |
+| `TURNSTILE_SITE_KEY` | `js/aurea.js` | Site key de Cloudflare Turnstile (vacío = captcha desactivado) |
 | `AUREA_RESOURCES` | `js/aurea.js` | URLs de la biblioteca |
 
 Los botones de compra de la landing apuntan a `https://wa.me/5491131404044` con el mensaje precargado según la opción. Para cambiar el número o los textos, editá los dos enlaces con clase `offer-btn` en `index.html`.
@@ -204,6 +270,9 @@ Los botones de compra de la landing apuntan a `https://wa.me/5491131404044` con 
 | «Tu cuenta existe pero todavía no tiene acceso» | El código no se canjeó o `profiles.has_access` es `false` |
 | Botones de compra no abren WhatsApp | Revisá el número en los enlaces `wa.me` de `index.html` |
 | Recuperación de contraseña no llega | Site URL / Redirect URLs mal seteadas en Authentication |
+| «No pudimos verificar que sos una persona» | Turnstile configurado en el cliente pero sin Secret Key en Supabase (o dominio no autorizado en Cloudflare) |
+| El widget de captcha no aparece | `TURNSTILE_SITE_KEY` vacío (estado normal) o script de Cloudflare bloqueado |
+| `pg_dump` no se reconoce | Falta PostgreSQL instalado o la terminal no se reinició después de instalarlo |
 
 ---
 

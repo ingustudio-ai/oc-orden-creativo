@@ -216,26 +216,30 @@ create policy "readings_delete_own"
   to authenticated
   using (user_id = auth.uid());
 
--- Waitlist: cualquiera puede sumarse; nadie lee la lista desde el cliente
+-- Waitlist: cualquiera puede sumarse; NADIE puede leer la lista desde el cliente.
+-- La política anterior ("waitlist_select_own_email" ... using (true)) filtraba
+-- todos los nombres, emails y teléfonos a cualquier usuario autenticado.
+drop policy if exists "waitlist_select_own_email" on public.waitlist;
+drop policy if exists "waitlist_select_any" on public.waitlist;
+
 drop policy if exists "waitlist_insert_any" on public.waitlist;
 create policy "waitlist_insert_any"
   on public.waitlist for insert
   to anon, authenticated
   with check (true);
 
-drop policy if exists "waitlist_select_own_email" on public.waitlist;
-create policy "waitlist_select_own_email"
-  on public.waitlist for select
-  to authenticated
-  using (true);
+-- Sin lectura ni escritura directa: los datos históricos solo se consultan
+-- desde el dashboard o con la service_role key.
+revoke all on public.waitlist from anon, authenticated;
+grant insert on public.waitlist to anon, authenticated;
 
 /* ========================= GRANTS / REVOKE ========================= */
 
 grant usage on schema public to anon, authenticated;
 
 grant select, update on public.profiles to authenticated;
+-- Waitlist: solo alta. La lectura queda cerrada a propósito (ver política).
 grant insert on public.waitlist to anon, authenticated;
-grant select on public.waitlist to authenticated;
 grant select, insert, update, delete on public.readings to authenticated;
 
 -- Códigos: sin acceso directo desde el cliente

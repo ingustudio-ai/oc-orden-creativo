@@ -14,6 +14,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/aurea.css">
+<!-- Cloudflare Turnstile: solo actúa si se define TURNSTILE_SITE_KEY en js/aurea.js -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 <body>
 
@@ -399,6 +401,7 @@
             <input id="reg-code" type="text" autocomplete="off" required placeholder="Tu código de activación" spellcheck="false">
             <small class="field-hint">Lo recibís cuando comprás el Kit Completo.</small>
           </div>
+          <div class="turnstile-slot" data-turnstile="registro" hidden></div>
           <button class="btn btn-gold btn-block" type="submit">Crear mi cuenta</button>
           <p id="reg-msg" class="form-msg" role="status" aria-live="polite"></p>
           <p class="form-alt">¿Ya tenés cuenta? <button class="link-btn" type="button" data-auth="ingreso">Ingresá a Áurea</button></p>
@@ -415,6 +418,7 @@
             <label for="login-pass">Contraseña</label>
             <input id="login-pass" type="password" autocomplete="current-password" required placeholder="Tu contraseña">
           </div>
+          <div class="turnstile-slot" data-turnstile="ingreso" hidden></div>
           <button class="btn btn-gold btn-block" type="submit">Ingresar a Áurea</button>
           <p id="login-msg" class="form-msg" role="status" aria-live="polite"></p>
           <p class="form-alt">
@@ -430,6 +434,7 @@
             <label for="forgot-email">Email</label>
             <input id="forgot-email" type="email" autocomplete="email" required placeholder="tu@email.com">
           </div>
+          <div class="turnstile-slot" data-turnstile="recuperar" hidden></div>
           <button class="btn btn-gold btn-block" type="submit">Enviar enlace</button>
           <p id="forgot-msg" class="form-msg" role="status" aria-live="polite"></p>
 

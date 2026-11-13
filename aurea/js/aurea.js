@@ -478,6 +478,90 @@ function requireConfig(target) {
   return false;
 }
 
+/* ========================= CAPTCHA · CLOUDFLARE TURNSTILE =========================
+   Dejá TURNSTILE_SITE_KEY vacío para desactivar el captcha por completo: no se
+   muestra ningún widget ni se bloquea el registro. Para activarlo:
+     1. Crear el widget en https://dash.cloudflare.com/?to=/:account/turnstile
+     2. Pegar acá la Site Key.
+     3. En Supabase → Authentication → Attack Protection, pegar la Secret Key.
+   ================================================================================ */
+const TURNSTILE_SITE_KEY = "";
+
+const turnstileWidgets = {};
+let turnstilePolling = false;
+
+function turnstileEnabled() {
+  return !!TURNSTILE_SITE_KEY;
+}
+
+function whenTurnstileReady(callback) {
+  if (!turnstileEnabled()) return;
+  if (window.turnstile) { callback(); return; }
+  if (turnstilePolling) return;
+  turnstilePolling = true;
+  let tries = 0;
+  const timer = setInterval(() => {
+    tries += 1;
+    if (window.turnstile) {
+      clearInterval(timer);
+      turnstilePolling = false;
+      callback();
+    } else if (tries > 60) {
+      // El script no cargó (bloqueador, sin red): se libera el estado
+      // para que un próximo intento vuelva a probar.
+      clearInterval(timer);
+      turnstilePolling = false;
+    }
+  }, 200);
+}
+
+function initTurnstile() {
+  if (!turnstileEnabled()) return;
+  whenTurnstileReady(() => {
+    $$("[data-turnstile]").forEach((slot) => renderTurnstile(slot));
+  });
+}
+
+function renderTurnstile(slot) {
+  if (!turnstileEnabled() || !window.turnstile || !slot) return;
+  const key = slot.dataset.turnstile;
+  slot.hidden = false;
+  if (turnstileWidgets[key]) return;
+  try {
+    turnstileWidgets[key] = window.turnstile.render(slot, {
+      sitekey: TURNSTILE_SITE_KEY,
+      theme: "dark",
+      language: "es",
+      callback: (token) => { turnstileWidgets[key + ":token"] = token; },
+      "expired-callback": () => { turnstileWidgets[key + ":token"] = ""; },
+      "error-callback": () => { turnstileWidgets[key + ":token"] = ""; },
+    });
+  } catch (e) {
+    slot.hidden = true;
+  }
+}
+
+function turnstileToken(key) {
+  if (!turnstileEnabled()) return undefined;
+  return turnstileWidgets[key + ":token"] || "";
+}
+
+function requireTurnstile(key, msgEl) {
+  if (!turnstileEnabled()) return true;
+  if (turnstileToken(key)) return true;
+  setMsg(msgEl, "Completá la verificación de seguridad para continuar.", "error");
+  return false;
+}
+
+function resetTurnstile(key) {
+  if (!turnstileEnabled()) return;
+  const widgetId = turnstileWidgets[key];
+  if (widgetId && window.turnstile) {
+    try { window.turnstile.reset(widgetId); } catch (e) { /* widget no disponible */ }
+  }
+  turnstileWidgets[key + ":token"] = "";
+}
+
 /* ========================= MODAL ========================= */
 let lastFocused = null;
 
@@ -694,6 +778,7 @@ function showAuthForm(key) {
   $$(".auth-tab").forEach((t) => t.classList.toggle("is-active", t.dataset.auth === key));
   $$("[data-auth-form]").forEach((f) => { f.hidden = f.dataset.authForm !== key; });
   if (key === "recuperar" && state.pendingReset) $("#reset-block").hidden = false;
+  initTurnstile();
 }
 
 function showPanel(key) {
@@ -759,6 +844,7 @@ function mapAuthError(error) {
   if (low.includes("invalid format") || low.includes("invalid email")) return "El email no es válido.";
   if (low.includes("password")) return "La contraseña no cumple los requisitos.";
   if (low.includes("rate limit") || low.includes("too many")) return "Demasiados intentos. Esperá unos minutos y volvé a intentar.";
+  if (low.includes("captcha")) return "No pudimos verificar que sos una persona. Completá la verificación y volvé a intentar.";
   if (low.includes("failed to fetch") || low.includes("network")) return "No se pudo conectar con el servidor. Verificá tu conexión.";
   return msg || "No se pudo completar la operación.";
 }
@@ -827,32 +913,39 @@ async function handleRegister(event) {
   if (pass.length < 8) return setMsg(msgEl, "La contraseña debe tener al menos 8 caracteres.", "error");
   if (pass !== pass2) return setMsg(msgEl, "Las contraseñas no coinciden.", "error");
   if (!code) return setMsg(msgEl, "Ingresá tu código de activación.", "error");
+  if (!requireTurnstile("registro", msgEl)) return;
 
+  const captchaToken = turnstileToken("registro");
   setMsg(msgEl, "Creando tu cuenta…", "info");
   const { data, error } = await sbClient.auth.signUp({
     email,
     password: pass,
-    options: { data: { full_name: name } },
+    options: { data: { full_name: name }, captchaToken },
   });
+  resetTurnstile("registro");
 
   if (error) return setMsg(msgEl, mapAuthError(error), "error");
 
   if (!data.session) {
-    // Si la confirmación por email está desactivada en Supabase pero el signUp
-    // no devolvió sesión, probamos iniciar sesión directamente.
-    const retry = await sbClient.auth.signInWithPassword({ email, password: pass });
-    if (retry && !retry.error && retry.data && retry.data.session) {
-      state.user = retry.data.user;
-      await loadProfile();
-      const okRetry = await redeemCode(code, msgEl);
-      if (okRetry) {
-        toast("Tu acceso a Áurea está activo.");
-        go("#/app/carta");
+    // Con captcha activo no se reintenta el login en silencio: el token de
+    // Turnstile ya fue consumido por el signUp.
+    if (!turnstileEnabled()) {
+      // Si la confirmación por email está desactivada en Supabase pero el signUp
+      // no devolvió sesión, probamos iniciar sesión directamente.
+      const retry = await sbClient.auth.signInWithPassword({ email, password: pass });
+      if (retry && !retry.error && retry.data && retry.data.session) {
+        state.user = retry.data.user;
+        await loadProfile();
+        const okRetry = await redeemCode(code, msgEl);
+        if (okRetry) {
+          toast("Tu acceso a Áurea está activo.");
+          go("#/app/carta");
+          return;
+        }
+        setMsg(msgEl, (($("#reg-msg").textContent || "") + " Tu cuenta fue creada: usá el código desde «Activar acceso»."), "info");
+        setTimeout(() => go("#/activar"), 2200);
         return;
       }
-      setMsg(msgEl, (($("#reg-msg").textContent || "") + " Tu cuenta fue creada: usá el código desde «Activar acceso»."), "info");
-      setTimeout(() => go("#/activar"), 2200);
-      return;
     }
 
     setMsg(msgEl, "Cuenta creada. Revisá tu correo para confirmar tu cuenta y después ingresá.", "ok");
@@ -882,9 +975,16 @@ async function handleLogin(event) {
   const email = $("#login-email").value.trim();
   const pass = $("#login-pass").value;
   if (!email || !pass) return setMsg(msgEl, "Ingresá email y contraseña.", "error");
+  if (!requireTurnstile("ingreso", msgEl)) return;
 
+  const captchaToken = turnstileToken("ingreso");
   setMsg(msgEl, "Ingresando…", "info");
-  const { data, error } = await sbClient.auth.signInWithPassword({ email, password: pass });
+  const { data, error } = await sbClient.auth.signInWithPassword({
+    email,
+    password: pass,
+    options: { captchaToken },
+  });
+  resetTurnstile("ingreso");
   if (error) return setMsg(msgEl, mapAuthError(error), "error");
 
   state.user = data.user;
@@ -905,10 +1005,14 @@ async function handleForgot(event) {
   if (!requireConfig(msgEl)) return;
   const email = $("#forgot-email").value.trim();
   if (!email) return setMsg(msgEl, "Ingresá tu email.", "error");
+  if (!requireTurnstile("recuperar", msgEl)) return;
 
+  const captchaToken = turnstileToken("recuperar");
   const { error } = await sbClient.auth.resetPasswordForEmail(email, {
     redirectTo: window.location.origin + window.location.pathname + "#/recuperar",
+    captchaToken,
   });
+  resetTurnstile("recuperar");
   if (error) return setMsg(msgEl, mapAuthError(error), "error");
   setMsg(msgEl, "Si el email existe, te enviamos un enlace para recuperar tu contraseña.", "ok");
 }
