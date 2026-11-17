@@ -537,7 +537,10 @@
               <div><dt>Frase sistémica</dt><dd id="daily-systemic"></dd></div>
               <div><dt>Pregunta de integración</dt><dd id="daily-question"></dd></div>
             </dl>
-            <button class="btn btn-gold" type="button" id="btn-daily-deep">Profundizar en este arcano</button>
+            <div class="daily-actions">
+              <button class="btn btn-gold" type="button" id="btn-daily-deep">Profundizar en este arcano</button>
+              <button class="btn btn-ghost" type="button" id="btn-daily-zoom">Ver la carta en grande</button>
+            </div>
           </div>
         </div>
       </section>
@@ -660,6 +663,24 @@
       <button class="btn btn-gold slide-done" type="button" data-slide-close>Cerrar</button>
     </footer>
   </section>
+</div>
+
+<!-- ================= CARTA AMPLIADA (LIGHTBOX) ================= -->
+<div id="zoom" class="zoom" hidden>
+  <div class="zoom-backdrop" data-zoom-close></div>
+  <div class="zoom-dialog" role="dialog" aria-modal="true" aria-labelledby="zoom-name">
+    <button class="zoom-close" type="button" data-zoom-close aria-label="Cerrar">✕</button>
+    <figure class="zoom-figure">
+      <img id="zoom-img" class="zoom-img card-art" alt="">
+      <div id="zoom-fallback" class="card-fallback" hidden></div>
+    </figure>
+    <div class="zoom-info">
+      <p class="zoom-label" id="zoom-label"></p>
+      <h3 class="zoom-name" id="zoom-name"></h3>
+      <p class="zoom-keyword" id="zoom-keyword"></p>
+      <button class="btn btn-gold btn-block" type="button" id="zoom-deep">Ver significado completo</button>
+    </div>
+  </div>
 </div>
 
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>

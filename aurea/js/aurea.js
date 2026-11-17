@@ -702,14 +702,87 @@ function initSlideDrag() {
   });
 }
 
+/* ========================= CARTA AMPLIADA (LIGHTBOX) ========================= */
+let zoomCardNumber = null;
+let zoomLastFocused = null;
+
+function openCardZoom(n) {
+  const card = cardByNumber(n);
+  const zoom = $("#zoom");
+  if (!card || !zoom) return;
+  zoomCardNumber = card.n;
+  zoomLastFocused = document.activeElement;
+
+  const img = $("#zoom-img");
+  const fallback = $("#zoom-fallback");
+  const src = getCardImage(card.n);
+
+  if (img && fallback) {
+    if (src) {
+      img.src = src;
+      img.alt = card.name;
+      img.hidden = false;
+      fallback.hidden = true;
+    } else {
+      img.hidden = true;
+      img.removeAttribute("src");
+      fallback.hidden = false;
+      fallback.innerHTML =
+        '<span class="fb-num">' + escapeHtml(card.roman) + "</span>" +
+        '<span class="fb-name">' + escapeHtml(card.name) + "</span>" +
+        '<span class="fb-symbol">' + escapeHtml(card.symbol) + "</span>";
+    }
+  }
+
+  const set = (sel, text) => { const el = $(sel); if (el) el.textContent = text; };
+  set("#zoom-label", "Arcano " + card.roman);
+  set("#zoom-name", card.name);
+  set("#zoom-keyword", card.keyword);
+
+  zoom.hidden = false;
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => {
+    zoom.classList.add("is-open");
+    const closeBtn = $(".zoom-close", zoom);
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+  });
+}
+
+function closeCardZoom(restoreFocus = true) {
+  const zoom = $("#zoom");
+  if (!zoom || zoom.hidden) return;
+  zoom.classList.remove("is-open");
+  const slide = $("#slide");
+  const slideOpen = slide && !slide.hidden;
+  if (!slideOpen) document.body.style.overflow = "";
+  window.setTimeout(() => {
+    if (!zoom.classList.contains("is-open")) {
+      zoom.hidden = true;
+    }
+  }, 260);
+  if (restoreFocus && zoomLastFocused && typeof zoomLastFocused.focus === "function") {
+    zoomLastFocused.focus({ preventScroll: true });
+  }
+  zoomLastFocused = null;
+}
+
+function zoomToDeep() {
+  const n = zoomCardNumber;
+  closeCardZoom(false);
+  if (typeof n === "number") {
+    document.body.style.overflow = "hidden";
+    openArcano(n);
+  }
+}
+
 function arcanoSlideHTML(card) {
   return (
     '<div class="slide-hero">' +
-      '<div class="modal-card">' +
+      '<button class="modal-card" type="button" data-zoom-card="' + card.n + '" aria-label="Ver la carta en grande">' +
         (getCardImage(card.n)
           ? '<img class="card-art" data-card="' + card.n + '" src="' + getCardImage(card.n) + '" alt="' + escapeHtml(card.name) + '">'
           : '<div class="card-fallback"><span class="fb-num">' + escapeHtml(card.roman) + '</span><span class="fb-name">' + escapeHtml(card.name) + "</span></div>") +
-      "</div>" +
+      "</button>" +
       "<div>" +
         '<p class="modal-label" id="slide-title">Arcano ' + escapeHtml(card.roman) + "</p>" +
         '<h3 class="modal-title">' + escapeHtml(card.name) + "</h3>" +
@@ -1193,6 +1266,14 @@ function initDailyCard() {
       if (state.daily) openArcano(state.daily.n);
     });
   }
+
+  const zoomBtn = $("#btn-daily-zoom");
+  if (zoomBtn && !zoomBtn.dataset.bound) {
+    zoomBtn.dataset.bound = "1";
+    zoomBtn.addEventListener("click", () => {
+      if (state.daily) openCardZoom(state.daily.n);
+    });
+  }
 }
 
 function fillDailyInfo(card) {
@@ -1475,7 +1556,7 @@ function renderArcans() {
   }).join("");
 
   grid.querySelectorAll("[data-arcano]").forEach((btn) => {
-    btn.addEventListener("click", () => openArcano(btn.dataset.arcano));
+    btn.addEventListener("click", () => openCardZoom(btn.dataset.arcano));
   });
   bindCardImages(grid);
 }
@@ -1634,6 +1715,15 @@ function bindGlobalEvents() {
   window.addEventListener("hashchange", renderRoute);
 
   document.addEventListener("click", (event) => {
+    const zoomCloser = event.target.closest("[data-zoom-close]");
+    if (zoomCloser) { closeCardZoom(); return; }
+
+    const zoomTrigger = event.target.closest("[data-zoom-card]");
+    if (zoomTrigger) { openCardZoom(zoomTrigger.dataset.zoomCard); return; }
+
+    const zoomDeep = event.target.closest("#zoom-deep");
+    if (zoomDeep) { zoomToDeep(); return; }
+
     const closer = event.target.closest("[data-modal-close]");
     if (closer) { closeModal(); return; }
 
@@ -1659,7 +1749,7 @@ function bindGlobalEvents() {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") { closeModal(); closeSlide(); }
+    if (event.key === "Escape") { closeCardZoom(); closeModal(); closeSlide(); }
   });
 
   const menuBtn = $("#btn-menu");

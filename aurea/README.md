@@ -164,12 +164,14 @@ Landing pública
 Área privada (#/app/*)
   ├─ Carta del día (determinística por usuario + fecha)
   ├─ Tirada de 3 → síntesis → insert en `readings`
-  ├─ 22 arcanos + modal
+  ├─ 22 arcanos → carta ampliada (lightbox) → profundizar en sheet
   ├─ Biblioteca (URLs configurables)
   └─ Mis lecturas → ver / eliminar (RLS propio)
 ```
 
 La **carta del día** se calcula con una semilla formada por el `id` del usuario y la fecha: cada persona ve la misma carta durante todo el día, pero distinta de la de otros usuarios. Con 22 arcanos, dos personas pueden coincidir por azar.
+
+Cualquier arcano se puede ver en grande: tocar una carta de la grilla, la carta del día o la del sheet abre un **lightbox** (`#zoom`) con la ilustración a pantalla completa. Desde ahí, “Ver significado completo” abre el sheet de profundización. Se cierra con ✕, Esc o tocando el fondo.
 
 ---
 
