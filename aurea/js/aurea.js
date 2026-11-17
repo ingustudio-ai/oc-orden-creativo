@@ -15,7 +15,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const AUREA_RESOURCES = {
   manual: "assets/AUREA_Manual_Completo_Oraculo_del_Linaje.pdf",
   biblio: "PEGAR_AQUI_URL_BIBLIOGRAFIA",
-  printable: "PEGAR_AQUI_URL_KIT_IMPRIMIBLE",
+  printable: "assets/AUREA_Kit_Imprimible_22_Arcanos.pdf",
   spreads: "PEGAR_AQUI_URL_GUIA_DE_TIRADAS",
   bonus: "PEGAR_AQUI_URL_MATERIAL_COMPLEMENTARIO",
 };
@@ -23,7 +23,6 @@ const AUREA_RESOURCES = {
 const RESOURCE_META = [
   { key: "manual", icon: "📘", title: "Manual de uso", text: "Guía completa para empezar: consulta del día, tirada de tres, los 22 arcanos, biblioteca e historial.", cta: "Abrir PDF" },
   { key: "biblio", icon: "📚", title: "Bibliografía", text: "Libros digitales sobre Constelaciones Familiares, Árbol Genealógico y lo Transgeneracional.", cta: "Abrir" },
-  { key: "printable", icon: "🖨", title: "Kit imprimible", text: "Mazo imprimible en alta calidad para trabajar en casa, en talleres o en sesiones.", cta: "Descargar" },
   { key: "spreads", icon: "✦", title: "Guía de tiradas", text: "Tres cartas, una carta, diario de linaje: cómo abrir una consulta con orden.", cta: "Abrir" },
   { key: "bonus", icon: "◇", title: "Material complementario", text: "Fichas, ejercicios y lecturas para acompañar tu práctica con Áurea.", cta: "Abrir" },
 ];
@@ -830,7 +829,7 @@ const AUTH_ROUTES = {
   "#/activar": "activar",
 };
 
-const PANELS = ["carta", "tirada", "arcanos", "biblioteca", "lecturas", "sobre"];
+const PANELS = ["carta", "tirada", "arcanos", "biblioteca", "kit", "lecturas", "sobre"];
 
 function showView(name) {
   $$(".view").forEach((v) => { v.hidden = v.dataset.view !== name; });
@@ -1561,6 +1560,32 @@ function renderArcans() {
   bindCardImages(grid);
 }
 
+async function copySpecsText() {
+  const text =
+    "ESPECIFICACIONES DE IMPRESIÓN – ÁUREA\n" +
+    "---------------------------------------\n" +
+    "· Impresión láser color.\n" +
+    "· Papel ilustración mate, del mayor gramaje posible.\n" +
+    "· Impresión doble faz, respetando la correspondencia entre frente y dorso.\n" +
+    "· Corte individual de cada carta, siguiendo las marcas del pliego.\n" +
+    "· Medida final de cada carta: 70 × 121 mm.\n\n" +
+    "Solicito mantener la calidad y definición de las imágenes, especialmente los detalles dorados y los tonos oscuros.";
+  const msg = $("#kit-copy-msg");
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); ta.remove();
+    }
+    if (msg) { msg.textContent = "Especificaciones copiadas al portapapeles."; msg.dataset.kind = "ok"; }
+  } catch (e) {
+    if (msg) { msg.textContent = "No se pudo copiar. Seleccioná el texto manualmente."; msg.dataset.kind = "error"; }
+  }
+  if (msg) setTimeout(() => { msg.textContent = ""; }, 3500);
+}
+
 function renderLibrary() {
   const grid = $("#library-grid");
   if (!grid) return;
@@ -1769,6 +1794,9 @@ function bindGlobalEvents() {
 
   const logoutBtn = $("#btn-logout");
   if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
+
+  const copySpecs = $("#btn-copy-specs");
+  if (copySpecs) copySpecs.addEventListener("click", copySpecsText);
 
   const register = $("#form-register");
   if (register) register.addEventListener("submit", handleRegister);

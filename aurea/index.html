@@ -503,6 +503,7 @@
         <button class="menu-chip" type="button" data-panel="tirada"><span aria-hidden="true">◇</span> Tirada de 3 cartas</button>
         <button class="menu-chip" type="button" data-panel="arcanos"><span aria-hidden="true">❖</span> Los 22 Arcanos</button>
         <button class="menu-chip" type="button" data-panel="biblioteca"><span aria-hidden="true">📖</span> Biblioteca Áurea</button>
+        <button class="menu-chip" type="button" data-panel="kit"><span aria-hidden="true">🖨</span> Kit imprimible</button>
         <button class="menu-chip" type="button" data-panel="lecturas"><span aria-hidden="true">✧</span> Mis lecturas</button>
         <button class="menu-chip" type="button" data-panel="sobre"><span aria-hidden="true">∞</span> Sobre Áurea</button>
       </nav>
@@ -604,6 +605,50 @@
           <p class="panel-meta">Material de acompañamiento para tu práctica</p>
         </header>
         <div id="library-grid" class="library-grid"></div>
+      </section>
+
+      <!-- Kit imprimible -->
+      <section id="panel-kit" class="panel" data-panel-view="kit" hidden>
+        <header class="panel-head">
+          <h2>Kit imprimible</h2>
+          <p class="panel-meta">Tu mazo de 22 arcanos, listo para imprimir</p>
+        </header>
+
+        <div class="kit-hero">
+          <div class="kit-hero-visual">
+            <img src="assets/cards/dorso.webp" alt="Dorso de las cartas de ÁureA">
+            <span class="kit-hero-badge">22 arcanos · 70 × 121 mm</span>
+          </div>
+          <div class="kit-hero-copy">
+            <p class="kit-eyebrow">Archivo para gráfica</p>
+            <h3 class="kit-title">Mazo completo en pliegos A4</h3>
+            <p>PDF con los 22 arcanos y sus dorsos, armado en 6 pliegos A4 con marcas de corte. Listo para enviar a imprimir tal como está.</p>
+            <ul class="kit-facts">
+              <li><strong>12</strong><span>páginas</span></li>
+              <li><strong>6</strong><span>pliegos</span></li>
+              <li><strong>A4</strong><span>formato</span></li>
+              <li><strong>Doble faz</strong><span>impresión</span></li>
+            </ul>
+            <a class="btn btn-gold" href="assets/AUREA_Kit_Imprimible_22_Arcanos.pdf" download>Descargar PDF listo para imprimir</a>
+            <p class="kit-file">PDF · 12 páginas · 6 pliegos · ≈ 6 MB</p>
+          </div>
+        </div>
+
+        <div class="kit-specs">
+          <h3 class="kit-specs-title">Especificaciones de impresión</h3>
+          <ol class="kit-specs-list">
+            <li>Impresión láser color.</li>
+            <li>Papel ilustración mate, del mayor gramaje posible.</li>
+            <li>Impresión doble faz, respetando la correspondencia entre frente y dorso.</li>
+            <li>Corte individual de cada carta, siguiendo las marcas del pliego.</li>
+            <li>Medida final de cada carta: 70 × 121 mm.</li>
+          </ol>
+          <p class="kit-quality">Solicito mantener la calidad y definición de las imágenes, especialmente los detalles dorados y los tonos oscuros.</p>
+          <div class="kit-copy-row">
+            <button class="btn btn-ghost" type="button" id="btn-copy-specs">Copiar especificaciones</button>
+            <span id="kit-copy-msg" class="form-msg" role="status" aria-live="polite"></span>
+          </div>
+        </div>
       </section>
 
       <!-- Mis lecturas -->

@@ -83,7 +83,7 @@ const BUY_URL = "https://tu-tienda/checkout"; // Kit Completo
 También podés configurar (opcional):
 
 - `LAUNCH_DATE` / `LAUNCH_PRICE` — fecha y precio del lanzamiento
-- `AUREA_RESOURCES` — URLs de la Biblioteca (guía, kit imprimible, tiradas, bonus)
+- `AUREA_RESOURCES` — URLs de la Biblioteca (guía, bibliografía, tiradas, bonus). El Kit imprimible apunta a `assets/AUREA_Kit_Imprimible_22_Arcanos.pdf` (generado con `aurea/scripts/build-kit-print.cjs`)
 
 Mientras los campos sigan en `PEGAR_AQUI`, la landing muestra un banner de configuración y el área privada no opera.
 
@@ -166,6 +166,7 @@ Landing pública
   ├─ Tirada de 3 → síntesis → insert en `readings`
   ├─ 22 arcanos → carta ampliada (lightbox) → profundizar en sheet
   ├─ Biblioteca (URLs configurables)
+  ├─ Kit imprimible (PDF listo para gráfica, 6 pliegos A4, 12 páginas)
   └─ Mis lecturas → ver / eliminar (RLS propio)
 ```
 
