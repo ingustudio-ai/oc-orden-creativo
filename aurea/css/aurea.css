@@ -495,14 +495,14 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: var(--fuente-display);
   font-size: 0.64rem; letter-spacing: 0.24em; text-transform: uppercase;
-  color: #6f5318;
-  border: 1px solid rgba(138, 106, 40, 0.34);
+  color: var(--dorado);
+  border: 1px solid rgba(217, 178, 100, 0.55);
   border-radius: 999px;
   padding: 0.4rem 0.9rem;
-  background: rgba(217, 178, 100, 0.14);
+  background: linear-gradient(120deg, #2c1b49, #160f2b);
   margin-bottom: 1.1rem;
 }
-.launch-eyebrow span { color: #8a6a28; }
+.launch-eyebrow span { color: var(--dorado-claro); }
 
 .launch-title {
   font-size: clamp(1.6rem, 3.8vw, 2.6rem);
@@ -541,9 +541,10 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 .launch-list-icon {
   display: grid; place-items: center;
   width: 30px; height: 30px;
-  border: 1px solid rgba(138, 106, 40, 0.34);
+  border: 1px solid rgba(217, 178, 100, 0.55);
   border-radius: 50%;
-  color: #8a6a28;
+  background: linear-gradient(120deg, #2c1b49, #160f2b);
+  color: var(--dorado);
   font-size: 0.85rem;
 }
 
@@ -558,20 +559,34 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 .launch-price {
   text-align: center;
-  border-color: rgba(138, 106, 40, 0.38);
+  border-color: rgba(217, 178, 100, 0.5);
   background:
-    radial-gradient(circle at 50% 0%, rgba(217, 178, 100, 0.24) 0%, transparent 62%),
-    linear-gradient(180deg, #fffdf8, #f8f1e2);
-  box-shadow: 0 26px 54px -38px rgba(138, 106, 40, 0.75);
+    radial-gradient(circle at 50% 0%, rgba(74, 46, 122, 0.55) 0%, transparent 62%),
+    linear-gradient(180deg, #2c1b49, #160f2b);
+  box-shadow: 0 26px 54px -34px rgba(44, 27, 73, 0.95);
   padding: clamp(1.6rem, 3.2vw, 2.3rem);
 }
+
+/* Tipografía dorada dentro del destacado violeta */
+.launch-price .launch-badge {
+  background: transparent;
+  border: 1px solid rgba(217, 178, 100, 0.7);
+}
+.launch-price .offer-sub { color: var(--dorado); }
+.launch-price .launch-plan { color: var(--dorado-claro); }
+.launch-price .offer-general { color: rgba(242, 221, 176, 0.75); }
+.launch-price .offer-price { color: var(--dorado-claro); }
+.launch-price .offer-price span { color: var(--dorado); }
+.launch-price .offer-tag { color: var(--dorado); }
+.launch-price .launch-fine { color: rgba(242, 221, 176, 0.7); }
 
 .launch-badge {
   align-self: center;
   font-family: var(--fuente-display);
   font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: #1a1204;
-  background: linear-gradient(120deg, #f4e3bd, var(--dorado) 55%, #b8913c);
+  color: var(--dorado);
+  background: linear-gradient(120deg, #2c1b49, #160f2b);
+  border: 1px solid rgba(217, 178, 100, 0.6);
   border-radius: 999px;
   padding: 0.35rem 0.95rem;
   margin-bottom: 0.35rem;
@@ -602,6 +617,19 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   font-size: 0.68rem;
   letter-spacing: 0.12em;
 }
+/* Kit de lanzamiento: botones y destacados en violeta oscuro con tipografía dorada */
+.launch .btn-gold {
+  background: linear-gradient(135deg, #4a2e7a 0%, #2c1b49 55%, #160f2b 100%);
+  color: var(--dorado);
+  border: 1px solid rgba(217, 178, 100, 0.6);
+  box-shadow: 0 14px 32px -20px rgba(44, 27, 73, 0.9);
+}
+.launch .btn-gold:hover {
+  color: var(--dorado-claro);
+  border-color: var(--dorado);
+  background: linear-gradient(135deg, #5a3a92 0%, #2c1b49 55%, #160f2b 100%);
+  box-shadow: 0 18px 38px -18px rgba(217, 178, 100, 0.7);
+}
 .launch-fine {
   font-size: 0.76rem; line-height: 1.5;
   color: var(--crema-muted);
@@ -631,19 +659,19 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   margin-bottom: 1.5rem;
 }
 .gift-item {
-  border: 1px solid rgba(138, 106, 40, 0.16);
+  border: 1px solid rgba(217, 178, 100, 0.45);
   border-radius: 14px;
-  background: #fbf6ea;
+  background: linear-gradient(160deg, #2c1b49, #160f2b);
   padding: 1.1rem 1rem;
 }
-.gift-icon { font-size: 1.35rem; margin-bottom: 0.5rem; color: #8a6a28; }
+.gift-icon { font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--dorado); }
 .gift-item h3 {
   font-family: var(--fuente-display);
   font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--crema);
+  color: var(--dorado);
   margin-bottom: 0.4rem;
 }
-.gift-item p { color: var(--crema-muted); font-size: 0.94rem; line-height: 1.55; }
+.gift-item p { color: rgba(242, 221, 176, 0.8); font-size: 0.94rem; line-height: 1.55; }
 .gift-note {
   color: var(--crema-muted); font-style: italic; font-size: 1.02rem; line-height: 1.7;
   max-width: 62ch; margin-inline: auto;
