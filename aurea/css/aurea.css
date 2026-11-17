@@ -1094,11 +1094,15 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   border: 1px solid var(--borde); border-radius: 22px;
   background: var(--panel); padding: clamp(1.4rem, 3.5vw, 2.2rem);
 }
-.kit-specs-title {
-  font-family: var(--fuente-display); font-size: 1rem;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--dorado);
-  margin-bottom: 1rem;
+.kit-format {
+  margin: 0 0 1rem; padding: 0.7rem 1rem;
+  border: 1px solid var(--borde); border-radius: 12px;
+  background: linear-gradient(120deg, #2c1b49, #160f2b);
+  color: var(--dorado); font-family: var(--fuente-display);
+  font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+  text-align: center;
 }
+.kit-format strong { color: var(--dorado-claro); }
 .kit-specs-list {
   list-style: none; padding: 0; margin: 0 0 1.2rem;
   display: grid; gap: 0.7rem; counter-reset: specs;

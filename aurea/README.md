@@ -166,7 +166,7 @@ Landing pública
   ├─ Tirada de 3 → síntesis → insert en `readings`
   ├─ 22 arcanos → carta ampliada (lightbox) → profundizar en sheet
   ├─ Biblioteca (URLs configurables)
-  ├─ Kit imprimible (PDF listo para gráfica, 6 pliegos A4, 12 páginas)
+  ├─ Kit imprimible (PDF listo para gráfica, 3 pliegos A3, 3 páginas)
   └─ Mis lecturas → ver / eliminar (RLS propio)
 ```
 
