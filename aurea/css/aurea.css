@@ -28,7 +28,7 @@
   --borde-suave: rgba(217, 178, 100, 0.14);
 
   --fuente-display: "Cinzel", "Times New Roman", serif;
-  --fuente-texto: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fuente-texto: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --fuente-cita: "Cormorant Garamond", Georgia, serif;
 
   --ancho: 1180px;
@@ -455,13 +455,19 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 .mini-deck img:hover { transform: translateY(-8px); border-color: var(--borde); }
 
-/* ---------- Lanzamiento ---------- */
+/* ---------- Lanzamiento (fondo claro) ---------- */
 .launch {
   position: relative;
-  border-bottom: 1px solid var(--borde-suave);
+  --crema: #221a31;
+  --crema-dim: #443a58;
+  --crema-muted: #6a6076;
+  --borde: rgba(138, 106, 40, 0.32);
+  --borde-suave: rgba(138, 106, 40, 0.14);
+  color: var(--crema);
+  border-bottom: 1px solid rgba(138, 106, 40, 0.16);
   background:
-    radial-gradient(circle at 50% 0%, rgba(217, 178, 100, 0.06) 0%, transparent 55%),
-    linear-gradient(180deg, rgba(22, 15, 43, 0.5), rgba(7, 6, 11, 0.1));
+    radial-gradient(circle at 50% 0%, rgba(217, 178, 100, 0.16) 0%, transparent 55%),
+    #fbf9f4;
 }
 
 .launch-panel {
@@ -470,15 +476,15 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: clamp(1.8rem, 4vw, 3.4rem);
   align-items: center;
-  border: 1px solid var(--borde);
+  border: 1px solid rgba(138, 106, 40, 0.22);
   border-radius: 26px;
-  background: linear-gradient(150deg, rgba(30, 21, 52, 0.94), rgba(10, 8, 18, 0.96));
-  box-shadow: var(--sombra);
+  background: #ffffff;
+  box-shadow: 0 30px 70px -48px rgba(40, 30, 15, 0.55);
   padding: clamp(1.7rem, 4.5vw, 3.4rem);
 }
 .launch-panel::before {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(circle at 84% 18%, rgba(217, 178, 100, 0.13) 0%, transparent 48%);
+  background: radial-gradient(circle at 84% 18%, rgba(217, 178, 100, 0.18) 0%, transparent 48%);
   pointer-events: none;
 }
 .launch-panel > * { position: relative; }
@@ -489,20 +495,20 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: var(--fuente-display);
   font-size: 0.64rem; letter-spacing: 0.24em; text-transform: uppercase;
-  color: var(--dorado-claro);
-  border: 1px solid var(--borde);
+  color: #6f5318;
+  border: 1px solid rgba(138, 106, 40, 0.34);
   border-radius: 999px;
   padding: 0.4rem 0.9rem;
-  background: rgba(217, 178, 100, 0.07);
+  background: rgba(217, 178, 100, 0.14);
   margin-bottom: 1.1rem;
 }
-.launch-eyebrow span { color: var(--dorado); }
+.launch-eyebrow span { color: #8a6a28; }
 
 .launch-title {
   font-size: clamp(1.6rem, 3.8vw, 2.6rem);
   letter-spacing: 0.06em; text-transform: uppercase;
   line-height: 1.15;
-  background: linear-gradient(120deg, var(--crema), var(--dorado-claro) 60%, var(--dorado));
+  background: linear-gradient(120deg, #2a1f3f 0%, #6b4a1c 55%, #8a6a28 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   margin-bottom: 0.9rem;
@@ -535,9 +541,9 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 .launch-list-icon {
   display: grid; place-items: center;
   width: 30px; height: 30px;
-  border: 1px solid var(--borde);
+  border: 1px solid rgba(138, 106, 40, 0.34);
   border-radius: 50%;
-  color: var(--dorado);
+  color: #8a6a28;
   font-size: 0.85rem;
 }
 
@@ -552,11 +558,11 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 }
 .launch-price {
   text-align: center;
-  border-color: rgba(217, 178, 100, 0.5);
+  border-color: rgba(138, 106, 40, 0.38);
   background:
-    radial-gradient(circle at 50% 0%, rgba(217, 178, 100, 0.16) 0%, transparent 62%),
-    linear-gradient(180deg, rgba(30, 21, 52, 0.92), rgba(12, 9, 20, 0.96));
-  box-shadow: 0 34px 70px -42px rgba(217, 178, 100, 0.6);
+    radial-gradient(circle at 50% 0%, rgba(217, 178, 100, 0.24) 0%, transparent 62%),
+    linear-gradient(180deg, #fffdf8, #f8f1e2);
+  box-shadow: 0 26px 54px -38px rgba(138, 106, 40, 0.75);
   padding: clamp(1.6rem, 3.2vw, 2.3rem);
 }
 
@@ -565,7 +571,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   font-family: var(--fuente-display);
   font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
   color: #1a1204;
-  background: linear-gradient(120deg, var(--dorado-claro), var(--dorado));
+  background: linear-gradient(120deg, #f4e3bd, var(--dorado) 55%, #b8913c);
   border-radius: 999px;
   padding: 0.35rem 0.95rem;
   margin-bottom: 0.35rem;
@@ -573,7 +579,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 
 .offer-sub {
   font-size: 0.76rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--dorado);
+  color: #8a6a28;
 }
 .launch-plan { font-size: 0.95rem; color: var(--crema-muted); }
 
@@ -585,10 +591,10 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   color: var(--crema); line-height: 1.05;
   margin-top: 0.35rem;
 }
-.offer-price span { font-size: 0.36em; letter-spacing: 0.28em; color: var(--dorado); }
+.offer-price span { font-size: 0.36em; letter-spacing: 0.28em; color: #8a6a28; }
 .offer-tag {
   font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--dorado-claro);
+  color: #6f5318;
 }
 .offer-btn {
   margin-top: 0.9rem;
@@ -604,9 +610,10 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 /* ---------- Regalo primeros 13 ---------- */
 .launch-gift {
   margin-top: clamp(1.4rem, 3vw, 2rem);
-  border: 1px solid var(--borde-suave);
+  border: 1px solid rgba(138, 106, 40, 0.18);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.02);
+  background: #ffffff;
+  box-shadow: 0 24px 60px -50px rgba(40, 30, 15, 0.5);
   padding: clamp(1.5rem, 3.5vw, 2.4rem);
   text-align: center;
 }
@@ -614,7 +621,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   font-family: var(--fuente-display);
   font-size: clamp(1rem, 2.3vw, 1.3rem);
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--dorado-claro);
+  color: #6f5318;
   margin-bottom: 1.4rem;
 }
 .gift-grid {
@@ -624,12 +631,12 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   margin-bottom: 1.5rem;
 }
 .gift-item {
-  border: 1px solid var(--borde-suave);
+  border: 1px solid rgba(138, 106, 40, 0.16);
   border-radius: 14px;
-  background: rgba(217, 178, 100, 0.04);
+  background: #fbf6ea;
   padding: 1.1rem 1rem;
 }
-.gift-icon { font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--dorado); }
+.gift-icon { font-size: 1.35rem; margin-bottom: 0.5rem; color: #8a6a28; }
 .gift-item h3 {
   font-family: var(--fuente-display);
   font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;

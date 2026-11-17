@@ -5,7 +5,7 @@ Espacio digital de **ÁUREA** — Orden Creativo · Fernando Matías Acri.
 - Landing pública con preventa y compra directa por WhatsApp
 - Autenticación real con Supabase Auth
 - Área privada: carta del día, tirada de 3, 22 arcanos, biblioteca e historial
-- Estética oscura, dorada y violeta · φ ≈ 1,618 · Cinzel + Cormorant Garamond
+- Estética oscura, dorada y violeta · φ ≈ 1,618 · Cinzel + Cormorant Garamond + Montserrat
 
 > Áurea es una herramienta simbólica de exploración personal. No constituye diagnóstico ni reemplaza psicoterapia o atención profesional.
 
