@@ -155,7 +155,7 @@ Abrí `http://localhost:8080`. En producción, subí la carpeta `aurea/` a tu ho
 
 ```
 Landing pública
-  ├─ Botones de compra → WhatsApp (Kit digital / Áurea completa)
+  ├─ Botón de compra → WhatsApp (Kit de lanzamiento · primeros 13)
   ├─ Crear cuenta → signUp (sin confirm email) → código → RPC redeem_activation_code → #/app/carta
   ├─ Ingresar → signInWithPassword → profiles.has_access
   │     └─ si no hay acceso → #/activar → código
