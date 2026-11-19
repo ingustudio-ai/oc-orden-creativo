@@ -1433,7 +1433,7 @@ const stageHTML = `
     <div class="slot-info" data-slot-info hidden></div>
   </article>`;
 
-/* ========================= ENTORNO DE TRABAJO ========================= */
+/* ========================= LIENZO ÁUREA ========================= */
 const WORK_LABELS = {
   1: ["La carta"],
   3: ["El origen / La raíz", "Lo presente / La tensión", "El movimiento / La integración"],

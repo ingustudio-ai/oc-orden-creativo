@@ -1139,7 +1139,7 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   .kit-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* ---------- Entorno de trabajo ---------- */
+/* ---------- Lienzo Áurea ---------- */
 .work-setup {
   display: grid; gap: clamp(1.4rem, 4vw, 2.4rem);
   grid-template-columns: minmax(0, 240px) minmax(0, 1fr);

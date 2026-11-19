@@ -164,7 +164,7 @@ Landing pública
 Área privada (#/app/*)
   ├─ Carta del día (determinística por usuario + fecha)
   ├─ Tirada de 3 → síntesis → insert en `readings`
-  ├─ Entorno de trabajo (tiradas de 1, 3 o 5 cartas, barajado, para vos o un cliente)
+  ├─ Lienzo Áurea (tiradas de 1, 3 o 5 cartas, barajado, para vos o un cliente)
   ├─ 22 arcanos → carta ampliada (lightbox) → profundizar en sheet
   ├─ Biblioteca (URLs configurables)
   ├─ Kit imprimible (PDF listo para gráfica, 3 pliegos A3, 3 páginas)
