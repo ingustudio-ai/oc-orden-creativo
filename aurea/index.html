@@ -501,6 +501,7 @@
       <nav class="app-menu" aria-label="Menú del área privada">
         <button class="menu-chip is-active" type="button" data-panel="carta"><span aria-hidden="true">✦</span> Carta del día</button>
         <button class="menu-chip" type="button" data-panel="tirada"><span aria-hidden="true">◇</span> Tirada de 3 cartas</button>
+        <button class="menu-chip" type="button" data-panel="trabajo"><span aria-hidden="true">🃏</span> Entorno de trabajo</button>
         <button class="menu-chip" type="button" data-panel="arcanos"><span aria-hidden="true">❖</span> Los 22 Arcanos</button>
         <button class="menu-chip" type="button" data-panel="biblioteca"><span aria-hidden="true">📖</span> Biblioteca Áurea</button>
         <button class="menu-chip" type="button" data-panel="kit"><span aria-hidden="true">🖨</span> Kit imprimible</button>
@@ -589,7 +590,58 @@
         </div>
       </section>
 
-      <!-- Los 22 Arcanos -->
+      <!-- Entorno de trabajo -->
+      <section id="panel-trabajo" class="panel" data-panel-view="trabajo" hidden>
+        <header class="panel-head">
+          <h2>Entorno de trabajo</h2>
+          <p class="panel-meta">Tu mazo completo · tiradas para vos o para un cliente</p>
+        </header>
+
+        <div class="work-setup">
+          <div class="work-deck" id="work-deck" aria-hidden="true">
+            <div class="work-deck-stack">
+              <img src="assets/cards/dorso.webp" alt="" class="work-deck-card" style="--i:0">
+              <img src="assets/cards/dorso.webp" alt="" class="work-deck-card" style="--i:1">
+              <img src="assets/cards/dorso.webp" alt="" class="work-deck-card" style="--i:2">
+              <img src="assets/cards/dorso.webp" alt="" class="work-deck-card" style="--i:3">
+              <img src="assets/cards/dorso.webp" alt="" class="work-deck-card" style="--i:4">
+            </div>
+            <button class="btn btn-ghost btn-sm work-shuffle" type="button" id="btn-work-shuffle">Barajar el mazo</button>
+          </div>
+
+          <form id="work-form" class="form work-form" novalidate>
+            <div class="field">
+              <label for="work-client">Cliente / consultante (opcional)</label>
+              <input id="work-client" type="text" maxlength="80" placeholder="Nombre o iniciales">
+            </div>
+            <div class="field">
+              <label for="work-question">Pregunta o nudo a mirar</label>
+              <input id="work-question" type="text" maxlength="180" placeholder="Escribí la pregunta o el tema">
+            </div>
+            <div class="field">
+              <label>Tamaño de la tirada</label>
+              <div class="work-size" role="radiogroup" aria-label="Tamaño de la tirada">
+                <button class="work-size-btn is-active" type="button" data-size="1" aria-pressed="true">1 carta</button>
+                <button class="work-size-btn" type="button" data-size="3" aria-pressed="false">3 cartas</button>
+                <button class="work-size-btn" type="button" data-size="5" aria-pressed="false">5 cartas</button>
+              </div>
+            </div>
+            <button class="btn btn-gold" type="submit" id="btn-work-draw">Tirar las cartas</button>
+          </form>
+        </div>
+
+        <div id="work-stage" class="work-stage" hidden></div>
+
+        <div id="work-synthesis" class="synthesis" hidden>
+          <h3>Síntesis de la tirada</h3>
+          <p id="work-synthesis-text"></p>
+          <div class="synthesis-actions">
+            <button class="btn btn-ghost" type="button" id="btn-work-new">Nueva tirada</button>
+            <button class="btn btn-ghost btn-sm" type="button" id="btn-work-copy">Copiar resumen</button>
+            <span id="work-status" class="form-msg" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </section>
       <section id="panel-arcanos" class="panel" data-panel-view="arcanos" hidden>
         <header class="panel-head">
           <h2>Los 22 Arcanos</h2>

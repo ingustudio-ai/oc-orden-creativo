@@ -448,6 +448,8 @@ const state = {
   profile: null,
   daily: null,
   spread: null,
+  workSpread: null,
+  workSize: 3,
   pendingReset: false,
 };
 
@@ -829,7 +831,7 @@ const AUTH_ROUTES = {
   "#/activar": "activar",
 };
 
-const PANELS = ["carta", "tirada", "arcanos", "biblioteca", "kit", "lecturas", "sobre"];
+const PANELS = ["carta", "tirada", "trabajo", "arcanos", "biblioteca", "kit", "lecturas", "sobre"];
 
 function showView(name) {
   $$(".view").forEach((v) => { v.hidden = v.dataset.view !== name; });
@@ -860,6 +862,7 @@ function showPanel(key) {
   if (panel === "lecturas") loadReadings();
   if (panel === "biblioteca") renderLibrary();
   if (panel === "arcanos") renderArcans();
+  if (panel === "trabajo") initWork();
 }
 
 function go(hash) {
@@ -1429,6 +1432,205 @@ const stageHTML = `
     <div class="flip slot-flip"><div class="flip-inner" data-slot-face></div></div>
     <div class="slot-info" data-slot-info hidden></div>
   </article>`;
+
+/* ========================= ENTORNO DE TRABAJO ========================= */
+const WORK_LABELS = {
+  1: ["La carta"],
+  3: ["El origen / La raíz", "Lo presente / La tensión", "El movimiento / La integración"],
+  5: ["La situación", "El desafío", "El recurso", "El movimiento", "El resultado"],
+};
+
+function pickWork(n) {
+  const pool = CARDS.slice();
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, n);
+}
+
+function workSlotHTML(card, label, index) {
+  return (
+    '<article class="spread-slot work-slot" data-position="' + index + '">' +
+      '<p class="slot-label"><span>' + (index + 1) + "</span> " + escapeHtml(label) + "</p>" +
+      '<div class="flip slot-flip"><div class="flip-inner" data-slot-face></div></div>' +
+      '<div class="slot-info" data-slot-info hidden></div>' +
+    "</article>"
+  );
+}
+
+function workStageHTML(count) {
+  const labels = WORK_LABELS[count] || WORK_LABELS[3];
+  return labels.map((l, i) => workSlotHTML(null, l, i)).join("");
+}
+
+function renderWorkSpread(picked, count) {
+  const stage = $("#work-stage");
+  if (!stage) return;
+  stage.hidden = false;
+  stage.className = "work-stage work-count-" + count;
+  stage.innerHTML = workStageHTML(count);
+
+  $$(".spread-slot", stage).forEach((slot, i) => {
+    const card = picked[i];
+    const label = (WORK_LABELS[count] || WORK_LABELS[3])[i];
+    const flip = $(".flip", slot);
+    const face = $("[data-slot-face]", slot);
+    const info = $("[data-slot-info]", slot);
+
+    flip.classList.remove("is-flipped");
+    face.innerHTML =
+      '<div class="face face-back"><img class="card-art" src="assets/cards/dorso.webp" alt="Reverso de la carta"><span class="face-hint">' +
+      escapeHtml(label) +
+      "</span></div>" +
+      '<div class="face face-front">' + cardFaceHTML(card, label + ":") + "</div>";
+
+    info.hidden = true;
+    info.innerHTML =
+      "<h4>" + escapeHtml(card.name) + "</h4>" +
+      '<p class="si-keyword">' + escapeHtml(card.keyword) + "</p>" +
+      "<dl>" +
+        "<div><dt>Significado</dt><dd>" + escapeHtml(card.description) + "</dd></div>" +
+        "<div><dt>Correspondencia al tarot: " + escapeHtml(card.tarot) + "</dt><dd>" + escapeHtml(card.vsTarot) + "</dd></div>" +
+        "<div><dt>Mirada de Hellinger</dt><dd>" + escapeHtml(card.hellinger) + "</dd></div>" +
+        "<div><dt>Pregunta de integración</dt><dd>" + escapeHtml(card.question) + "</dd></div>" +
+      "</dl>";
+
+    setTimeout(() => {
+      flip.classList.add("is-flipped");
+      setTimeout(() => { info.hidden = false; }, 500);
+    }, 300 + i * 700);
+  });
+
+  setTimeout(() => { bindCardImages(stage); }, 300 + count * 700);
+}
+
+function buildWorkSynthesis(question, picked) {
+  const names = picked.map((c) => c.name + " (" + c.keyword + ")");
+  const lines = [];
+  if (picked.length === 1) {
+    const c = picked[0];
+    lines.push(c.name + " —" + c.keyword + "— sostiene esta mirada: " + c.healing);
+    lines.push("Pregunta de integración: " + c.question);
+  } else {
+    picked.forEach((c, i) => {
+      const label = (WORK_LABELS[picked.length] || [])[i] || ("Carta " + (i + 1));
+      lines.push(label + ": " + c.name + " (" + c.keyword + "). " + c.healing);
+    });
+  }
+  const close = question
+    ? "Sobre «" + question + "», Áurea no predice: ordena la mirada. Llevate la pregunta y observá qué se mueve en los próximos días."
+    : "Áurea no predice: ordena la mirada. Llevate la pregunta y observá qué se mueve en los próximos días.";
+  lines.push(close);
+  return lines.join("\\n\\n");
+}
+
+function shuffleWorkDeck() {
+  const deck = $("#work-deck");
+  if (!deck) return;
+  deck.classList.remove("is-shuffling");
+  void deck.offsetWidth;
+  deck.classList.add("is-shuffling");
+  setTimeout(() => deck.classList.remove("is-shuffling"), 900);
+}
+
+async function handleWorkDraw(event) {
+  event.preventDefault();
+  const client = ($("#work-client") ? $("#work-client").value.trim() : "");
+  const question = ($("#work-question") ? $("#work-question").value.trim() : "");
+  const count = state.workSize || 3;
+  const picked = pickWork(count);
+
+  state.workSpread = { client: client, question: question, cards: picked, count: count };
+
+  shuffleWorkDeck();
+  setTimeout(() => {
+    renderWorkSpread(picked, count);
+    const synthesis = $("#work-synthesis");
+    const text = $("#work-synthesis-text");
+    setTimeout(() => {
+      if (synthesis) synthesis.hidden = false;
+      if (text) text.textContent = buildWorkSynthesis(question, picked);
+      const status = $("#work-status");
+      if (status) setMsg(status, client ? "Tirada para " + client + "." : "Tirada registrada.", "ok");
+    }, 300 + count * 700);
+  }, 950);
+}
+
+function resetWork() {
+  state.workSpread = null;
+  const stage = $("#work-stage");
+  if (stage) { stage.hidden = true; stage.innerHTML = ""; stage.className = "work-stage"; }
+  const synthesis = $("#work-synthesis");
+  if (synthesis) synthesis.hidden = true;
+  const client = $("#work-client");
+  if (client) client.value = "";
+  const question = $("#work-question");
+  if (question) question.value = "";
+  const status = $("#work-status");
+  if (status) setMsg(status, "", null);
+}
+
+async function copyWorkSummary() {
+  const spread = state.workSpread;
+  if (!spread) return;
+  const lines = [];
+  if (spread.client) lines.push("Cliente: " + spread.client);
+  if (spread.question) lines.push("Pregunta: " + spread.question);
+  lines.push("Tirada de " + spread.count + " carta(s):");
+  spread.cards.forEach((c, i) => {
+    const label = (WORK_LABELS[spread.count] || [])[i] || ("Carta " + (i + 1));
+    lines.push((i + 1) + ". " + label + " — " + c.name + " (" + c.keyword + ")");
+  });
+  lines.push("");
+  lines.push(buildWorkSynthesis(spread.question, spread.cards));
+  const text = lines.join("\\n");
+  const msg = $("#work-status");
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(text);
+    else { const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+    if (msg) { msg.textContent = "Resumen copiado al portapapeles."; msg.dataset.kind = "ok"; }
+  } catch (e) {
+    if (msg) { msg.textContent = "No se pudo copiar."; msg.dataset.kind = "error"; }
+  }
+  if (msg) setTimeout(() => { msg.textContent = ""; }, 3500);
+}
+
+function initWork() {
+  const form = $("#work-form");
+  if (form && !form.dataset.bound) {
+    form.dataset.bound = "1";
+    form.addEventListener("submit", handleWorkDraw);
+  }
+  const sizeBtns = $$(".work-size-btn");
+  sizeBtns.forEach((btn) => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", () => {
+      state.workSize = Number(btn.dataset.size) || 3;
+      sizeBtns.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-pressed", String(active));
+      });
+    });
+  });
+  const shuffle = $("#btn-work-shuffle");
+  if (shuffle && !shuffle.dataset.bound) {
+    shuffle.dataset.bound = "1";
+    shuffle.addEventListener("click", shuffleWorkDeck);
+  }
+  const reset = $("#btn-work-new");
+  if (reset && !reset.dataset.bound) {
+    reset.dataset.bound = "1";
+    reset.addEventListener("click", resetWork);
+  }
+  const copy = $("#btn-work-copy");
+  if (copy && !copy.dataset.bound) {
+    copy.dataset.bound = "1";
+    copy.addEventListener("click", copyWorkSummary);
+  }
+}
 
 /* ========================= MIS LECTURAS ========================= */
 async function loadReadings() {
