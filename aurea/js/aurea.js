@@ -927,12 +927,17 @@ function mapAuthError(error) {
 
 async function loadProfile() {
   if (!sbClient || !state.user) { state.profile = null; return null; }
-  const { data, error } = await sbClient
-    .from("profiles")
-    .select("id, full_name, email, phone, has_access, is_admin, created_at")
-    .eq("id", state.user.id)
-    .maybeSingle();
+  const fullSelect = "id, full_name, email, phone, has_access, is_admin, created_at";
+  const baseSelect = "id, full_name, email, phone, has_access, created_at";
+  let data = null;
+  let error = null;
+  ({ data, error } = await sbClient.from("profiles").select(fullSelect).eq("id", state.user.id).maybeSingle());
+  if (error) {
+    // Columna is_admin puede no existir aún (migración no aplicada): reintentar sin ella.
+    ({ data, error } = await sbClient.from("profiles").select(baseSelect).eq("id", state.user.id).maybeSingle());
+  }
   if (error) { state.profile = null; return null; }
+  if (data && data.is_admin === undefined) data.is_admin = false;
   state.profile = data;
   updateGreeting();
   return data;
@@ -969,6 +974,8 @@ async function redeemCode(code, msgEl) {
     return false;
   }
   await loadProfile();
+  if (state.profile) state.profile.has_access = true;
+  else state.profile = { id: state.user.id, has_access: true };
   setMsg(msgEl, result.message || "Acceso activado.", "ok");
   return true;
 }
