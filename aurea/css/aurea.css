@@ -1316,7 +1316,15 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
 .com-wa-copy { display: grid; gap: 0.7rem; }
 .com-wa-title { font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--crema); margin: 0; }
 .com-wa-copy p { color: var(--crema-dim); margin: 0; }
-.com-wa-note { font-size: 0.88rem; color: var(--crema-muted); font-style: italic; }
+.com-wa-direct { margin: 0.6rem 0 0; }
+.com-wa-direct a {
+  display: inline-block; padding: 0.55rem 1.1rem;
+  border: 1px solid rgba(217, 178, 100, 0.55); border-radius: 999px;
+  color: var(--dorado); font-family: var(--fuente-display);
+  font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  transition: background 0.3s, border-color 0.3s;
+}
+.com-wa-direct a:hover { background: rgba(217, 178, 100, 0.12); border-color: var(--dorado); }
 .com-wa-actions { display: grid; gap: 0.8rem; align-content: center; }
 .com-status { margin: 0; font-size: 0.95rem; }
 .com-status-pending { color: var(--dorado-claro); font-style: italic; }
