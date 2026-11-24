@@ -1236,22 +1236,10 @@ main, .site-header, .modal, .toast, .config-banner { position: relative; z-index
   position: relative; aspect-ratio: 1 / 1;
   display: grid; place-items: center;
 }
-.com-portal {
-  width: 86%; height: 86%; border-radius: 50%;
-  border: 1px solid rgba(217, 178, 100, 0.45);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(74, 46, 122, 0.55), transparent 62%),
-    radial-gradient(circle at 50% 50%, rgba(217, 178, 100, 0.18), transparent 70%);
-  box-shadow: 0 0 60px -20px rgba(217, 178, 100, 0.6), inset 0 0 40px -20px rgba(217, 178, 100, 0.3);
+.com-hero-logo {
+  width: 86%; height: auto; max-width: 260px;
+  filter: drop-shadow(0 0 30px rgba(217, 178, 100, 0.4));
   animation: comPulse 6s ease-in-out infinite;
-}
-@keyframes comPulse {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.04); opacity: 1; }
-}
-.com-hero-glyph {
-  position: absolute; font-size: clamp(2.4rem, 6vw, 3.6rem);
-  color: var(--dorado); text-shadow: 0 0 24px rgba(217, 178, 100, 0.6);
 }
 
 .com-hero-copy { display: grid; gap: 0.7rem; }
