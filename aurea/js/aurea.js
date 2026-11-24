@@ -1640,7 +1640,7 @@ function initWork() {
   }
 }
 
-/* ========================= COMUNIDAD ÁUREA ========================= */
+const COMUNIDAD_WA_URL = "https://chat.whatsapp.com/ECg4FQINjZr4Z4tNKkcO37";
 state.community = { status: null, is_founder: false, requested_at: null, approved_at: null, inviteUrl: null, formacion: {} };
 state.communityFilter = "all";
 state.isAdmin = false;
@@ -1674,9 +1674,9 @@ async function loadCommunityStatus() {
     // invite url (solo si aprobado)
     if (state.community.status === "approved") {
       const { data: url } = await sbClient.rpc("get_community_invite_url");
-      state.community.inviteUrl = (typeof url === "string") ? url : null;
+      state.community.inviteUrl = (typeof url === "string" && url) ? url : COMUNIDAD_WA_URL;
     } else {
-      state.community.inviteUrl = null;
+      state.community.inviteUrl = COMUNIDAD_WA_URL;
     }
 
     // formación config
@@ -1750,17 +1750,12 @@ async function enterCommunity() {
   const msg = $("#com-msg");
   if (state.community.status !== "approved") return;
   if (!state.community.inviteUrl) {
-    // reintentar
-    const { data } = await sbClient.rpc("get_community_invite_url");
-    state.community.inviteUrl = (typeof data === "string") ? data : null;
+    state.community.inviteUrl = COMUNIDAD_WA_URL;
   }
-  if (!state.community.inviteUrl) {
-    if (msg) setMsg(msg, "El enlace de la comunidad todavía no está disponible. Intentá más tarde.", "info");
-    return;
-  }
+  const url = state.community.inviteUrl || COMUNIDAD_WA_URL;
   const ok = window.confirm("Vas a abrir WhatsApp para ingresar a Comunidad Áurea. Otros participantes podrán ver tu número. ¿Continuás?");
   if (!ok) return;
-  window.open(state.community.inviteUrl, "_blank", "noopener");
+  window.open(url, "_blank", "noopener");
 }
 
 /* ---------- Admin ---------- */
@@ -1872,22 +1867,14 @@ async function adminSaveCfg(key, inputId, msgId) {
 }
 
 function initComunidad() {
-  const req = $("#btn-com-request");
-  if (req && !req.dataset.bound) {
-    req.dataset.bound = "1";
-    req.addEventListener("click", requestCommunity);
-  }
-  const enter = $("#btn-com-enter");
-  if (enter && !enter.dataset.bound) {
-    enter.dataset.bound = "1";
-    enter.addEventListener("click", enterCommunity);
-  }
+  if (state.profile) state.isAdmin = !!state.profile.is_admin;
+  const adminBlock = $("#com-admin");
+  if (adminBlock) adminBlock.hidden = !state.isAdmin;
   const saveInvite = $("#btn-com-save-invite");
   if (saveInvite && !saveInvite.dataset.bound) {
     saveInvite.dataset.bound = "1";
     saveInvite.addEventListener("click", adminSaveInvite);
   }
-  // config buttons
   $$("#com-admin [data-cfg]").forEach((btn) => {
     if (btn.dataset.bound) return;
     btn.dataset.bound = "1";
@@ -1898,7 +1885,6 @@ function initComunidad() {
       adminSaveCfg(key, "#" + (input ? input.id : ""), "#com-admin-cfg-msg");
     });
   });
-  // filters
   $$(".com-admin-filters [data-filter]").forEach((btn) => {
     if (btn.dataset.bound) return;
     btn.dataset.bound = "1";
@@ -1908,14 +1894,9 @@ function initComunidad() {
     });
   });
 
-  // load profile admin flag
-  if (state.profile) state.isAdmin = !!state.profile.is_admin;
-  const adminBlock = $("#com-admin");
-  if (adminBlock) adminBlock.hidden = !state.isAdmin;
-
-  loadCommunityStatus();
   if (state.isAdmin) loadAdminCommunity();
 }
+
 
 /* ========================= MIS LECTURAS ========================= */
 async function loadReadings() {
