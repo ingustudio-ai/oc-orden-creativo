@@ -831,7 +831,7 @@ const AUTH_ROUTES = {
   "#/activar": "activar",
 };
 
-const PANELS = ["carta", "tirada", "trabajo", "arcanos", "biblioteca", "kit", "lecturas", "sobre"];
+const PANELS = ["carta", "tirada", "trabajo", "comunidad", "arcanos", "biblioteca", "kit", "lecturas", "sobre"];
 
 function showView(name) {
   $$(".view").forEach((v) => { v.hidden = v.dataset.view !== name; });
@@ -863,6 +863,7 @@ function showPanel(key) {
   if (panel === "biblioteca") renderLibrary();
   if (panel === "arcanos") renderArcans();
   if (panel === "trabajo") initWork();
+  if (panel === "comunidad") initComunidad();
 }
 
 function go(hash) {
@@ -928,7 +929,7 @@ async function loadProfile() {
   if (!sbClient || !state.user) { state.profile = null; return null; }
   const { data, error } = await sbClient
     .from("profiles")
-    .select("id, full_name, email, phone, has_access, created_at")
+    .select("id, full_name, email, phone, has_access, is_admin, created_at")
     .eq("id", state.user.id)
     .maybeSingle();
   if (error) { state.profile = null; return null; }
@@ -1630,6 +1631,283 @@ function initWork() {
     copy.dataset.bound = "1";
     copy.addEventListener("click", copyWorkSummary);
   }
+}
+
+/* ========================= COMUNIDAD ÁUREA ========================= */
+state.community = { status: null, is_founder: false, requested_at: null, approved_at: null, inviteUrl: null, formacion: {} };
+state.communityFilter = "all";
+state.isAdmin = false;
+
+async function loadCommunityStatus() {
+  if (!sbClient || !state.user || !state.profile || !state.profile.has_access) {
+    renderCommunityState("noaccess");
+    return;
+  }
+  const loading = $("#com-state-loading");
+  const none = $("#com-state-none");
+  const pending = $("#com-state-pending");
+  const approved = $("#com-state-approved");
+  const rejected = $("#com-state-rejected");
+  [loading, none, pending, approved, rejected].forEach((el) => { if (el) el.hidden = true; });
+  if (loading) loading.hidden = false;
+
+  try {
+    const { data, error } = await sbClient.rpc("get_community_status");
+    const row = Array.isArray(data) ? data[0] : data;
+    if (error) throw error;
+    state.community.status = row ? row.status : null;
+    state.community.is_founder = !!(row && row.is_founder);
+    state.community.requested_at = row ? row.requested_at : null;
+    state.community.approved_at = row ? row.approved_at : null;
+
+    // insignia
+    const badge = $("#com-badge");
+    if (badge) badge.hidden = !(state.community.status === "approved" && state.community.is_founder);
+
+    // invite url (solo si aprobado)
+    if (state.community.status === "approved") {
+      const { data: url } = await sbClient.rpc("get_community_invite_url");
+      state.community.inviteUrl = (typeof url === "string") ? url : null;
+    } else {
+      state.community.inviteUrl = null;
+    }
+
+    // formación config
+    const { data: cfg } = await sbClient.rpc("get_formacion_config");
+    const formacion = {};
+    (cfg || []).forEach((r) => { formacion[r.key] = r.value; });
+    state.community.formacion = formacion;
+    renderFormacion(formacion);
+
+    renderCommunityState(state.community.status || "none");
+  } catch (e) {
+    if (loading) loading.hidden = true;
+    if (none) none.hidden = false;
+    const msg = $("#com-msg");
+    if (msg) setMsg(msg, "No se pudo cargar el estado de la comunidad.", "error");
+  }
+}
+
+function renderCommunityState(status) {
+  const loading = $("#com-state-loading");
+  const none = $("#com-state-none");
+  const pending = $("#com-state-pending");
+  const approved = $("#com-state-approved");
+  const rejected = $("#com-state-rejected");
+  [loading, none, pending, approved, rejected].forEach((el) => { if (el) el.hidden = true; });
+
+  if (status === "noaccess") {
+    if (none) { none.hidden = false; }
+    const btn = $("#btn-com-request");
+    if (btn) { btn.disabled = true; btn.textContent = "Activá tu acceso para participar"; }
+    return;
+  }
+  if (status === "pending") { if (pending) pending.hidden = false; return; }
+  if (status === "approved") { if (approved) approved.hidden = false; return; }
+  if (status === "rejected") { if (rejected) rejected.hidden = false; return; }
+  if (none) none.hidden = false;
+}
+
+function renderFormacion(cfg) {
+  const launch = $("#com-price-general");
+  const founder = $("#com-price-founder");
+  const notes = $("#com-formacion-notes");
+  if (launch && cfg && cfg.formacion_general_price) launch.textContent = cfg.formacion_general_price;
+  if (founder && cfg && cfg.formacion_founder_price) founder.textContent = cfg.formacion_founder_price;
+  if (notes) {
+    const parts = [];
+    if (cfg && cfg.formacion_launch_date) parts.push("Lanzamiento: " + cfg.formacion_launch_date + ".");
+    if (cfg && cfg.formacion_notes) parts.push(cfg.formacion_notes);
+    notes.textContent = parts.join(" ");
+  }
+}
+
+async function requestCommunity() {
+  const msg = $("#com-msg");
+  if (!sbClient || !state.user) return setMsg(msg, "Iniciá sesión para solicitar acceso.", "error");
+  if (!state.profile || !state.profile.has_access) return setMsg(msg, "Necesitás acceso activo a ÁUREA.", "error");
+  if (msg) setMsg(msg, "Enviando solicitud…", "info");
+  try {
+    const { data, error } = await sbClient.rpc("request_community_membership");
+    if (error) throw error;
+    const row = Array.isArray(data) ? data[0] : data;
+    state.community.status = row ? row.status : "pending";
+    renderCommunityState(state.community.status);
+    if (msg) setMsg(msg, "Solicitud enviada. Te avisamos cuando esté revisada.", "ok");
+  } catch (e) {
+    if (msg) setMsg(msg, (e && e.message) ? e.message : "No se pudo enviar la solicitud.", "error");
+  }
+}
+
+async function enterCommunity() {
+  const msg = $("#com-msg");
+  if (state.community.status !== "approved") return;
+  if (!state.community.inviteUrl) {
+    // reintentar
+    const { data } = await sbClient.rpc("get_community_invite_url");
+    state.community.inviteUrl = (typeof data === "string") ? data : null;
+  }
+  if (!state.community.inviteUrl) {
+    if (msg) setMsg(msg, "El enlace de la comunidad todavía no está disponible. Intentá más tarde.", "info");
+    return;
+  }
+  const ok = window.confirm("Vas a abrir WhatsApp para ingresar a Comunidad Áurea. Otros participantes podrán ver tu número. ¿Continuás?");
+  if (!ok) return;
+  window.open(state.community.inviteUrl, "_blank", "noopener");
+}
+
+/* ---------- Admin ---------- */
+async function loadAdminCommunity() {
+  const adminBlock = $("#com-admin");
+  if (!adminBlock) return;
+  state.isAdmin = !!(state.profile && state.profile.is_admin);
+  adminBlock.hidden = !state.isAdmin;
+  if (!state.isAdmin) return;
+
+  await loadAdminInvite();
+  await loadAdminRequests(state.communityFilter || "all");
+}
+
+async function loadAdminInvite() {
+  // no RPC to read; reuse get_community_invite_url (admin is also approved? not necessarily).
+  // Admins read via direct? RLS blocks direct. Use a placeholder; admin sets it.
+  const input = $("#com-admin-invite");
+  if (input) input.value = "";
+}
+
+async function loadAdminRequests(filter) {
+  const list = $("#com-admin-list");
+  const msg = $("#com-admin-list-msg");
+  if (!list) return;
+  if (msg) setMsg(msg, "Cargando…", "info");
+  try {
+    const { data, error } = await sbClient.rpc("admin_list_community_memberships");
+    if (error) throw error;
+    const rows = (data || []).filter((r) => filter === "all" || r.status === filter);
+    if (!rows.length) {
+      list.innerHTML = '<p class="empty-state">Sin solicitudes.</p>';
+      if (msg) setMsg(msg, "", null);
+      return;
+    }
+    list.innerHTML = rows.map((r) => {
+      const statusLabel = r.status === "approved" ? "Aprobada" : r.status === "rejected" ? "Rechazada" : "Pendiente";
+      return (
+        '<article class="com-admin-item">' +
+          '<div class="com-admin-item-head">' +
+            '<strong>' + escapeHtml(r.full_name || r.email || "—") + '</strong>' +
+            '<span class="com-admin-status com-admin-status--' + r.status + '">' + statusLabel + '</span>' +
+          '</div>' +
+          '<p class="com-admin-meta">' + escapeHtml(r.email || "") + ' · solicitó ' + escapeHtml(String(r.requested_at || "").slice(0, 10)) + '</p>' +
+          '<div class="com-admin-actions">' +
+            '<label><input type="checkbox" data-founder="' + r.user_id + '"' + (r.is_founder ? " checked" : "") + '> Fundador</label>' +
+            '<button class="btn btn-ghost btn-sm" type="button" data-act="approved" data-uid="' + r.user_id + '">Aprobar</button>' +
+            '<button class="btn btn-ghost btn-sm" type="button" data-act="rejected" data-uid="' + r.user_id + '">Rechazar</button>' +
+            '<button class="btn btn-ghost btn-sm" type="button" data-act="pending" data-uid="' + r.user_id + '">Pendiente</button>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join("");
+
+    list.querySelectorAll("[data-act]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const uid = btn.dataset.uid;
+        const status = btn.dataset.act;
+        const cb = list.querySelector('[data-founder="' + uid + '"]');
+        const isFounder = cb ? cb.checked : false;
+        try {
+          const { error } = await sbClient.rpc("admin_set_community_membership", {
+            p_user_id: uid, p_status: status, p_is_founder: isFounder,
+          });
+          if (error) throw error;
+          if (msg) setMsg(msg, "Estado actualizado.", "ok");
+          await loadAdminRequests(state.communityFilter);
+        } catch (e) {
+          if (msg) setMsg(msg, (e && e.message) ? e.message : "No se pudo actualizar.", "error");
+        }
+      });
+    });
+    if (msg) setMsg(msg, "", null);
+  } catch (e) {
+    if (msg) setMsg(msg, (e && e.message) ? e.message : "No se pudieron cargar las solicitudes.", "error");
+  }
+}
+
+async function adminSaveInvite() {
+  const input = $("#com-admin-invite");
+  const msg = $("#com-admin-invite-msg");
+  if (!input) return;
+  try {
+    const { error } = await sbClient.rpc("admin_set_community_invite_url", { p_url: input.value.trim() });
+    if (error) throw error;
+    if (msg) setMsg(msg, "Enlace guardado.", "ok");
+  } catch (e) {
+    if (msg) setMsg(msg, (e && e.message) ? e.message : "No se pudo guardar.", "error");
+  }
+}
+
+async function adminSaveCfg(key, inputId, msgId) {
+  const input = $(inputId);
+  const msg = $(msgId);
+  if (!input) return;
+  try {
+    const { error } = await sbClient.rpc("admin_set_formacion_config", { p_key: key, p_value: input.value.trim() });
+    if (error) throw error;
+    if (msg) setMsg(msg, "Guardado.", "ok");
+    // refrescar config
+    const { data } = await sbClient.rpc("get_formacion_config");
+    const formacion = {};
+    (data || []).forEach((r) => { formacion[r.key] = r.value; });
+    state.community.formacion = formacion;
+    renderFormacion(formacion);
+  } catch (e) {
+    if (msg) setMsg(msg, (e && e.message) ? e.message : "No se pudo guardar.", "error");
+  }
+}
+
+function initComunidad() {
+  const req = $("#btn-com-request");
+  if (req && !req.dataset.bound) {
+    req.dataset.bound = "1";
+    req.addEventListener("click", requestCommunity);
+  }
+  const enter = $("#btn-com-enter");
+  if (enter && !enter.dataset.bound) {
+    enter.dataset.bound = "1";
+    enter.addEventListener("click", enterCommunity);
+  }
+  const saveInvite = $("#btn-com-save-invite");
+  if (saveInvite && !saveInvite.dataset.bound) {
+    saveInvite.dataset.bound = "1";
+    saveInvite.addEventListener("click", adminSaveInvite);
+  }
+  // config buttons
+  $$("#com-admin [data-cfg]").forEach((btn) => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.cfg;
+      const row = btn.closest(".com-admin-row");
+      const input = row ? row.querySelector("input") : null;
+      adminSaveCfg(key, "#" + (input ? input.id : ""), "#com-admin-cfg-msg");
+    });
+  });
+  // filters
+  $$(".com-admin-filters [data-filter]").forEach((btn) => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", () => {
+      state.communityFilter = btn.dataset.filter;
+      loadAdminRequests(state.communityFilter);
+    });
+  });
+
+  // load profile admin flag
+  if (state.profile) state.isAdmin = !!state.profile.is_admin;
+  const adminBlock = $("#com-admin");
+  if (adminBlock) adminBlock.hidden = !state.isAdmin;
+
+  loadCommunityStatus();
+  if (state.isAdmin) loadAdminCommunity();
 }
 
 /* ========================= MIS LECTURAS ========================= */

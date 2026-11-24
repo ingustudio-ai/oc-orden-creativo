@@ -502,6 +502,7 @@
         <button class="menu-chip is-active" type="button" data-panel="carta"><span aria-hidden="true">✦</span> Carta del día</button>
         <button class="menu-chip" type="button" data-panel="tirada"><span aria-hidden="true">◇</span> Tirada de 3 cartas</button>
         <button class="menu-chip" type="button" data-panel="trabajo"><span aria-hidden="true">🃏</span> Lienzo Áurea</button>
+        <button class="menu-chip" type="button" data-panel="comunidad"><span aria-hidden="true">✦</span> Comunidad Áurea</button>
         <button class="menu-chip" type="button" data-panel="arcanos"><span aria-hidden="true">❖</span> Los 22 Arcanos</button>
         <button class="menu-chip" type="button" data-panel="biblioteca"><span aria-hidden="true">📖</span> Biblioteca Áurea</button>
         <button class="menu-chip" type="button" data-panel="kit"><span aria-hidden="true">🖨</span> Kit imprimible</button>
@@ -701,6 +702,175 @@
             <button class="btn btn-ghost" type="button" id="btn-copy-specs">Copiar especificaciones</button>
             <span id="kit-copy-msg" class="form-msg" role="status" aria-live="polite"></span>
           </div>
+        </div>
+      </section>
+
+      <!-- Comunidad Áurea -->
+      <section id="panel-comunidad" class="panel" data-panel-view="comunidad" hidden>
+        <header class="panel-head">
+          <h2>Comunidad Áurea</h2>
+          <p class="panel-meta">Un universo que crece con vos</p>
+        </header>
+
+        <div class="com-hero">
+          <div class="com-hero-visual" aria-hidden="true">
+            <div class="com-portal"></div>
+            <span class="com-hero-glyph">✦</span>
+          </div>
+          <div class="com-hero-copy">
+            <p class="com-eyebrow">Espacio privado · Miembros activos</p>
+            <h3 class="com-hero-title">Comunidad Áurea</h3>
+            <p class="com-hero-lead">Un espacio privado para conectar, compartir experiencias, recibir novedades y participar activamente en la evolución de ÁUREA.</p>
+            <p class="com-hero-quote">"No sos solamente parte de una aplicación. Sos parte de un universo que estamos construyendo juntos."</p>
+            <div class="com-badge" id="com-badge" hidden>
+              <span class="com-badge-medal">✧</span>
+              <div>
+                <p class="com-badge-kicker">Reconocimiento</p>
+                <p class="com-badge-title">Miembro fundador</p>
+                <p class="com-badge-sub">Comunidad Áurea</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="com-benefits">
+          <article class="com-benefit">
+            <span class="com-benefit-icon" aria-hidden="true">✦</span>
+            <h4>Novedades exclusivas</h4>
+            <p>Recibí información sobre actualizaciones, nuevas herramientas, contenidos y funcionalidades de ÁUREA.</p>
+          </article>
+          <article class="com-benefit">
+            <span class="com-benefit-icon" aria-hidden="true">◇</span>
+            <h4>Consultas y acompañamiento</h4>
+            <p>Un espacio para compartir preguntas y recibir soporte sobre el funcionamiento de la aplicación.</p>
+          </article>
+          <article class="com-benefit">
+            <span class="com-benefit-icon" aria-hidden="true">❖</span>
+            <h4>Participación activa</h4>
+            <p>Tus ideas y sugerencias pueden contribuir al crecimiento y evolución de ÁUREA.</p>
+          </article>
+          <article class="com-benefit">
+            <span class="com-benefit-icon" aria-hidden="true">✧</span>
+            <h4>Beneficios exclusivos</h4>
+            <p>Accedé a promociones y condiciones preferenciales para futuras experiencias.</p>
+          </article>
+          <article class="com-benefit">
+            <span class="com-benefit-icon" aria-hidden="true">∞</span>
+            <h4>Formación Áurea</h4>
+            <p>Accedé a precios especiales y beneficios económicos exclusivos para el lanzamiento de enero de 2027.</p>
+          </article>
+        </div>
+
+        <div class="com-wa-card">
+          <div class="com-wa-copy">
+            <p class="com-eyebrow">Tu comunidad te espera</p>
+            <h3 class="com-wa-title">Formá parte de nuestro espacio privado de encuentro</h3>
+            <p>Compartí tus ideas, realizá consultas y acompañanos en la evolución de ÁUREA.</p>
+            <p class="com-wa-note">Al ingresar aceptás que otros participantes puedan ver tu número telefónico. La administración revisa cada solicitud antes de habilitar el acceso.</p>
+          </div>
+          <div class="com-wa-actions">
+            <div id="com-state-none">
+              <button class="btn btn-gold" type="button" id="btn-com-request">Solicitar acceso a la comunidad</button>
+            </div>
+            <div id="com-state-pending" hidden>
+              <p class="com-status com-status-pending">Tu solicitud está siendo revisada. Pronto vas a recibir novedades.</p>
+            </div>
+            <div id="com-state-approved" hidden>
+              <button class="btn btn-gold" type="button" id="btn-com-enter">Ingresar a Comunidad Áurea</button>
+              <p class="com-status com-status-ok">Tu acceso está habilitado.</p>
+            </div>
+            <div id="com-state-rejected" hidden>
+              <p class="com-status com-status-error">Tu solicitud no fue aprobada. Podés contactar a la administración para más información.</p>
+            </div>
+            <div id="com-state-loading" hidden>
+              <p class="com-status">Cargando estado…</p>
+            </div>
+            <span id="com-msg" class="form-msg" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <div class="com-formacion">
+          <header class="com-formacion-head">
+            <p class="com-eyebrow">Formación Áurea</p>
+            <h3 class="com-formacion-title">Tu próximo paso dentro del universo ÁUREA</h3>
+            <p class="com-formacion-sub">LANZAMIENTO · ENERO 2027</p>
+            <p>En enero de 2027 llega la Formación ÁUREA. Una experiencia de aprendizaje para profundizar en el universo de conocimientos y herramientas de ÁUREA.</p>
+          </header>
+
+          <div class="com-formacion-grid">
+            <article class="com-formacion-card">
+              <h4>Público general</h4>
+              <p class="com-formacion-price" id="com-price-general">Precio general de lanzamiento</p>
+              <ul>
+                <li>Acceso a la formación</li>
+                <li>Material de estudio</li>
+                <li>Certificado de participación</li>
+              </ul>
+            </article>
+            <article class="com-formacion-card com-formacion-card--founder">
+              <h4>Miembros fundadores</h4>
+              <p class="com-formacion-price" id="com-price-founder">Precio preferencial exclusivo + beneficios adicionales</p>
+              <ul>
+                <li>Precio preferencial de lanzamiento</li>
+                <li>Descuentos exclusivos</li>
+                <li>Promociones adicionales</li>
+                <li>Información anticipada sobre inscripciones</li>
+                <li>Comunicación prioritaria de novedades</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="com-formacion-foot">
+            <p id="com-formacion-notes" class="com-formacion-notes"></p>
+            <button class="btn btn-ghost" type="button" disabled>Próximamente más información</button>
+          </div>
+        </div>
+
+        <div class="com-admin" id="com-admin" hidden>
+          <header class="panel-head">
+            <h2>Administración · Comunidad</h2>
+            <p class="panel-meta">Gestión de solicitudes y configuración</p>
+          </header>
+
+          <div class="com-admin-config">
+            <h4>Enlace de invitación de WhatsApp</h4>
+            <div class="com-admin-row">
+              <input id="com-admin-invite" type="url" placeholder="https://chat.whatsapp.com/...">
+              <button class="btn btn-ghost btn-sm" type="button" id="btn-com-save-invite">Guardar</button>
+            </div>
+            <span id="com-admin-invite-msg" class="form-msg" role="status"></span>
+          </div>
+
+          <div class="com-admin-config">
+            <h4>Formación Áurea · configuración</h4>
+            <div class="com-admin-row">
+              <input id="com-admin-launch" type="text" placeholder="Fecha de lanzamiento (ej. Enero 2027)">
+              <button class="btn btn-ghost btn-sm" type="button" data-cfg="formacion_launch_date">Guardar</button>
+            </div>
+            <div class="com-admin-row">
+              <input id="com-admin-general" type="text" placeholder="Precio público general (texto)">
+              <button class="btn btn-ghost btn-sm" type="button" data-cfg="formacion_general_price">Guardar</button>
+            </div>
+            <div class="com-admin-row">
+              <input id="com-admin-founder" type="text" placeholder="Precio miembros fundadores (texto)">
+              <button class="btn btn-ghost btn-sm" type="button" data-cfg="formacion_founder_price">Guardar</button>
+            </div>
+            <div class="com-admin-row">
+              <input id="com-admin-notes" type="text" placeholder="Notas (texto)">
+              <button class="btn btn-ghost btn-sm" type="button" data-cfg="formacion_notes">Guardar</button>
+            </div>
+            <span id="com-admin-cfg-msg" class="form-msg" role="status"></span>
+          </div>
+
+          <h4>Solicitudes</h4>
+          <div class="com-admin-filters">
+            <button class="btn btn-ghost btn-sm" type="button" data-filter="all">Todas</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-filter="pending">Pendientes</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-filter="approved">Aprobadas</button>
+            <button class="btn btn-ghost btn-sm" type="button" data-filter="rejected">Rechazadas</button>
+          </div>
+          <div id="com-admin-list" class="com-admin-list"></div>
+          <span id="com-admin-list-msg" class="form-msg" role="status"></span>
         </div>
       </section>
 
