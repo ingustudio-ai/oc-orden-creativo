@@ -136,6 +136,7 @@
     .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
     .service-card .tag { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dark); }
     .service-card h3 { font-size: clamp(28px, 3.5vw, 38px); }
+    .service-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-md); margin: 4px 0; box-shadow: var(--shadow-card); }
     .service-card p { color: var(--gray); font-size: 16px; line-height: 1.7; }
     .service-card .cta { margin-top: 8px; padding: 12px 24px; font-size: 10px; }
 
@@ -222,18 +223,20 @@
     </section>
 
     <!-- SERVICIOS -->
+
     <section class="services" id="servicios">
       <div class="container">
-        <div class="section-label">Servicios</div>
-        <h2>Lo que ofrecemos.</h2>
+        <div class="section-label">Servicios y proyectos</div>
+        <h2>Mis servicios y proyectos.</h2>
         <p class="lead" style="margin-top:18px;">Acompañamientos y herramientas para mirar, ordenar y transformar.</p>
 
         <div class="services-grid">
 
           <article class="service-card">
-            <span class="tag">Acompañamiento 1:1</span>
+            <span class="tag">Acompañamiento 1:1 · 6 sesiones</span>
+            <img src="../assets/ChatGPT Image 10 sept 2026, 04_56_59 p.m.png" alt="Constelaciones del Dinero" class="service-img" loading="lazy" />
             <h3>Constelaciones del Dinero</h3>
-            <p>Un proceso de 6 sesiones para recorrer tu historia con el dinero desde la raíz sistémica hasta una nueva forma de recibir y avanzar.</p>
+            <p>Un recorrido de 6 sesiones para mirar tu historia con el dinero desde la raíz sistémica hasta una nueva forma de recibir y avanzar.</p>
             <a class="cta" href="../index.html#proceso">
               Conocer el proceso <span class="cta-arrow">→</span>
             </a>
@@ -241,16 +244,50 @@
 
           <article class="service-card">
             <span class="tag">Plataforma digital</span>
+            <img src="../aurea/assets/cards/dorso.webp" alt="Áurea" class="service-img" loading="lazy" />
             <h3>Áurea</h3>
-            <p>Oráculo Sistémico de 22 Arcanos. Una herramienta simbólica para explorar tu historia familiar, vínculos y patrones. Consulta del día, tirada de 3 cartas, biblioteca y más.</p>
+            <p>Oráculo Sistémico de 22 Arcanos. Herramienta simbólica para explorar tu historia familiar, vínculos y patrones. Consulta del día, tirada de 3 cartas, biblioteca y más.</p>
             <a class="cta" href="../aurea/">
               Entrar a Áurea <span class="cta-arrow">→</span>
             </a>
           </article>
 
+          <article class="service-card">
+            <span class="tag">Sesiones 1:1</span>
+            <h3>Registros Akáshicos</h3>
+            <p>Sesiones individuales para acceder a la memoria del alma y recibir información que ordena, sana y abre camino.</p>
+            <a class="cta" href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20las%20sesiones%20de%20Registros%20Ak%C3%A1shicos." target="_blank" rel="noopener noreferrer">
+              Consultar <span class="cta-arrow">→</span>
+            </a>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Sesiones 1:1</span>
+            <h3>Biodecodificación</h3>
+            <p>Sesiones para decodificar síntomas, fobias y patologías físicas desde la mirada biológica y sistémica.</p>
+            <a class="cta" href="https://wa.me/541131404044?text=Hola%20Fernando%2C%20quiero%20conocer%20la%20Biodecodificaci%C3%B3n." target="_blank" rel="noopener noreferrer">
+              Consultar <span class="cta-arrow">→</span>
+            </a>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Próximamente</span>
+            <h3>Entrenamiento de Mindfulness</h3>
+            <p>Entrenamiento para cultivar presencia, calma y claridad en la vida cotidiana. Próximamente.</p>
+            <button class="cta" type="button" disabled style="opacity:0.5;cursor:not-allowed;">Próximamente</button>
+          </article>
+
+          <article class="service-card">
+            <span class="tag">Próximamente</span>
+            <h3>Entrenamiento de IKIGAI para emprendedores</h3>
+            <p>Un proceso para encontrar tu propósito, alinear tu negocio con lo que amás y generar valor sostenible. Próximamente.</p>
+            <button class="cta" type="button" disabled style="opacity:0.5;cursor:not-allowed;">Próximamente</button>
+          </article>
+
         </div>
       </div>
     </section>
+
 
     <!-- SOBRE -->
     <section class="about">
