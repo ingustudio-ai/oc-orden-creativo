@@ -125,6 +125,26 @@
     h2 { font-size: clamp(42px, 5vw, 68px); }
     .lead { font-size: 19px; color: var(--gray); max-width: 650px; }
 
+    /* CÍRCULO SISTÉMICO */
+    .circulo { background: var(--cream); }
+    .circulo-inner {
+      display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+      gap: 60px; align-items: center;
+    }
+    .circulo-visual { display: grid; place-items: center; }
+    .circulo-logo {
+      width: 220px; height: 220px; object-fit: cover;
+      border-radius: 50%; border: 2px solid var(--gold);
+      box-shadow: var(--shadow-soft);
+    }
+    .circulo-copy h2 { font-size: clamp(42px, 5vw, 64px); margin-bottom: 16px; }
+    .circulo-copy .lead { margin-bottom: 28px; }
+    @media (max-width: 800px) {
+      .circulo-inner { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+      .circulo-visual { justify-self: center; }
+      .circulo-logo { width: 180px; height: 180px; }
+    }
+
     /* SERVICES */
     .services { background: var(--cream-light); }
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; margin-top: 60px; }
@@ -220,6 +240,27 @@
         </div>
       </div>
     </section>
+
+    <!-- CÍRCULO SISTÉMICO -->
+
+    <section class="circulo" id="circulo">
+      <div class="container">
+        <div class="circulo-inner">
+          <div class="circulo-visual">
+            <img src="assets/circulo-sistemico.png" alt="Círculo Sistémico" class="circulo-logo" />
+          </div>
+          <div class="circulo-copy">
+            <div class="section-label">Comunidad</div>
+            <h2>Círculo Sistémico</h2>
+            <p class="lead">Un espacio de encuentro para compartir, preguntar y crecer juntos en el camino sistémico.</p>
+            <a class="cta" href="https://chat.whatsapp.com/CmaMx3aVfW32Vi1pyuILjE" target="_blank" rel="noopener noreferrer">
+              Unirme al Círculo Sistémico <span class="cta-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- SERVICIOS -->
 
